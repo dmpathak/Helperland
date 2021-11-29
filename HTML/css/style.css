@@ -11,7 +11,7 @@ body{
     /* padding: 0px; */
 }
 .maincontainer{
-    background: url("../photo/mainimg.png") center center no-repeat;
+    background: url("../img/mainimg.png") center center no-repeat;
     /* background-position: center;
     background-repeat: no-repeat; */
     background-size: cover;
