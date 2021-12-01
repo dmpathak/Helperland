@@ -20,6 +20,7 @@ body{
 }
 .hamburger{
     display: none;
+    margin-right: 20px;
 }
 
 .header{
@@ -315,8 +316,6 @@ body{
 }
 .arrow_div{
     background-color: #525252;
-    width: 48px;
-    height: 48px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
