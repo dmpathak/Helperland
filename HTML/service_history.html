@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/service_history.css">
+    <title>Service Provider > Service History</title>
+</head>
+
+<body>
+    <div class="Faq_header">
+        <img src="img/logo-small.png" alt="logo" class="faq-nav-logo">
+        <div class="nav-btn-container">
+            <div class="nav-round-btn-book">Book Now</div>
+            <div class="nav-btn">Prices & services</div>
+            <div class="nav-btn">Warranty</div>
+            <div class="nav-btn">Blog</div>
+            <div><a class="nav-btn" href="contact.html">Contact</a></div>
+            <div style="border: 1px solid white; height:48px"></div>
+            <div class="notifications">
+                <img style="width:29px; height:32px;" src="img/icon-notification.png" alt="notification">
+                <div class="notification_number">2</div>
+            </div>
+            <div style="border: 1px solid white; height:48px"></div>
+            <div class="dropdown_imgs">
+                <img style="width:36px; height:36px;" src="img/admin-user.png" alt="flag">
+                <img style="width:11px; height:6px; margin-top:14px; margin-left:7px;" src="img/arrow_down.png"
+                    alt="flag">
+            </div>
+        </div>
+        <div class="nav-expand-btn-container">
+            <img class="hamburger" id="expand_btn" src="img/expand-btn.svg" alt="hamburger_img">
+        </div>
+    </div>
+    <div class="expand-btn-container" id="expand_btn_container">
+        <div class="expand-btn-inner-container">
+            <div class="expand-btn">Book Now</div>
+            <div class="expand-btn">Prices & services</div>
+            <div class="expand-btn">Warranty</div>
+            <div class="expand-btn">Blog</div>
+            <div class="expand-btn"><a class="nav-btn" href="contact.html">Contact</a></div>
+            <div class="notifications expand-btn">
+                <img style="width:29px; height:32px;" src="img/icon-notification.png" alt="notification">
+                <div class="notification_number">2</div>
+            </div>
+            <div class="dropdown_imgs expand-btn">
+                <img style="width:36px; height:36px;" src="img/admin-user.png" alt="flag">
+                <img style="width:11px; height:6px; margin-top:14px; margin-left:7px;" src="img/arrow_down.png"
+                    alt="flag">
+            </div>
+        </div>
+    </div>
+
+    <!-- welcome...  -->
+    <div class="welcome">
+        Welcome,<b> Gaurang!</b>
+    </div>
+
+    <!-- between -->
+    <div class="between_main_container">
+        <div class="between_1st_container" id="open_side_manu_id">
+            <p class="between_1st_container_data">Dashboard</p>
+            <hr style="opacity: 0.2;">
+            <p class="between_1st_container_data" style="background-color: #146371;">Service History</p>
+            <hr style="opacity: 0.2;">
+            <p class="between_1st_container_data">Service Schedule</p>
+            <hr style="opacity: 0.2;">
+            <p class="between_1st_container_data">Favourite Pros</p>
+            <hr style="opacity: 0.2;">
+            <p class="between_1st_container_data">Invoices</p>
+            <hr style="opacity: 0.2;">
+            <p class="between_1st_container_data">Notifications</p>
+            <hr style="opacity: 0.2;">
+            <div class="open_side_manu" id="open_side_manu_btn">
+                >>
+            </div>
+        </div>
+        <div class="sec_main_container">
+            <div class="between_2nd_container_upper_header">
+                <p style="color:#646464; font-size:22px"><b>Service History</b></p>
+                <input class="expert_btn" type="button" value="Export">
+            </div>
+            <div class="between_2nd_container">
+                <div class="between_2nd_container_header">
+                    <p>Service Details <img style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                    </p>
+                    <p class="between_2nd_container_header_date">Service Provider <img style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                    </p>
+                    <p class="between_2nd_container_header_service">Payment <img style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                    </p>
+                    <p>Status <img style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt=""></p>
+                    <p>Rate SP</p>
+                </div>
+                <!-- 1 -->
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#67b644;" type="button" value="Completed">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2nd  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#67b644;" type="button" value="Completed">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3rd  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#67b644;" type="button" value="Completed">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#ff6b6b;" type="button" value="Cancelled">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#67b644;" type="button" value="Completed">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 6th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#ff6b6b;" type="button" value="Cancelled">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 7th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#67b644;" type="button" value="Completed">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 8th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#67b644;" type="button" value="Completed">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 9th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#ff6b6b;" type="button" value="Cancelled">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 10 th  -->
+                <hr style="color: #e1e1e1;">
+                <div class="between_2nd_container_wrap">
+                    <div class="between_2nd_container_data">
+                        <div>
+                            <div class="data_adjust">
+                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar.png" alt="">
+                                <div><b>31/03/2018</b> </div>
+                            </div>
+                            <div class="data_adjust">
+                                <div>12:00 - 18:00</div>
+                            </div>
+                        </div>
+                        <div class="between_2nd_container_data_date" style="display: flex;">
+                            <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                            <div>
+                                <div>Lyum Watson</div>
+                                <div style="display: flex; margin-top:4px;">
+                                    <img class="star_imgs" src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star1.png" alt="">
+                                    <img src="img/star2.png" alt="">
+                                    <p style="margin-left: 4px;">4</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="doller between_2nd_container_data_service">€63</p>
+                        <input class="completed_btn" style="background-color:#ff6b6b;" type="button" value="Cancelled">
+                        <input class="action_button" type="button" value="Rate SP">
+                        <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
+                            +
+                        </div>
+                    </div>
+
+                    <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
+                        <div class="achordian">
+                            <div style="background-color: #e1e1e1; margin-bottom:5px;">
+                                <p>Service Provider <img style="height:14px; width:14px; cursor:pointer;"
+                                        src="img/sort.png" alt="">
+                                </p>
+                            </div>
+                            <div>
+                                <div style="display: flex;">
+                                    <div class="cap_img"><img src="img/cap.png" alt=""></div>
+                                    <div>
+                                        <div>Lyum Watson</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            <img class="star_imgs" src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star1.png" alt="">
+                                            <img src="img/star2.png" alt="">
+                                            <p style="margin-left: 4px;">4</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p style="background-color: #e1e1e1; margin-bottom:5px;">Payment <img
+                                        style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
+                                </p>
+                                <p class="doller">€63</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="last_between_div">
+                <div class="last_between_div_1">
+                    <p>Show</p>
+                    <div class="dropdown_10">
+                        <p>10</p>
+                        <img style="width:12px; height:7px; margin-left:11px" src="img/forma-1_3.png" alt="">
+                    </div>
+                    <p>entries</p>
+                    <p style="margin-left: 8px;">Total Record: 55</p>
+                </div>
+                <div class="last_between_div_2">
+                    <div class="last_between_div_21">
+                        <img src="img/first-page.png" alt="">
+                    </div>
+                    <div class="last_between_div_21">
+                        <img src="img/keyboard-right-arrow-button-copy.png" alt="">
+                    </div>
+                    <div class="last_between_div_21" style="background-color: #1D7A8C; color:white">
+                        1
+                    </div>
+                    <div class="last_between_div_21">
+                        2
+                    </div>
+                    <div class="last_between_div_21">
+                        3
+                    </div>
+                    <div class="last_between_div_21">
+                        4
+                    </div>
+                    <div class="last_between_div_21">
+                        <img class="transform_imgs" src="img/keyboard-right-arrow-button-copy.png" alt="">
+                    </div>
+                    <div class="last_between_div_21">
+                        <img class="transform_imgs" src="img/first-page.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer  -->
+    <div class="footer">
+        <img class="footer_logo" src="img/logo.png" alt="logo">
+        <div>
+            <ul class="footer_data">
+                <li class="footer_link"><a class="nav-btn" href="index.html">HOME</a></li>
+                <li class="footer_link"><a class="nav-btn" href="About.html">ABOUT</a></li>
+                <li class="footer_link">TESTIMONIALS</li>
+                <li class="footer_link"><a class="nav-btn" href="faq.html">FAQS</a></li>
+                <li class="footer_link">INSURANCE</li>
+                <li class="footer_link">POLICY</li>
+                <li class="footer_link">IMPRESSUM</li>
+            </ul>
+        </div>
+        <div>
+            <img class="footer_icon1" src="img/ic-facebook.png" alt="fb">
+            <img class="footer_icon2" src="img/insta.png" alt="insta">
+        </div>
+        <div class="footer_line">
+
+        </div>
+    </div>
+    <div class="last_div">
+        <div class="last_div_data">
+            ©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+        </div>
+    </div>
+
+
+</body>
+<script src="js/service_history.js"></script>
+
+</html>
