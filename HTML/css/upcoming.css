@@ -4,6 +4,7 @@
     margin : 0px;
     padding: 0px;
 }
+
 .nav-btn{
   color: #FFFFFF;
   text-decoration: none;
@@ -20,6 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 .faq-nav-logo{
     margin-top: 6px;
@@ -113,19 +115,17 @@
   height: 100%;
 }
 .expand-btn-container {
-    width: 100%;
-    height: 0px;
-    overflow: hidden;
-    max-height: 350px;
-    transition: all 0.2s linear;
-    background-color: #525252;
-    opacity: 0.8;
-    color: white;
-    /* height: auto; */
-}
-.expand-btn-container-open{
-  height: 300px;
   display: none;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.2s linear;
+  background-color: #ffffff;
+  color: rgb(107, 101, 101);
+ 
+}
+#expand_btn_res{
+  height: 30px;
+  padding: 20px;
 }
 .expand-btn-inner-container{
     display: block;
@@ -172,6 +172,7 @@
 
 .between_1st_container_data{
     padding: 15px 15px 15px 15px;
+    margin: 0px !important;
 }
 .between_2nd_container{
     width: 845px;
@@ -179,12 +180,7 @@
     border: 1px solid #e1e1e1;
     
 }
-.open_side_manu{
-  display: none;
-}
-.open_side_manu_toggle{
-  left: 0px !important;
-}
+
 .between_2nd_container_header{
     color: #646464;
     font-weight: bold;
@@ -310,10 +306,12 @@
         justify-content: center;
     }
     .nav-expand-btn-container{
-      display: block;
+      display: flex;
     }
     .expand-btn-container-open{
-      display: block;
+      /* display: block; */
+
+      right: 0px !important;
     }
     .notification_number{
       top: 5px;
@@ -327,18 +325,34 @@
     z-index: 10;
 
   }
-  .open_side_manu{
+  .expand-btn{
+    margin: 0px 25px;
+  }
+  .notific{
+    display: flex; 
     position: absolute;
-    top: 0px;
-    right: -30px;
+    left:125px;
+  }
+  /* .between_main_res{
+    display: block !important;
+  }
+
+  .between_main_container{
+    display : none !important;
+  } */
+  .expand-btn-container{
     display: block;
-    height: 30px;
-    width: 30px;
-    background-color: #29626D;
-    color: #F1F1F1;
-    cursor: pointer;
+    position: fixed;
+    width: 240px;
+    top: 0;
+    right: -240px;
+    height: 100vh;
+    overflow: scroll;
+    z-index: 1000;
   }
   }
+
+
   
   @media screen and (max-width: 650px){
   .footer{
@@ -394,4 +408,11 @@
 .between_2nd_container_data_toggle{
   height: auto;
   display: block;
+}
+
+.between_main_res{
+  display : none;
+}
+p{
+  margin-bottom: 0px !important;
 }
