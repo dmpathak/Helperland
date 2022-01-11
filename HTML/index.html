@@ -11,7 +11,6 @@
 
     <!-- css link  -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- font select  -->
 
     <title>Home | Helperland</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -20,20 +19,22 @@
 <body>
     <!-- maincontant -->
     <div class="maincontainer">
-        <div class="header">
+        <div class="header" id="header">
             <div class="navLogoDiv">
-                <a href="/index.html"><img class="nav_logo" src="img/logo.png" alt="logo"></a>
+                <a href="index.html"><img class="nav_logo" src="img/logo.png" alt="logo"></a>
                 <div class="hamburger h1 me-5">=</div>
             </div>
             <div class="nav">
                 <ul class="nav_ul">
                     <li class="navitem "><a class="nav_link navitem_round" href="#">Book a cleaner</a></li>
-                    <li class="navitem"><a class="nav_link" href="#">Prices</a></li>
+                    <li class="navitem"><a class="nav_link" href="prices.html">Prices</a></li>
                     <li class="navitem"><a class="nav_link" href="#">Our Guarantee</a></li>
                     <li class="navitem"><a class="nav_link" href="#">Blog</a></li>
-                    <li class="navitem"><a class="nav_link" href="#">Contact us</a></li>
-                    <li class="navitem "><a class="nav_link navitem_round" href="#">Login</a></li>
-                    <li class="navitem "><a class="nav_link navitem_round" href="#">Become a helper</a></li>
+                    <li class="navitem"><a class="nav_link" href="contact.html">Contact us</a></li>
+                    <li class="navitem "><a class="nav_link navitem_round" href="#" id="login_modal"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a></li>
+                    <li class="navitem "><a class="nav_link navitem_round" href="become-a-pro.html">Become a helper</a>
+                    </li>
                     <div class="dropdown">
                         <img src="img/flag.png" alt="flag">
                         <img src="img/arrow_down.png" alt="flag">
@@ -96,12 +97,12 @@
         </div>
 
         <div class="last_arrow">
-            <a href="#"><img src="img/group-18_5.png" alt="arrow"></a>
+            <a href="#second_contant"><img src="img/group-18_5.png" alt="arrow"></a>
         </div>
     </div>
 
     <!-- secondcontant  -->
-    <div class="second_contant">
+    <div class="second_contant" id="second_contant">
         <h2><b>Why Helperland</b></h2>
         <div class="second_main_container">
             <div class="second_ind_containers">
@@ -129,6 +130,8 @@
 
     <!-- thirdcontant -->
     <div class="thirdcontant">
+        <img class="left_blog" src="img/blog-left-bg.png" alt="left_blog">
+        <img class="right_blog" src="img/blog-right-bg.png" alt="right_blog">
         <div class="thirdcontant1_container">
             <div class="thirdcontant_container1">
                 <h3 class="thirdcontant_container1_h1">Lorem ipsum dolor sit amet, consectetur</h3>
@@ -276,10 +279,10 @@
         <img class="footer_logo" src="img/logo-small.png" alt="logo">
         <div>
             <ul class="footer_data">
-                <li class="footer_link">HOME</li>
-                <li class="footer_link">ABOUT</li>
+                <li class="footer_link"><a href="index.html">HOME</a></li>
+                <li class="footer_link"><a href="About.html">ABOUT</a></li>
                 <li class="footer_link">TESTIMONIALS</li>
-                <li class="footer_link">FAQS</li>
+                <li class="footer_link"><a href="faq.html">FAQS</a></li>
                 <li class="footer_link">INSURANCE</li>
                 <li class="footer_link">POLICY</li>
                 <li class="footer_link">IMPRESSUM</li>
@@ -299,6 +302,79 @@
         </div>
         <button class="last_div_button rounded-pill">OK!</button>
     </div>
+
+
+
+    <!-- modal start  -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" style="color: #494949;">Log in</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="ng-invalid ng-touched ng-dirty">
+                        <div class="form-group icon-textbox right">
+                            <input autofocus type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="E-mail" required>
+                            <img src="img/user_name.png" alt="username">
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                        <div class="form-group icon-textbox right">
+                            <input autofocus type="password" class="form-control" id="exampleFormControlInput1"
+                                placeholder="password" required>
+                            <img src="img/lock.png" alt="password">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Save on computer
+                            </label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary rounded-pill modal_submit" type="submit">log
+                                in</button>
+                        </div>
+                        <div class="modal_footer_div">
+                            <a href="#" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Forgot
+                                Password?</a>
+                            <div>Don't have account yet?</div>
+                            <a href="#">create Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="ng-invalid ng-touched ng-dirty">
+                        <div class="form-group icon-textbox right">
+                            <input autofocus type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="E-Mail-Address" required>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary rounded-pill modal_submit" type="submit">Send</button>
+                        </div>
+                        <div class="modal_footer_div">
+                            <a href="#" data-bs-target="#exampleModal" data-bs-toggle="modal">log in
+                                now</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end  -->
 </body>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

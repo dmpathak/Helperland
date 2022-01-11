@@ -13,9 +13,9 @@
 
 <body>
     <div class="maincontainer">
-        <div class="header">
+        <div class="header" id="header">
             <div class="navLogoDiv">
-                <a href="/index.html"><img class="nav_logo" src="img/logo.png" alt="logo"></a>
+                <a href="index.html"><img class="nav_logo" src="img/logo.png" alt="logo"></a>
                 <div class="hamburger h1 me-5">=</div>
             </div>
             <div class="nav">
@@ -25,8 +25,9 @@
                     <li class="navitem"><a class="nav_link" href="#">Our Guarantee</a></li>
                     <li class="navitem"><a class="nav_link" href="#">Blog</a></li>
                     <li class="navitem"><a class="nav_link" href="contact.html">Contact us</a></li>
-                    <li class="navitem "><a class="nav_link navitem_round" href="#">Login</a></li>
-                    <li class="navitem "><a class="nav_link navitem_round" href="#">Become a helper</a></li>
+                    <li class="navitem "><a class="nav_link navitem_round" href="index.html?login=true">Login</a></li>
+                    <li class="navitem "><a class="nav_link navitem_round" href="become-a-pro.html">Become a helper</a>
+                    </li>
                     <div class="dropdown">
                         <img src="img/flag.png" alt="flag">
                         <img src="img/arrow_down.png" alt="flag">
@@ -35,58 +36,63 @@
             </div>
         </div>
 
-        <div class="get_in_touch container">
-            <div class="get_in_touch_hd">
-                <b>Register Now</b>
-            </div>
-            <form>
-                <div class="row align-items-center justify-content-center g-2">
-                    <div class="form-item col-12">
-                        <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" />
-                    </div>
-                    <div class="form-item col-12">
-                        <input type="text" class="form-control" name="fname" id="fname" placeholder="Last Name" />
-                    </div>
-                    <div class="form-item col-12">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" />
-                    </div>
-                    <div class="form-item col-12">
-                        <div class="input-group mx-0 row">
-                            <input type="text" class="input-group-text col-2 px-0" id="countryCode" placeholder="+46" />
-                            <input type="text" class="form-control col-10" placeholder="Phone Number"
-                                aria-label="Mobile Number" aria-describedby="basic-addon1" />
-                        </div>
-                    </div>
-                    <div class="form-item col-12">
-                        <input type="password" class="form-control" name="fname" id="fname" placeholder="Password" />
-                    </div>
-                    <div class="form-item col-12">
-                        <input type="password" class="form-control" name="fname" id="fname"
-                            placeholder="Confirm Password" />
-                    </div>
-                    <div class="checkbox_container col-12">
-                        <input class="checkbox" type="checkbox" name="check1" id="check1">
-                        <div class="check_data">Send me newsletters from Helperland</div>
-                    </div>
-                    <div class="checkbox_container col-12">
-                        <input class="checkbox" type="checkbox" name="check1" id="check1">
-                        <div class="check_data">I accept <span style="color: #1fb6ff;">terms and conditions</span> &
-                            <span style="color: #1fb6ff;">privacy policy</span>
-                        </div>
-                    </div>
-                    <img class="robot_img" src="img/pro-layer-20.png" alt="">
-                    <button class="submit rounded-pill border-0 outline-0">Get Started <span><img class="arrow_white"
-                                src="img/arrow-white.png" alt="arrow"></span></button>
+        <div style="padding-top: 152px;">
+            <div class="get_in_touch container">
+                <div class="get_in_touch_hd">
+                    <b>Register Now</b>
                 </div>
-            </form>
+                <form>
+                    <div class="row align-items-center justify-content-center g-2">
+                        <div class="form-item col-12">
+                            <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" />
+                        </div>
+                        <div class="form-item col-12">
+                            <input type="text" class="form-control" name="fname" id="fname" placeholder="Last Name" />
+                        </div>
+                        <div class="form-item col-12">
+                            <input type="email" class="form-control" name="email" id="email"
+                                placeholder="Email Address" />
+                        </div>
+                        <div class="form-item col-12">
+                            <div class="input-group mx-0 row">
+                                <input type="text" class="input-group-text col-2 px-0" id="countryCode"
+                                    placeholder="+46" />
+                                <input type="text" class="form-control col-10" placeholder="Phone Number"
+                                    aria-label="Mobile Number" aria-describedby="basic-addon1" />
+                            </div>
+                        </div>
+                        <div class="form-item col-12">
+                            <input type="password" class="form-control" name="fname" id="fname"
+                                placeholder="Password" />
+                        </div>
+                        <div class="form-item col-12">
+                            <input type="password" class="form-control" name="fname" id="fname"
+                                placeholder="Confirm Password" />
+                        </div>
+                        <div class="checkbox_container col-12">
+                            <input class="checkbox" type="checkbox" name="check1" id="check1">
+                            <div class="check_data">Send me newsletters from Helperland</div>
+                        </div>
+                        <div class="checkbox_container col-12">
+                            <input class="checkbox" type="checkbox" name="check1" id="check1">
+                            <div class="check_data">I accept <a href="#"style="color: #1fb6ff;">terms and conditions</a> &
+                                <a href="#" style="color: #1fb6ff;">privacy policy</a>
+                            </div>
+                        </div>
+                        <img class="robot_img" src="img/pro-layer-20.png" alt="">
+                        <button class="submit rounded-pill border-0 outline-0">Get Started <span><img
+                                    class="arrow_white" src="img/arrow-white.png" alt="arrow"></span></button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="last_arrow">
-            <a href="#"><img src="img/group-18_5.png" alt="arrow"></a>
+            <a href="#between_container"><img src="img/group-18_5.png" alt="arrow"></a>
         </div>
     </div>
 
     <!-- between  -->
-    <div class="between_container">
+    <div class="between_container" id="between_container">
         <img class="blog-left-bg" src="img/blog-left-bg.png" alt="" srcset="">
         <div class="inner_between_container">
             <p class="inner_between_container_header">How it works</p>
@@ -150,26 +156,24 @@
         <img class="footer_logo" src="img/logo.png" alt="logo">
         <div>
             <ul class="footer_data">
-               <a href="index.html"><li class="footer_link">HOME</li></a> 
-                <a href="About.html"><li class="footer_link">ABOUT</li></a>
-                <li class="footer_link">TESTIMONIALS</li>
-                <a href="faq.html"><li class="footer_link">FAQS</li></a>
-                <li class="footer_link">INSURANCE</li>
-                <li class="footer_link">POLICY</li>
-                <li class="footer_link">IMPRESSUM</li>
+                <li><a href="index.html" class="footer_link">HOME</a></li>
+                <li><a href="About.html" class="footer_link">ABOUT</a></li>
+                <li><a href="#" class="footer_link">TESTIMONIALS</a></li>
+                <li><a href="faq.html" class="footer_link">FAQS</a></li>
+                <li><a href="#" class="footer_link">INSURANCE</a></li>
+                <li><a href="#" class="footer_link">POLICY</a></li>
+                <li><a href="#" class="footer_link">IMPRESSUM</a></li>
             </ul>
         </div>
         <div>
             <img class="footer_icon1" src="img/ic-facebook.png" alt="fb">
             <img class="footer_icon2" src="img/insta.png" alt="insta">
         </div>
-        <div class="footer_line">
-
-        </div>
     </div>
     <div class="last_div">
+        <hr>
         <div class="last_div_data">
-            ©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+            ©2018 Helperland. All rights reserved. <a href="#">Terms and Conditions</a> <div style="margin: 5.5px;">|</div> <a href="#">Privacy Policy</a>
         </div>
     </div>
 </body>

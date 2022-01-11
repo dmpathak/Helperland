@@ -5,32 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/upcoming.css">
+
+    <title>Service Provider > Upcoming Service</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-    <title>Service Provider > Upcoming Service</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="css/upcoming.css">
 </head>
 
 <body>
     <!-- navbar  -->
     <div class="Faq_header">
-        <img src="img/logo-small.png" alt="logo" class="faq-nav-logo">
+        <a href="index.html"><img src="img/logo-small.png" alt="logo" class="faq-nav-logo"></a>
         <div class="nav-btn-container">
-            <!-- <div class="nav-round-btn-book">Book Now</div> -->
-            <div class="nav-btn">Prices & services</div>
-            <div class="nav-btn">Warranty</div>
-            <div class="nav-btn">Blog</div>
+            <a class="nav-btn" href="prices.html">Prices & services</a>
+            <a class="nav-btn" href="#">Warranty</a>
+            <a class="nav-btn" href="#">Blog</a>
             <div><a class="nav-btn" href="contact.html">Contact</a></div>
-            <div style="border: 1px solid white; height:48px"></div>
-            <div class="notifications">
-                <img style="width:29px; height:32px;" src="img/icon-notification.png" alt="notification">
+            <a class="notifications" href="#">
+                <img src="img/icon-notification.png" alt="notification">
                 <div class="notification_number">2</div>
-            </div>
-            <div style="border: 1px solid white; height:48px"></div>
-            <div class="dropdown_imgs">
+            </a>
+            <!-- popover user icon  -->
+            <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
+                data-bs-html="true"
+                data-bs-content="<p><span> welcome,</span> <br> <span><b>User Name</b></span></p> <hr> <p><a href='#'>My Dashboard</a></p> <p><a href='#'>My Settings</a></p> <p><a href='#'>Logout</a></p>">
                 <img style="width:36px; height:36px;" src="img/admin-user.png" alt="flag">
                 <img style="width:11px; height:6px; margin-top:14px; margin-left:7px;" src="img/arrow_down.png"
                     alt="flag">
@@ -38,42 +39,42 @@
         </div>
         <div class="nav-expand-btn-container">
             <div class="notific">
-                <div style="border: 1px solid white; height:48px"></div>
                 <div class="notifications expand-btn">
-                    <img style="width:29px; height:32px;" src="img/icon-notification.png" alt="notification">
-                    <div class="notification_number">2</div>
+                    <a href="#">
+                        <img style="width:29px; height:32px;" src="img/icon-notification.png" alt="notification">
+                        <div class="notification_number">2</div>
+                    </a>
                 </div>
-                <div style="border: 1px solid white; height:48px"></div>
             </div>
             <img class="hamburger" id="expand_btn" src="img/expand-btn.svg" alt="hamburger_img">
         </div>
     </div>
     <div class="expand-btn-container" id="expand_btn_container">
-        <div id="expand_btn_res">>>></div>
+        <div id="expand_btn_res">x</div>
         <div class="expand-btn-inner-container">
-            <p class="between_1st_container_data">Welcome, <br> <b>User name</b></p>
+            <p class="between_1st_container_dat">Welcome, <br> <b>User name</b></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">Dashboard</p>
-            <p class="between_1st_container_data">New Service Requests</p>
-            <p class="between_1st_container_data" style="background-color: #146371;">Upcoming Services</p>
-            <p class="between_1st_container_data">Service Schedule</p>
-            <p class="between_1st_container_data">Service History</p>
-            <p class="between_1st_container_data">My Ratings</p>
-            <p class="between_1st_container_data">Block Customer</p>
+            <p class="between_1st_container_dat"><a href="upcoming.html">Dashboard</a></p>
+            <p class="between_1st_container_dat"><a href="#">New Service Requests</a></p>
+            <p class="between_1st_container_dat"><a href="#" style="color: #146371;">Upcoming Services</a></p>
+            <p class="between_1st_container_dat"><a href="#">Service Schedule</a></p>
+            <p class="between_1st_container_dat"><a href="#">Service History</a></p>
+            <p class="between_1st_container_dat"><a href="#">My Ratings</a></p>
+            <p class="between_1st_container_dat"><a href="#">Block Customer</a></p>
+            <p class="between_1st_container_dat"><a href="#">My Settings</a></p>
+            <p class="between_1st_container_dat"><a href="#">Logout</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">Prices & services</p>
-            <p class="between_1st_container_data">Warranty</p>
-            <p class="between_1st_container_data">Blog</p>
-            <p class="between_1st_container_data" href="contact.html">Contact</p>
+            <p class="between_1st_container_dat"><a href="prices.html">Prices & services</a></p>
+            <p class="between_1st_container_dat"><a href="#">Warranty</a></p>
+            <p class="between_1st_container_dat"><a href="#">Blog</a></p>
+            <p class="between_1st_container_dat"><a href="contact.html">Contact</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">
-            <div style="display: flex; justify-content:center;">
+            <p class="between_1st_container_dat">
+            <div style="display: flex; justify-content:center; margin-bottom:30px;">
                 <img style="margin-right:10px" src="img/ic-facebook.png" alt="fb">
                 <img src="img/insta.png" alt="insta">
             </div>
             </p>
-
-
         </div>
     </div>
 
@@ -85,662 +86,490 @@
     <!-- between -->
     <div class="between_main_container">
         <div class="between_1st_container" id="open_side_manu_id">
-            <!-- <div class="open_side_manu" id="open_side_manu_btn">
-                >>
-            </div> -->
-            <p class="between_1st_container_data">Dashboard</p>
+            <p class="between_1st_container_data"><a href="#">Dashboard</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">New Service Requests</p>
+            <p class="between_1st_container_data"><a href="#"> New Service Requests</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data" style="background-color: #146371;">Upcoming Services</p>
+            <p class="between_1st_container_data" style="background-color: #146371;"><a href="#"> Upcoming Services</a>
+            </p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">Service Schedule</p>
+            <p class="between_1st_container_data"><a href="#"> Service Schedule</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">Service History</p>
+            <p class="between_1st_container_data"><a href="#"> Service History</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">My Ratings</p>
+            <p class="between_1st_container_data"><a href="#"> My Ratings</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
-            <p class="between_1st_container_data">Block Customer</p>
+            <p class="between_1st_container_data"><a href="#"> Block Customer</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
         </div>
+
         <div class="between_2nd_container">
-            <div class="between_2nd_container_header">
-                <p style="margin-bottom: 0px;">Service ID <img style="height:14px; width:14px; cursor:pointer;"
-                        src="img/sort.png" alt=""></p>
-                <p class="between_2nd_container_header_date" style="margin-left: -23px; margin-right:20px">Service
-                    date
-                    <img style="height:14px; width:14px; cursor:pointer;" src="img/sort.png" alt="">
-                </p>
-                <p class="between_2nd_container_header_service">Customer details <img
-                        style="height:14px; width:14px; margin-right:86px; cursor:pointer;" src="img/sort.png" alt="">
-                </p>
-                <p style="margin-bottom: 0px;">Distance <img style="height:14px; width:14px; cursor:pointer;"
-                        src="img/sort.png" alt=""></p>
-                <p style="margin-bottom: 0px;">Actions</p>
+            <h4 style="color: #646464;">Upcoming services</h4>
+
+            <div class="responsive_filter" id="responsive_filter_id" data-bs-toggle="popover" data-bs-custom-class="filter_popover"
+                data-bs-placement="bottom" data-bs-html="true" data-bs-content="
+                    <label class='form-check-label' for='provider_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_asd' data-dt-col=1 data-dt-sort='asc'>
+                        Service Date: Most Recent
+                    </label>
+                    <label class='form-check-label' for='provider_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_dec' data-dt-col=1 data-dt-sort='desc'>
+                        Service Date: older
+                    </label>
+                    <label class='form-check-label' for='payment_asc'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_asc' data-dt-col=2 data-dt-sort='asc'>
+                        Customer Details: A to Z
+                    </label>
+                    <label class='form-check-label' for='payment_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_dec' data-dt-col=2 data-dt-sort='desc'>
+                        Customer Details: Z to A
+                    </label>
+                    <label class='form-check-label' for='service_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_asd' data-dt-col=3 data-dt-sort='asc'>
+                        Distance: Near to Far
+                    </label>
+                    <label class='form-check-label' for='service_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_dec' data-dt-col=3 data-dt-sort='desc'>
+                        Distance: Far to Near
+                    </label>
+                ">
+                <img id="responsive_filter_img" src="img/filter.png" alt="">
+
             </div>
-            <!-- 1 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
+            <div class="between_table_header_container">
+                <table id="example" style="width:100%">
+                    <thead style="height: 56px;">
+                        <tr>
+                            <td class="between_table_header ">Service ID</td>
+                            <td class="between_table_header ">Service Date</td>
+                            <td class="between_table_header ">Customer details</td>
+                            <td class="between_table_header ">Distance</td>
+                            <td class="between_table_header ">Actions</td>
+                        </tr>
+                    </thead>
 
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 2 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 3  -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 4 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 5 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 6 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 7 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 8 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 9 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- 10 -->
-            <div class="between_2nd_container_wrap">
-                <div class="between_2nd_container_data">
-                    <p style="margin-bottom: 0px;">323436</p>
-                    <div class="between_2nd_container_data_date">
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                            <div><b>09/04/2018</b> </div>
-                        </div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                            <div>12:00 - 18:00</div>
-                        </div>
-                    </div>
-                    <div class="between_2nd_container_data_service">
-                        <div>David Bough</div>
-                        <div class="data_adjust">
-                            <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                            <div>Musterstrabe 5,12345 Bonn</div>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 0px;">15 km</p>
-                    <input class="action_button" type="button" value="Cancel">
-                    <div class="between_2nd_container_wrap_btn" id="between_2nd_container_wrap_btn">
-                        +
-                    </div>
-                </div>
-                <div class="between_2nd_container_data_detail" id="between_2nd_container_data_detail">
-                    <div class="achordian">
-                        <div style="background-color: #e1e1e1; margin-bottom:5px;">
-                            <p>Service date <img style="height:14px; width:14px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt=""></p>
-                        </div>
-                        <div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/calendar2.png" alt="">
-                                <div><b>09/04/2018</b> </div>
-                            </div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-14.png" alt="">
-                                <div>12:00 - 18:00</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p style="background-color: #e1e1e1; margin-bottom:5px;">Customer details <img
-                                    style="height:14px; width:14px; margin-right:86px; margin-top:10px; cursor:pointer;"
-                                    src="img/sort.png" alt="">
-
-                            <div>David Bough</div>
-                            <div class="data_adjust">
-                                <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
-                                <div>Musterstrabe 5,12345 Bonn</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                    <tbody>
+                        <tr>
+                            <td class="between_table_data">
+                                323436
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                13 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 2  -->
+                        <tr>
+                            <td class="between_table_data">
+                                323437
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 3 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323438
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>avid Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 4 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323439
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 5 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323440
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 6 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323441
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 7 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323442
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 8 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323443
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 9 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323444
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 10 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323445
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 11 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323446
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                        <!-- 12 -->
+                        <tr>
+                            <td class="between_table_data">
+                                323447
+                            </td>
+                            <td class="between_table_data">
+                                <div class="between_2nd_container_data_date">
+                                    <div class="data_adjust">
+                                        <img class="calender_img" src="img/calendar2.png" alt="">
+                                        <div><b>09/04/2018</b> </div>
+                                    </div>
+                                    <div class="data_adjust">
+                                        <img class="home_img" style="margin-right:7px; margin-bottom:8px"
+                                            src="img/layer-14.png" alt="">
+                                        <div>12:00 - 18:00</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div>David Bough</div>
+                                <div class="data_adjust">
+                                    <img style="margin-right:7px; margin-bottom:8px" src="img/layer-15.png" alt="">
+                                    <div>Musterstrabe 5,12345 Bonn</div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                15 km
+                            </td>
+                            <td class="between_table_data action_button">
+                                <input type="button" value="Cancel">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
-
     <!-- footer  -->
     <div class="footer">
         <img class="footer_logo" src="img/logo.png" alt="logo">
         <div>
             <ul class="footer_data">
-                <li class="footer_link"><a class="nav-btn" href="index.html">HOME</a></li>
-                <li class="footer_link"><a class="nav-btn" href="About.html">ABOUT</a></li>
-                <li class="footer_link">TESTIMONIALS</li>
-                <li class="footer_link"><a class="nav-btn" href="faq.html">FAQS</a></li>
-                <li class="footer_link">INSURANCE</li>
-                <li class="footer_link">POLICY</li>
-                <li class="footer_link">IMPRESSUM</li>
+                <li class="footer_link"><a href="index.html">HOME</a></li>
+                <li class="footer_link"><a href="About.html">ABOUT</a></li>
+                <li class="footer_link"><a href="#">TESTIMONIALS</a></li>
+                <li class="footer_link"><a href="faq.html">FAQS</a></li>
+                <li class="footer_link"><a href="#">INSURANCE</a></li>
+                <li class="footer_link"><a href="#">POLICY</a></li>
+                <li class="footer_link"><a href="#">IMPRESSUM</a></li>
             </ul>
         </div>
         <div>
             <img class="footer_icon1" src="img/ic-facebook.png" alt="fb">
             <img class="footer_icon2" src="img/insta.png" alt="insta">
         </div>
-        <div class="footer_line">
-
-        </div>
     </div>
+    <!-- last div  -->
     <div class="last_div">
+        <hr>
         <div class="last_div_data">
-            ©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+            ©2018 Helperland. All rights reserved. <a href="#">Terms and Conditions</a> <div style="margin: 5.5px;">|</div> <a href="#">Privacy Policy</a>
         </div>
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 </body>
 <script src="js/upcoming.js"></script>
 

@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#example').DataTable({
         dom: 'tlp',
         responsive: true,
-        'columnDefs': [{ 'orderable': false, 'targets': [1, 2, 4, 7] }],
+        'columnDefs': [{ 'orderable': false, 'targets': [5] }],
         "language": {
             "paginate": {
                 "previous": '<img src="img/polygon-1-copy-5.png" alt="">',
@@ -12,7 +12,6 @@ $(document).ready(function () {
     });
 });
 
-
 // for popover 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -21,7 +20,8 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 
 
 // left toggle 
+
 document.getElementById("pg_10_left_toggler").addEventListener('click', () => {
     document.getElementById("main_contant_1").classList.toggle("main_contant_1_toggler")
     document.getElementById("pg_10_left_toggler").classList.toggle("background_change")
-})
+  })

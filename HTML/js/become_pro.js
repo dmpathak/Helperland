@@ -8,18 +8,12 @@ hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("open")
 })
 
-hide_ok.addEventListener("click", () => {
-    last_div.classList.add('hidden');
-})
-
+// for navbar scroll
 window.addEventListener("scroll", () => {
-    if (window.scrollY <= 132) {
-        arrow_div.style.opacity = 0;
-        arrow_div.style.pointerEvents = "none";
+    if (window.scrollY > 10) {
+        document.getElementById("header").classList.add("header_scroll")
     }
     else {
-        arrow_div.style.opacity = 1;
-        arrow_div.style.pointerEvents = "all";
-
+        document.getElementById("header").classList.remove("header_scroll")
     }
 })

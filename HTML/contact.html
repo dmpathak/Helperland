@@ -15,17 +15,15 @@
 <body>
     <!-- for navbar  -->
     <div class="Faq_header">
-        <img src="img/logo-small.png" alt="logo" class="faq-nav-logo">
+        <a href="index.html"><img src="img/logo-small.png" alt="logo" class="faq-nav-logo"></a>
         <div class="nav-btn-container">
-            <div class="nav-round-btn-book">Book Now</div>
-            <div class="nav-round-btn-price">Prices & services</div>
-            <div class="nav-inner-btn-container">
-                <div class="nav-btn">Warranty</div>
-                <div class="nav-btn">Blog</div>
-                <div class="nav-btn">Contact</div>
-            </div>
-            <div class="nav-round-btn-login">Login</div>
-            <div class="nav-round-btn-helper">Become a Helper</div>
+            <a href="#" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+            <a href="prices.html" class="nav-round-btn-price nav_btn_hover2">Prices & services</a>
+            <a href="#" class="nav-btn nav_btn_hover2">Warranty</a>
+            <a href="#" class="nav-btn nav_btn_hover2">Blog</a>
+            <a href="contact.html" class="nav-btn contact_border">Contact</a>
+            <a href="index.html?login=true" class="nav-round-btn-login nav_btn_hover1">Login</a>
+            <a href="become-a-pro.html" class="nav-round-btn-helper nav_btn_hover1">Become a Helper</a>
         </div>
         <div class="nav-expand-btn-container">
             <img class="hamburger" id="expand_btn" src="img/expand-btn.svg" alt="hamburger_img">
@@ -33,26 +31,13 @@
     </div>
     <div class="expand-btn-container" id="expand_btn_container">
         <div class="expand-btn-inner-container">
-            <div class="expand-btn">Book now</div>
-            <div class="expand-btn">Prices & services</div>
-            <div class="expand-btn">Warranty</div>
-            <div class="expand-btn">Blog</div>
-            <div class="expand-btn">Contact</div>
-            <div class="expand-btn">Login</div>
-            <div class="expand-btn">Become a Helper</div>
-        </div>
-    </div>
-
-
-    <div class="expand-btn-container" id="expand_btn_container">
-        <div class="expand-btn-inner-container">
-            <div class="expand-btn">Book now</div>
-            <div class="expand-btn">Prices & services</div>
-            <div class="expand-btn">Warranty</div>
-            <div class="expand-btn">Blog</div>
-            <div class="expand-btn">Contact</div>
-            <div class="expand-btn">Login</div>
-            <div class="expand-btn">Become a Helper</div>
+            <div class="expand-btn"><a href="#">Book now</a></div>
+            <div class="expand-btn"><a href="prices.html">Prices & services</a></div>
+            <div class="expand-btn"><a href="#">Warranty</a></div>
+            <div class="expand-btn"><a href="#">Blog</a></div>
+            <div class="expand-btn"><a class="nav-btn" href="contact.html">Contact</a></div>
+            <div class="expand-btn"><a href="index.html?login=true">Login</a></div>
+            <div class="expand-btn"><a href="become-a-pro.html">Become a Helper</a></div>
         </div>
     </div>
 
@@ -69,14 +54,14 @@
         <div class="messages-container">
             <div class="messages-particular-container">
                 <img class="message_img1" src="img/forma-1_2.png" alt="forma-1_2">
-                <p class="msg_data1">1111 Lorem ipsum text 100,</p>
-                <p class="msg_data1">Lorem ipsum AB</p>
+                <p class="msg_data1 p-0 m-0">1111 Lorem ipsum text 100,</p>
+                <p class="msg_data1 p-0 m-0">Lorem ipsum AB</p>
                 <!-- <div class="msg_data">1111 Lorem ipsum text 100, Lorem ipsum AB</div> -->
             </div>
             <div class="messages-particular-container for_margin">
                 <img class="message_img1" src="img/phone-call.png" alt="phone-call.png">
-                <p class="msg_data1">+49 (40) 123 56 7890</p>
-                <p class="msg_data1">+49 (40) 987 56 0000</p>
+                <p class="msg_data1 p-0 m-0">+49 (40) 123 56 7890</p>
+                <p class="msg_data1 p-0 m-0">+49 (40) 987 56 0000</p>
             </div>
             <div class="messages-particular-container">
                 <img class="message_img3" src="img/vector-smart-object.png" alt="smart">
@@ -155,13 +140,13 @@
         <img class="footer_logo" src="img/logo.png" alt="logo">
         <div>
             <ul class="footer_data">
-                <li class="footer_link">HOME</li>
-                <li class="footer_link">ABOUT</li>
-                <li class="footer_link">TESTIMONIALS</li>
-                <li class="footer_link">FAQS</li>
-                <li class="footer_link">INSURANCE</li>
-                <li class="footer_link">POLICY</li>
-                <li class="footer_link">IMPRESSUM</li>
+                <li class="footer_link"><a class="footer-btn" href="index.html">HOME</a></li>
+                <li class="footer_link"><a class="footer-btn" href="About.html">ABOUT</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">TESTIMONIALS</a></li>
+                <li class="footer_link"><a class="footer-btn" href="faq.html">FAQS</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">INSURANCE</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">POLICY</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">IMPRESSUM</a></li>
             </ul>
         </div>
         <div>
@@ -174,7 +159,7 @@
     </div>
     <div class="last_div">
         <div class="last_div_data">
-            ©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+            ©2018 Helperland. All rights reserved. <a href="#">Terms and Conditions</a> <div style="margin: 5.5px;">|</div> <a href="#">Privacy Policy</a>
         </div>
     </div>
 </body>

@@ -22,19 +22,46 @@ body{
     display: none;
     margin-right: 20px;
 }
-
 .header{
     padding-top: 10px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    transition: all 0.5s;
+    margin-bottom: 50px;
 }
+/* from java script  */
+.header_scroll{
+    background: rgba(39,39,39,.7);
+}
+.header_scroll .navLogoDiv a img{
+    height: 54px;
+    width: 73px;
+    transition: all 0.5s;
+}
+.header_scroll .nav .nav_ul .navitem_round{ 
+    color: #FFFFFF !important;
+    background-color: #006072;
+    transition: all 0.5s;
+}
+.header_scroll .nav .nav_ul .navitem_round:hover{ 
+    color: #006072 !important;
+    background-color: #FFFFFF;
+    transition: all 0.5s;
+}
+/* till here  */
+
 .nav_logo{
     height: 102px;
     width: 138px;
     margin-left: 17px;
 }
 .nav{
-    margin-top: 33px;
+    margin-top: 10px;
 }
 .nav_ul{
     list-style: none;
@@ -44,7 +71,6 @@ body{
 }
 .navitem{
     margin-left: 11px;
-    /* border: 1px solid white; */
     color: white;
     display: flex;
     align-items: center;
@@ -56,112 +82,46 @@ body{
     padding: 6px 29px 8px 29px;
     text-decoration: none;
     color: white!important;
+    border: 1px solid transparent;
+    border-radius: 100px;
 }
+.nav_link:hover{
+    border: 1px solid white;
+    transition: all 0.5s;
+}   
 .navitem_round{
     border: 1px solid white;
     border-radius: 20px;
 }
+.navitem_round:hover{
+    color: #006072!important;
+    background-color: #FFFFFF;
+    transition: all 0.5s;
+}
 .dropdown{
-    margin-top: 28px;
+    margin-top: 8px;
     margin-left: 20px;
     margin-right: 8px;
-}
-
-.loremtext{
-    margin-top: 178px;
-    margin-left: 55px;
-}
-.lorem_innertext_container{
-    /* display: flex; */
-    margin-top: 12px;
-}
-.tik_img{
-    width: 13px;
-    height: 9.99px;
-    margin-right: 12px;
-}
-.center_form_container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.button{
-    padding: 10px 25px;
-    border-radius: 50px;
-    background-color: #006072;
-    border: 1px solid white;
-    margin-top:10px;
-    color: white;
 }
 .last_arrow{
     padding-top: 44px;
     padding-bottom: 30px;
     text-align: center;
 }
-@media screen and (max-width:1320px) {
-    .navLogoDiv {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .header {
-        flex-direction: column;
-        justify-content: center;
-        /* background-color: #292929; */
-    }
-    .hamburger{
-        display: block;
-    }
-    .nav_ul {
-        flex-direction: column;
-        /* align-items: flex-start; */
-        justify-content: center;
-        transition: height 0.5s;
-        padding: 0;
-        height: 0;
-        overflow: hidden;
-        position: absolute;
-        /* top: 0px; */
-        background-color: #292929;
-        width: 100vw;
-        margin: 0px;
-    }
-    .dropdown{
-        display: flex;
-    align-items: center;
-    justify-content: center;
-    }
-    .nav_ul .dropdown {
-        margin-top: 10px;
-    }
-
-    .navitem {
-        margin: 10px 0;
-    }
-
-    .nav_ul.open {
-        height: 462px;
-    }
-}
-
 .get_in_touch_hd{
     color: #4F4F4F;
     font-size: 24px;
     text-align: center;
-    /* margin-top: 23px; */
     margin-bottom: 25px;
     font-weight: bold;
 }
 .get_in_touch{
-    /* height: 664px; */
     max-width: 430px;
     margin: auto;
     border-radius: 4px;
     box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.15);
     padding: 23px 35px 19px 36px;
     background-color: #ffffff;
-    margin-top: 67px;
 }
 .get_in_touch_form_inner{
     display: flex;
@@ -177,7 +137,6 @@ body{
     max-height: 46px;
     border-radius: 4px;
 }
-
 .form-control,
 .form-select {
 	padding: 11px 15px;
@@ -231,7 +190,6 @@ form textarea {
 }
 .inner_between_container{
     margin-top: 68px;
-    /* border: 1px solid black; */
 }
 .inner_between_container_header{
     font-weight: bold;
@@ -242,11 +200,7 @@ form textarea {
 .inner_between_container_data{
     display: flex;
     flex-wrap: wrap;
-    /* max-width: 748px; */
 }
-/* @media screen and (max-width){
-           at 1138
-} */
 .inner_between_container_data1{
     display: flex;
     flex-direction: column;
@@ -265,9 +219,6 @@ form textarea {
     margin-bottom: 16px;
     font-weight: bold;
 }
-/* .smiling_girl_img{
-    margin-right: 126px;
-} */
 .inner_between_container_data1_data{
     font-size: 18px;
     color: #4F4F4F;
@@ -337,6 +288,10 @@ form textarea {
   padding: 11px 20px 13px 23px;
   background: #FF7B6D 0% 0% no-repeat padding-box;
 }
+.form-container button:hover {
+  background: #1d7a8c 0% 0% no-repeat padding-box;
+  transition: all 0.5s;
+}
 @media screen and (max-width: 423px) {
     .form-container{
         display: flex;
@@ -383,16 +338,22 @@ form textarea {
     color: #F1F1F1;
     font-size: 14px;
 }
+.footer_link:hover{
+    color: #006072 !important;
+    transition: all 0.5s;
+}
 .footer_icon1{
     height: 18px;
     width: 9px;
     margin-right: 20px;
-    margin-top: 61px;
+    margin-top: 40px;
+    cursor: pointer;
 }
 .footer_icon2{
     height: 20px;
     width: 20px;
-    margin-top: 61px;
+    margin-top: 40px;
+    cursor: pointer;
 }
 
 .last_div{
@@ -401,10 +362,9 @@ form textarea {
     text-align: center;
     align-items: center;
     justify-content: center;
-    padding-top: 25px;
-    padding-bottom: 22px;
+    /* padding-bottom: 22px; */
     background-color: #111111;
-
+    
 }
 .last_div_data{
     display: flex;
@@ -415,13 +375,23 @@ form textarea {
     color: #9BA0A3;
     text-align: center;
     margin-bottom: 22px;
+    padding-top: 25px;
 }
-.footer_line{
-  width: 89%;
-  height: 1px;
-  margin-top: 19px;
-  background-color: #424242;
-}
+.last_div hr {
+    height: 2px;
+    width: 84.5% !important;
+    background: #424242;
+    margin: 0px auto;
+  }
+  .last_div_data a{
+    color: #9BA0A3;
+    text-decoration: none;
+  }
+  .last_div_data a:hover{
+    color: #29626D;
+    transition: all 0.5s;
+  }
+
 @media screen and (max-width:1320px) {
     .navLogoDiv {
         width: 100%;
@@ -443,7 +413,6 @@ form textarea {
         padding: 0;
         height: 0;
         overflow: hidden;
-        position: absolute;
         background-color: #292929;
         width: 100vw;
         margin: 0px;
