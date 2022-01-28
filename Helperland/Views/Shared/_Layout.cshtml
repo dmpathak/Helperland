@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Helperland</title>
+    @RenderSection("CustomCss",required:false)
+</head>
+<body>
+        @if (ViewData["Title"] != null && ViewData["Title"].ToString() != "Home Page")
+        {
+            <div class="Faq_header">
+                <a asp-controller="Home" asp-action="Index"><img src="~/img/logo-small.png" alt="logo" class="faq-nav-logo"></a>
+                <div class="nav-btn-container">
+                    <a href="#" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+                    <a asp-controller="Home" asp-action="Prices" class="nav-round-btn-price nav_btn_hover2">Prices & services</a>
+                    <a href="#" class="nav-btn nav_btn_hover2">Warranty</a>
+                    <a href="#" class="nav-btn nav_btn_hover2">Blog</a>
+                    <a asp-controller="Home" asp-action="Contact" class="nav-btn nav_btn_hover2">Contact</a>
+                    <a asp-controller="Home" asp-action="index" asp-route-login="true" class="nav-round-btn-login nav_btn_hover1">Login</a>
+                    <a href="become-a-pro.html" class="nav-round-btn-helper nav_btn_hover1">Become a Helper</a>
+                </div>
+                <div class="nav-expand-btn-container">
+                    <img class="hamburger" id="expand_btn" src="~/img/expand-btn.svg" alt="hamburger_img">
+                </div>
+            </div>
+            <div class="expand-btn-container" id="expand_btn_container">
+                <div class="expand-btn-inner-container">
+                    <div class="expand-btn"><a href="#">Book now</a></div>
+                    <div class="expand-btn"><a asp-controller="Home" asp-action="Prices" >Prices & services</a></div>
+                    <div class="expand-btn"><a href="#">Warranty</a></div>
+                    <div class="expand-btn"><a href="#">Blog</a></div>
+                    <div class="expand-btn"><a class="nav-btn" asp-controller="Home" asp-action="Contact" >Contact</a></div>
+                    <div class="expand-btn"><a asp-controller="Home" asp-action="index" asp-route-login="true" >Login</a></div>
+                    <div class="expand-btn"><a href="become-a-pro.html">Become a Helper</a></div>
+                </div>
+            </div>
+    }
+
+            @RenderBody()
+
+     <!-- footer  -->
+    <div class="footer">
+        <img class="footer_logo" src="~/img/logo.png" alt="logo">
+        <div>
+            <ul class="footer_data">
+                <li class="footer_link"><a class="footer-btn" asp-controller="Home" asp-action="index">HOME</a></li>
+                <li class="footer_link"><a class="footer-btn" asp-controller="Home" asp-action="About">ABOUT</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">TESTIMONIALS</a></li>
+                <li class="footer_link"><a class="footer-btn" asp-controller="Home" asp-action="Faq">FAQS</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">INSURANCE</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">POLICY</a></li>
+                <li class="footer_link"><a class="footer-btn" href="#">IMPRESSUM</a></li>
+            </ul>
+        </div>
+        <div>
+            <img class="footer_icon1" src="~/img/ic-facebook.png" alt="fb">
+            <img class="footer_icon2" src="~/img/insta.png" alt="insta">
+        </div>
+        <div class="footer_line">
+
+        </div>
+    </div>
+  @if (ViewData["Title"] != null && ViewData["Title"] != "Home Page")
+  {
+    <div class="last_div">
+        <div class="last_div_data">
+            ©2018 Helperland. All rights reserved. <a href="#">Terms and Conditions</a> <div style="margin: 5.5px;">|</div> <a href="#">Privacy Policy</a>
+        </div>
+        </div>
+    }
+    else
+    {
+        <div class="last_div">
+        <div class="last_div_data">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam
+            ac.
+            <a style="color: #6EABEF; text-decoration:none;" href="#">Privacy Policy</a>
+        </div>
+        <button class="last_div_button rounded-pill">OK!</button>
+    </div>
+    }
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

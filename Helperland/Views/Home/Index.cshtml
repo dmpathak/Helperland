@@ -1,0 +1,357 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section CustomCss
+{
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ <link rel="stylesheet" href="~/css/site.css"/> 
+}
+
+<div class="header" id="header">
+            <div class="navLogoDiv">
+                <a asp-controller="Home" asp-action="Index"><img class="nav_logo" src="~/img/logo.png" alt="logo"></a>
+                <div class="hamburger h1 me-5">=</div>
+            </div>
+            <div class="nav">
+                <ul class="nav_ul">
+                    <li class="navitem ">
+                        <a class="nav_link navitem_round" href="#">Book a cleaner</a></li>
+                                            <li class="navitem">
+                        <a class="nav_link" asp-controller="Home" asp-action="Prices">Prices</a></li>
+                                            <li class="navitem">
+                        <a class="nav_link" href="#">Our Guarantee</a></li>
+                                            <li class="navitem">
+                        <a class="nav_link" href="#">Blog</a></li>
+                                            <li class="navitem">
+                        <a class="nav_link" asp-controller="Home" asp-action="Contact">Contact us</a></li>
+                                            <li class="navitem ">
+                        <a class="nav_link navitem_round" href="#" id="login_modal"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a></li>
+                                            <li class="navitem ">
+                        <a class="nav_link navitem_round" href="become-a-pro.html">Become a helper</a>
+                    </li>
+                            <div class="dropdown">
+                                <img src="img/flag.png" alt="flag">
+                                <img src="img/arrow_down.png" alt="flag">
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+<div class="maincontainer">
+        
+
+        <div class="loremtext">
+            <div>
+                <h1 style="font-size: 50px;">Do not feel like housework?</h1>
+            </div>
+            <div class="lorem_innertext_container">
+                <span>Great! Book now for Helperland and enjoy the benefits</span>
+            </div>
+            <div class="lorem_innertext_container">
+                <img class="tik_img" src="~/img/ic-check.png" alt="">
+                <span>certified & insured helper</span>
+            </div>
+            <div class="lorem_innertext_container">
+                <img class="tik_img" src="~/img/ic-check.png" alt="">
+                <span>easy booking procedure</span>
+            </div>
+            <div class="lorem_innertext_container">
+                <img class="tik_img" src="~/img/ic-check.png" alt="">
+                <span>friendly customer service</span>
+            </div><div class="lorem_innertext_container">
+                <img class="tik_img" src="~/img/ic-check.png" alt="">
+                <span>secure online payment method</span>
+            </div>
+        </div>
+
+        <div class="center_button">
+            <button class="button">Let's Book a cleaner</button>
+        </div>
+
+        <div class="last_pictures">
+            <div class="individual_pictures">
+                <div class="individual">
+                    <img class="step_img" src="img/step-1.png" alt="">
+                    <div>Enter your postcode</div>
+                </div>
+                <div class="individual for_none">
+                    <img class="step_img" src="img/step-arrow-1.png" alt="">
+                </div>
+                <div class="individual">
+                    <img class="step_img" src="img/step-2.png" alt="">
+                    <div>Select your plan</div>
+                </div>
+                <div class="individual for_none">
+                    <img class="step_img" src="img/step-arrow-1-copy.png" alt="">
+                </div>
+                <div class="individual">
+                    <img class="step_img" src="img/step-3.png" alt="">
+                    <div>Pay securely online</div>
+                </div>
+                <div class="individual for_none">
+                    <img class="step_img" src="img/step-arrow-1.png" alt="">
+                </div>
+                <div class="individual">
+                    <img class="step_img" src="img/step-4.png" alt="">
+                    <div>Enjoy amazing service</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="last_arrow">
+            <a href="#second_contant"><img src="img/group-18_5.png" alt="arrow"></a>
+        </div>
+    </div>
+<div class="second_contant" id="second_contant">
+        <h2><b>Why Helperland</b></h2>
+        <div class="second_main_container">
+            <div class="second_ind_containers">
+                <div class="final_container">
+                    <img class="final_container_img" src="~/img/group-21.png" alt="">
+                    <p class="final_container_heading">Experience & Vetted Professionals</p>
+                    <p class="final_container_desc">dominate the industry in scale and scope with an adaptable,
+                        extensive network that consistently delivers exceptional results.</p>
+                </div>
+                <div class="final_container">
+                    <img class="final_container_img" src="~/img/group-23.png" alt="">
+                    <div class="final_container_heading">Secure Online Payment</div>
+                    <p class="final_container_desc">Payment is processed securely online. Customers pay safely online
+                        and manage the booking.</p>
+                </div>
+                <div class="final_container">
+                    <img class="final_container_img" src="~/img/group-24.png" alt="">
+                    <div class="final_container_heading">Dedicated Customer Service</div>
+                    <p class="final_container_desc">to our customers and are guided in all we do by their needs. The
+                        team is always happy to support you and offer all the information.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- thirdcontant -->
+    <div class="thirdcontant">
+        <img class="left_blog" src="~/img/blog-left-bg.png" alt="left_blog">
+        <img class="right_blog" src="~/img/blog-right-bg.png" alt="right_blog">
+        <div class="thirdcontant1_container">
+            <div class="thirdcontant_container1">
+                <h3 class="thirdcontant_container1_h1">We do not know what makes you happy, but ...</h3>
+                <p class="thirdcontant_container1_p">If it's not dusting off, our friendly helpers will free you from this burden -
+                    don't worry anymore about spending valuable time doing housework, but savor life, you're well worth your time w
+                    ith beautiful experiences. Free yourself and enjoy the gained time: Go celebrate, relax, play with your children, 
+                    meet friends or dare to jump on the bungee.Other leisure ideas and exclusive events can be found in our blog - 
+                    guaranteed free from dust and cleaning tips!
+                </p>
+            </div>
+            <div class="thirdcontant_container2">
+                <img class="thirdcontant_container2_img" src="~/img/group-36.png" alt="imgs">
+            </div>
+        </div>
+        <h2 class="our_blog"><b>Our Blog</b></h2>
+        <div class="thirdcontant2_container">
+            <div class="card_main_container">
+                <div class="card_container">
+                    <div>
+                        <img class="card_container_img" src="~/img/group-28.png" alt="">
+                    </div>
+                    <div class="card_container_heading"><b>Lorem ipsum dolor sit amet</b></div>
+                    <div class="card_container_date">January 28, 2019</div>
+                    <div class="card_container_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                        fermentum metus pulvinar aliquet.
+                    </div>
+                    <div class="read_post">
+                        <p class="read_post_p">Read the Post</p>
+                        <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                    </div>
+                </div>
+                <div class="card_container">
+                    <div><img class="card_container_img" src="~/img/group-29.png" alt=""></div>
+                    <div class="card_container_heading"><b>Lorem ipsum dolor sit amet</b></div>
+                    <div class="card_container_date">January 28, 2019</div>
+                    <div class="card_container_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                        fermentum metus pulvinar aliquet.
+                    </div>
+                    <div class="read_post">
+                        <p class="read_post_p">Read the Post</p>
+                        <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                    </div>
+                </div>
+                <div class="card_container">
+                    <div><img class="card_container_img" src="~/img/group-30.png" alt=""></div>
+                    <div class="card_container_heading"><b>Lorem ipsum dolor sit amet</b></div>
+                    <div class="card_container_date">January 28, 2019</div>
+                    <div class="card_container_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                        fermentum metus pulvinar aliquet.
+                    </div>
+                    <div class="read_post">
+                        <p class="read_post_p">Read the Post</p>
+                        <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- fourth  -->
+    <div class="fourthcontant">
+        <h2 class="fourth_heading">
+            <b>What Our Customers Say</b>
+        </h2>
+        <div class="fourth_card_container">
+            <div class="particular_container">
+                <img src="~/img/message.png" alt="messageicon">
+                <div class="details">
+                    <img class="details_img" src="~/img/group-31.png" alt="img">
+                    <div style="text-align:start;">
+                        <div class="card_container_heading"><b>Lary Watson</b></div>
+                        <div class="card_container_date">Manchester</div>
+                    </div>
+                </div>
+                <div class="details_desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus pulvinar aliquet
+                    consequat. Praesent nec malesuada nibh. <br><br> Nullam et metus congue, auctor augue sit amet,
+                    consectetur
+                    tortor.
+                </div>
+                <div class="read_post readmore">
+                    <p class="read_post_p">Read More</p>
+                    <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                </div>
+            </div>
+            <div class="particular_container">
+                <img src="~/img/message.png" alt="messageicon">
+                <div class="details">
+                    <img class="details_img" src="~/img/group-32.png" alt="img">
+                    <div style="text-align:start;">
+                        <div class="card_container_heading"><b>John Smith</b></div>
+                        <div class="card_container_date">Manchester</div>
+                    </div>
+                </div>
+                <div class="details_desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus pulvinar aliquet
+                    consequat. Praesent nec malesuada nibh. <br><br> Nullam et metus congue, auctor augue sit amet,
+                    consectetur
+                    tortor.
+                </div>
+                <div class="read_post readmore">
+                    <p class="read_post_p">Read More</p>
+                    <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                </div>
+            </div>
+            <div class="particular_container">
+                <img src="~/img/message.png" alt="messageicon">
+                <div class="details">
+                    <img class="details_img" src="~/img/group-33.png" alt="img">
+                    <div style="text-align:start;">
+                        <div class="card_container_heading"><b>Lars Johnson</b></div>
+                        <div class="card_container_date">Manchester</div>
+                    </div>
+                </div>
+                <div class="details_desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus pulvinar aliquet
+                    consequat. Praesent nec malesuada nibh. <br><br> Nullam et metus congue, auctor augue sit amet,
+                    consectetur
+                    tortor.
+                </div>
+                <div class="read_post readmore">
+                    <p class="read_post_p">Read More</p>
+                    <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                </div>
+            </div>
+        </div>
+        <div class="newsletter">
+            <div onclick="window.scroll(0,0);" class="arrow_div">
+                <img src="~/img/forma-1.png" alt="img">
+            </div>
+            <div class="news_between">
+                <p style="font-size: 21px;">GET OUR NEWSLETTER</p>
+                <form action="">
+                    <input class="form_text rounded-pill" type="text" placeholder="YOUR EMAIL">
+                    <button class="form_submit rounded-pill" type="submit">Submit</button>
+                </form>
+            </div>
+            <img class="news_img" src="~/img/layer-598.png" alt="img">
+        </div>
+    </div>
+
+
+
+    <!-- modal start  -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel" style="color: #494949;">Log in</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="ng-invalid ng-touched ng-dirty">
+                        <div class="form-group icon-textbox right">
+                            <input autofocus type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="E-mail" required>
+                            <img src="~/img/user_name.png" alt="username">
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                        <div class="form-group icon-textbox right">
+                            <input autofocus type="password" class="form-control" id="exampleFormControlInput1"
+                                placeholder="password" required>
+                            <img src="~/img/lock.png" alt="password">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Save on computer
+                            </label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary rounded-pill modal_submit" type="submit">log
+                                in</button>
+                        </div>
+                        <div class="modal_footer_div">
+                            <a href="#" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Forgot
+                                Password?</a>
+                            <div>Don't have account yet?</div>
+                            <a href="#">create Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="ng-invalid ng-touched ng-dirty">
+                        <div class="form-group icon-textbox right">
+                            <input autofocus type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="E-Mail-Address" required>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary rounded-pill modal_submit" type="submit">Send</button>
+                        </div>
+                        <div class="modal_footer_div">
+                            <a href="#" data-bs-target="#exampleModal" data-bs-toggle="modal">log in
+                                now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts
+    {
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="~/js/site.js"></script>
+    }
