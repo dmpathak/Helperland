@@ -9,6 +9,9 @@
 html {
     scroll-behavior: smooth;
 }
+a:hover {
+    color: #FFFFFF;
+}
 
 .Faq_header {
     height: 64px;
@@ -133,7 +136,7 @@ html {
     width: 100%;
     height: 0px;
     overflow: hidden;
-    max-height: 350px;
+    max-height: fit-content;
     transition: all 0.2s linear;
     background-color: #000000;
     opacity: 0.8;
@@ -143,7 +146,7 @@ html {
 }
 
 .expand-btn-container-open {
-    height: 350px;
+    height: fit-content;
     display: none;
 }
 
@@ -159,11 +162,10 @@ html {
     font-size: 17px;
     color: #FFFFFF;
 }
-
-    .expand-btn a {
-        text-decoration: none;
-        color: white;
-    }
+.expand-btn a {
+   text-decoration: none;
+   color: white;
+}
 
 
 
@@ -191,6 +193,9 @@ html {
     .extra_service_inner_container {
         text-align: center;
         justify-content: center;
+    }
+    .popover {
+        display: none !important;
     }
 }
 
@@ -798,4 +803,83 @@ html {
     .news_img {
         margin-right: 0px;
     }
+}
+
+
+
+
+/*form another navbar after login*/
+.notifications {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 20px 7px 20px;
+    border-right: 1px solid #E1E1E1;
+    border-left: 1px solid #E1E1E1;
+}
+
+.notifications img {
+    width: 29px;
+    height: 32px;
+}
+
+.notification_number {
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    border-radius: 20px;
+    background-color: #ff1616;
+    color: #FFFFFF;
+    height: 18px;
+    font-size: 13.5px;
+    width: 18px;
+    text-align: center
+}
+
+.dropdown_imgs {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 26px;
+    cursor: pointer;
+}
+
+
+.logout_popover.popover {
+    display: block;
+    top: 28px !important;
+    left: -28px !important;
+}
+
+.logout_popover .popover-arrow {
+    left: 22px !important;
+}
+.logout_popover .popover-body {
+    padding: 0px !important;
+    width: 200px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+}
+.logout_popover .popover-body a{
+  color: #111111 !important;
+  text-decoration: none;
+}
+.logout_popover .popover-body p{
+  color: #111111 !important;
+  padding: 10px 0px 10px 10px;
+  margin-bottom: 0px !important;
+}
+.logout_popover .popover-body p:hover{
+  background-color: #F9F9F9;
+  transition: all 0.5s;
+}
+.logout_popover .popover-body hr{
+  color: #111111 !important;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+.logout_popover .popover_container {
+    padding: 15px 0px 12px 10px;
 }

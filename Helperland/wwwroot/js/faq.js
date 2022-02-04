@@ -28,3 +28,5 @@ $(document).ready(()=>{
     $($e).parent().next().slideToggle(500);
 })
 })
+
+

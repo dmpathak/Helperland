@@ -15,3 +15,5 @@ window.addEventListener("scroll", () => {
     document.getElementById("scroll_img_div").style.pointerEvents = "all";
   }
 })
+
+

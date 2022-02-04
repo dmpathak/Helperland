@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\.net Practice\\Helperland\\Helperland.csproj": {}
+    "C:\\Users\\DEEP\\Desktop\\Helperland\\Helperland\\Helperland.csproj": {}
   },
   "projects": {
-    "E:\\.net Practice\\Helperland\\Helperland.csproj": {
+    "C:\\Users\\DEEP\\Desktop\\Helperland\\Helperland\\Helperland.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\.net Practice\\Helperland\\Helperland.csproj",
+        "projectUniqueName": "C:\\Users\\DEEP\\Desktop\\Helperland\\Helperland\\Helperland.csproj",
         "projectName": "Helperland",
-        "projectPath": "E:\\.net Practice\\Helperland\\Helperland.csproj",
+        "projectPath": "C:\\Users\\DEEP\\Desktop\\Helperland\\Helperland\\Helperland.csproj",
         "packagesPath": "C:\\Users\\DEEP\\.nuget\\packages\\",
-        "outputPath": "E:\\.net Practice\\Helperland\\obj\\",
+        "outputPath": "C:\\Users\\DEEP\\Desktop\\Helperland\\Helperland\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DEEP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,26 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "System.Web.Helpers.Crypto": {
+              "target": "Package",
+              "version": "[3.2.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

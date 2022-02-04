@@ -1,0 +1,187 @@
+﻿@model Helperland.Models.ViewModels.BeacomeaproViewModel
+
+@{
+    ViewData["Title"] = "Beacome_a_pro";
+}
+
+@section CustomCss
+{
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="~/css/Become-a-pro.css" />
+}
+
+@*body*@
+<div class="maincontainer">
+    <div class="header" id="header">
+        <div class="navLogoDiv">
+            <a asp-controller="Home" asp-action="index"><img class="nav_logo" src="~/img/logo.png" alt="logo"></a>
+            <div class="hamburger h1 me-5">=</div>
+        </div>
+        <div class="nav">
+            <ul class="nav_ul">
+                <li class="navitem "><a class="nav_link navitem_round" href="#">Book a cleaner</a></li>
+                <li class="navitem"><a class="nav_link" asp-controller="Home" asp-action="Prices">Prices</a></li>
+                <li class="navitem"><a class="nav_link" href="#">Our Guarantee</a></li>
+                <li class="navitem"><a class="nav_link" href="#">Blog</a></li>
+                <li class="navitem"><a class="nav_link" asp-controller="Home" asp-action="Contact">Contact us</a></li>
+                <li class="navitem "><a class="nav_link navitem_round" asp-controller="Home" asp-action="index" asp-route-login="true">Login</a></li>
+                <li class="navitem ">
+                    <a class="nav_link navitem_round" asp-controller="Home" asp-action="Beacome_a_pro">Become a helper</a>
+                </li>
+                <div class="dropdown">
+                    <img src="~/img/flag.png" alt="flag">
+                    <img src="~/img/arrow_down.png" alt="flag">
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div style="padding-top: 152px;">
+        <div class="get_in_touch container">
+            <div class="get_in_touch_hd">
+                <b>Register Now</b>
+            </div>
+            <form asp-action="Beacome_a_pro" asp-method="post">
+
+                <div class="row align-items-center justify-content-center g-2">
+                    <div class="form-item col-12">
+                        <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-item col-12">
+                        <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-item col-12">
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-item col-12">
+                        <div class="input-group mx-0 row">
+                            <input type="text" class="input-group-text col-2 px-0"
+                                   placeholder="+46" />
+                            <input asp-for="Mobile" type="tel" class="form-control col-10" placeholder="Phone Number"
+                                   aria-label="Mobile Number" aria-describedby="basic-addon1" />
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-item col-12">
+                        <input asp-for="Password" type="password" class="form-control"
+                               placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-item col-12">
+                        <input asp-for="ConfirmPassword" type="password" class="form-control"
+                               placeholder="Confirm Password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox_container col-12">
+                        <input class="checkbox" type="checkbox">
+                        <div class="check_data">Send me newsletters from Helperland</div>
+                    </div>
+                    <div class="checkbox_container col-12">
+                        <input class="checkbox" type="checkbox">
+                        <div class="check_data">
+                            I accept <a href="#" style="color: #1fb6ff;">terms and conditions</a> &
+                            <a href="#" style="color: #1fb6ff;">privacy policy</a>
+                        </div>
+                    </div>
+                    <img class="robot_img" src="~/img/pro-layer-20.png" alt="">
+                    <button type="submit" class="submit rounded-pill border-0 outline-0">
+                        Get Started <span>
+                            <img class="arrow_white" src="~/img/arrow-white.png" alt="arrow">
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="last_arrow">
+        <a href="#between_container"><img src="~/img/group-18_5.png" alt="arrow"></a>
+    </div>
+</div>
+
+<!-- between  -->
+<div class="between_container" id="between_container">
+    <img class="blog-left-bg" src="~/img/blog-left-bg.png" alt="" srcset="">
+    <div class="inner_between_container">
+        <p class="inner_between_container_header">How it works</p>
+        <div>
+            <div class="inner_between_container_data">
+                <div class="inner_between_container_data1">
+                    <div class="inner_between_container_data1_header">Register yourself</div>
+                    <div class="inner_between_container_data1_data">
+                        Provide your basic information to register
+                        yourself as a service provider.
+                    </div>
+                    <div class="read_post">
+                        <p class="read_post_p">Read the Post</p>
+                        <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                    </div>
+                </div>
+                <img src="~/img/pro-group-18_3.png" alt="photo1">
+            </div>
+            <div class="inner_between_container_data">
+                <img src="~/img/pro-group-18_2.png" alt="photo1">
+                <div class="smiling_girl_img_data">
+                    <div class="inner_between_container_data1_header">Register yourself</div>
+                    <div class="inner_between_container_data1_data">
+                        Provide your basic information to register
+                        yourself as a service provider.
+                    </div>
+                    <div class="read_post">
+                        <p class="read_post_p">Read the Post</p>
+                        <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="inner_between_container_data">
+                <div class="inner_between_container_data1">
+                    <div class="inner_between_container_data1_header">Register yourself</div>
+                    <div class="inner_between_container_data1_data">
+                        Provide your basic information to register
+                        yourself as a service provider.
+                    </div>
+                    <div class="read_post">
+                        <p class="read_post_p">Read the Post</p>
+                        <span><img src="~/img/shape-2-copy-3.png" alt="arrow"></span>
+                    </div>
+                </div>
+                <img src="~/img/pro-group-18_4.png" alt="photo1">
+            </div>
+        </div>
+    </div>
+    <img class="blog-right-bg" src="~/img/blog-right-bg.png" alt="" srcset="">
+</div>
+
+<!-- newsletter  -->
+<div class="center">
+    <div class="get-news-container">
+        <p>
+            GET OUR NEWSLETTER
+        </p>
+        <form action="#" method="post" class="form-container">
+            <input class="form-container-input" type="email" placeholder="YOUR EMAIL">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+@section jquery {
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="~/js/become_pro.js"></script>
+}

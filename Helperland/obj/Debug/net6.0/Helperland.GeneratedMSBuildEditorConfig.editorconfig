@@ -8,49 +8,61 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Helperland
 build_property.RootNamespace = Helperland
-build_property.ProjectDir = E:\.net Practice\Helperland\
+build_property.ProjectDir = C:\Users\DEEP\Desktop\Helperland\Helperland\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\.net Practice\Helperland
+build_property.MSBuildProjectDirectory = C:\Users\DEEP\Desktop\Helperland\Helperland
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/.net Practice/Helperland/Views/Home/About.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Home/Contact.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/Beacome_a_pro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCZWFjb21lX2FfcHJvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/Contact.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Home/Faq.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/createAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxjcmVhdGVBY2NvdW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/Faq.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGYXEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Home/Index.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Home/Prices.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/Prices.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcmljZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Shared/Error.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Home/Resetpassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXNldHBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/_ViewImports.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/_ViewStart.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/.net Practice/Helperland/Views/Shared/_Layout.cshtml]
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-oly2lupp25
