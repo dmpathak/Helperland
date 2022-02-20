@@ -387,15 +387,14 @@ a {
 }
 
     .card_container:hover {
-        margin: 64px 10px 43px 30px;
+        /*margin: 64px 10px 43px 30px;*/
         box-shadow: 0 0 50px #b3c0c7;
-        ;
-        border-radius: 4px;
+        /*border-radius: 4px;*/
     }
 
 .card_container_img {
     height: 164px;
-    max-width: 357px;
+    /*max-width: 357px;*/
 }
 
 .card_container_heading {

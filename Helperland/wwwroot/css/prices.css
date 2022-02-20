@@ -420,6 +420,9 @@ a:hover {
 .inner_services {
     display: flex;
 }
+.inner_services p{
+    margin-bottom: 0px !important;
+}
 
 .srvice_heading {
     color: #4F4F4F;
@@ -546,7 +549,6 @@ a:hover {
     align-items: center;
     border-radius: 50px;
     padding: 18px 14px 20px;
-    margin-left: 70px;
     position: fixed;
     bottom: 71px;
     left: 30px;

@@ -8,13 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     @RenderSection("CustomCss",required:false)
 </head>
-<body>
+<body onload="progress_validator(4);">
     @if (ViewData["Title"] != null && (ViewData["Title"].ToString() != "Home Page" && ViewData["Title"].ToString() != "Beacome_a_pro"))
     {
         <div class="Faq_header">
             <a asp-controller="Home" asp-action="Index"><img src="~/img/logo-small.png" alt="logo" class="faq-nav-logo"></a>
             <div class="nav-btn-container">
-                <a href="#" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Book" asp-action="BookService" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+                }
+                else
+                {
+                    <a asp-controller="Home" asp-action="index" asp-route-login="true" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+                }
                 <a asp-controller="Home" asp-action="Prices" class="nav-round-btn-price nav_btn_hover2">Prices & services</a>
                 <a href="#" class="nav-btn nav_btn_hover2">Warranty</a>
                 <a href="#" class="nav-btn nav_btn_hover2">Blog</a>
@@ -32,10 +39,11 @@
                     <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
                  data-bs-html="true"
                  data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='#'>My Dashboard</a></p> <p><a href='#'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>" data-bs-custom-class="logout_popover">
-                    <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="flag">
-                    <img style="width:11px; height:6px; margin-top:10px; margin-left:7px;" src="~/img/arrow_down.png"
+                        <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="flag">
+                        <img style="width:11px; height:6px; margin-top:10px; margin-left:7px;" src="~/img/arrow_down.png"
                      alt="flag">
-                </div>
+                    </div>
+
                 }
                 else
                 {
@@ -49,7 +57,16 @@
         </div>
         <div class="expand-btn-container" id="expand_btn_container">
             <div class="expand-btn-inner-container">
-                <div class="expand-btn"><a href="#">Book now</a></div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @*<a asp-controller="Book" asp-action="BookService" class="nav-round-btn-book nav_btn_hover1">Book Now</a>*@
+                    <div class="expand-btn"><a asp-controller="Book" asp-action="BookService">Book now</a></div>
+                }
+                else
+                {
+                    @*<a asp-controller="Home" asp-action="index" asp-route-login="true" class="nav-round-btn-book nav_btn_hover1">Book Now</a>*@
+                    <div class="expand-btn"><a asp-controller="Home" asp-action="index" asp-route-login="true">Book now</a></div>
+                }
                 <div class="expand-btn"><a asp-controller="Home" asp-action="Prices">Prices & services</a></div>
                 <div class="expand-btn"><a href="#">Warranty</a></div>
                 <div class="expand-btn"><a href="#">Blog</a></div>

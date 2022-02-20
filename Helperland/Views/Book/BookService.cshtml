@@ -1,0 +1,769 @@
+﻿@model Helperland.Models.ViewModels.CheckavailViewModel
+
+
+@{
+    ViewData["Title"] = "BookService";
+}
+@section CustomCss{
+
+<link rel="stylesheet" href="~/css/BookService.css" />
+}
+
+
+<!-- banner  -->
+<img class="faq-banner" src="~/img/book-service-banner.jpg" alt="">
+
+<!-- Set up your cleaning service  -->
+<div class="faq-heading-container">
+    <div class="faq-heading-inner-container">
+        <h2 class="faq-heading">Set up your cleaning service</h2>
+        <div class="faq-heading-img"></div>
+    </div>
+</div>
+
+@*.............................................................................................................................*@
+<div class="d-flex" style="justify-content:space-evenly;">
+    <div class="between_first_contain">
+        <!-- TABS HEADINGS  -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <!-- TAB-1 HEADING  CONTAINER-->
+            <li class="nav-item tabs_data" role="presentation">
+                <!-- <div class="tabs_data "> -->
+                <button class="nav-link active" id="setupServiceBtn" data-bs-toggle="tab"
+                        data-bs-target="#setupServices" type="button" role="tab" aria-controls="setupServices"
+                        onclick="progress_validator(4);" aria-selected="false">
+                    <span>
+                        <span class="icon"><img src="~/img/setup-service.png" alt="a" /></span>
+                        <span>Setup Service</span>
+                    </span>
+                </button>
+                <!-- </div> -->
+            </li>
+            <!-- TAB-2 HEADING  -->
+            <li class="nav-item tabs_data" role="presentation">
+                <!-- <div class="tabs_data "> -->
+                <button class="nav-link" id="schedulePlanBtn" data-bs-toggle="tab" data-bs-target="#schedulePlan"
+                        onclick="progress_validator(3);" type="button" role="tab" aria-controls="schedulePlan"
+                        aria-selected="false">
+                    <span>
+                        <span class="icon"><img src="~/img/schedule.png" alt="a" /></span>
+                        <span>Schedule & Plan</span>
+                    </span>
+                </button>
+                <!-- </div> -->
+            </li>
+            <!-- TAB-3 HEADING  -->
+            <li class="nav-item tabs_data" role="presentation">
+                <!-- <div class="tabs_data "> -->
+                <button class="nav-link" id="detailsBtn" data-bs-toggle="tab" data-bs-target="#details"
+                        type="button" role="tab" onclick="progress_validator(2);" aria-controls="details"
+                        aria-selected="false">
+                    <span>
+                        <span class="icon"><img src="~/img/details.png" alt="a" /></span>
+                        <span>Your Details</span>
+                    </span>
+                </button>
+                <!-- </div> -->
+            </li>
+            <!-- TAB-4 HEADING  -->
+            <li class="nav-item tabs_data" role="presentation">
+                <!-- <div class="tabs_data "> -->
+                <button class="nav-link" id="paymentBtn" data-bs-toggle="tab" data-bs-target="#payment"
+                        type="button" onclick="progress_validator(1);" role="tab" aria-controls="payment"
+                        aria-selected="false">
+                    <span>
+                        <span class="icon"><img src="~/img/payment.png" alt="a" /></span>
+                        <span>Make Payment</span>
+                    </span>
+                </button>
+                <!-- </div> -->
+            </li>
+        </ul>
+        <!-- TABS DATAS CONTAINER -->
+        <div class="tab-content" id="myTabContent">
+            <!-- TAB-1 DATA  -->
+            <div class="tab-pane fade show active third_tab_data_color" id="setupServices" role="tabpanel"
+                 aria-labelledby="setupServiceBtn">
+                <div class="first_tab_data">
+                    <form id="postalcode_form">
+                        <label for="" class="mb-2"><b>Enter your Postal Code</b></label><br>
+                        <input class="postal_text" asp-for="MyCheckavail" placeholder="Postal code">
+                        <button class="avail_btn rounded-pill" type="submit">
+                            Check
+                            Availability
+                        </button>
+                    </form>
+                </div>
+                <span class="text-danger" id="pin_not_found"></span>
+            </div>
+
+
+            <!-- TAB-2 DATA  -->
+            <div class="tab-pane fade" id="schedulePlan" role="tabpanel" aria-labelledby="schedulePlanBtn">
+                <div class="second_tab_data">
+                    <!-- TAB-2 DATA part 1  -->
+                    <!--TAB-2 DATA part 2 -->
+                    <div class="d-flex flex-wrap">
+                        <div class="for_margin_tab2_part2">
+                            <label class="mb-2 second_tab_headings">
+                                <b>
+                                    When do you need the
+                                    cleaner?
+                                </b>
+                            </label><br>
+                            <div class="second_tab_data_select">
+                                <form id="clening_date_time">
+                                    <input asp-for="date" onchange="datechange();" id="date"  placeholder="01/01/2018">
+                                    
+                                    <select asp-for="time" onchange="timechange();" id="time" class="form-select-sm">
+                                        <option value="8:00">8:00</option>
+                                        <option value="8:30">8:30</option>
+                                        <option value="9:00">9:00</option>
+                                        <option value="9:30">9:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="text-danger" id="wrong_date"></div>
+                        </div>
+                        <div>
+                            <label class="mb-2 second_tab_headings">
+                                <b>
+                                    How long do you need your cleaner to
+                                    stay?
+                                </b>
+                            </label><br>
+                            <div class="second_tab_data_select">
+                                <form id="basic_time">
+                                    <select asp-for="basic_time" class="form-select-sm" onchange="basicchange();" id="basic">
+                                        <option value="3">3 Hrs</option>
+                                        <option value="3.5">3.5 Hrs</option>
+                                        <option value="4">4 Hrs</option>
+                                        <option value="4.5">4.5 Hrs</option>
+                                        <option value="5">5 Hrs</option>
+                                        <option value="5.5">5.5 Hrs</option>
+                                        <option value="6">6 Hrs</option>
+                                        <option value="6.5">6.5 Hrs</option>
+                                        <option value="7">7 Hrs</option>
+                                        <option value="7.5">7.5 Hrs</option>
+                                        <option value="8">8 Hrs</option>
+                                        <option value="8.5">8.5 Hrs</option>
+                                        <option value="9">9 Hrs</option>
+                                        <option value="9.5">9.5 Hrs</option>
+                                        <option value="10">10 Hrs</option>
+                                        <option value="10.5">10.5 Hrs</option>
+                                        <option value="11">11 Hrs</option>
+                                        <option value="11.5">11.5 Hrs</option>
+                                        <option value="12">12 Hrs</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- TAB-2 DATA part 3 -->
+                    <div class="second_tab_headings mb-4"><b>Extra Service</b></div>
+                    <div class="extra_services">
+                        <!-- 1st extra servive -->
+                        <div>
+                            <div class="form-check">
+
+                                <input class="d-none form-check-input click_checkbox1" value=""
+                                       id="flexCheckDefault1" type="checkbox">
+                                <label class="form-check-label" for="flexCheckDefault1">
+                                    <div class="extra_service_photo_inactive rounded-pill" style="
+                                            padding: 30px 35px 30px 36px;">
+                                        <img src='~/img/3.png' alt='photo'>
+                                        <img src='~/img/3-green.png' alt='photo' style="display: none;">
+                                    </div>
+                                    <p>Inside cabinets</p>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 2nd extra servive -->
+                        <div>
+                            <div class="form-check">
+                                <input class="d-none form-check-input click_checkbox2" value=""
+                                       id="flexCheckDefault2" type="checkbox">
+                                <label class="form-check-label" for="flexCheckDefault2">
+                                    <div class="extra_service_photo_inactive rounded-pill"
+                                         style="padding: 24px 40px 28px 40px;">
+                                        <img src="~/img/5.png" alt="photo">
+                                        <img src='~/img/5-green.png' alt='photo' style="display: none;">
+                                    </div>
+                                    <p>Inside fridge</p>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 3rd extra servive -->
+                        <div>
+                            <div class="form-check">
+                                <input class="d-none form-check-input click_checkbox3" value=""
+                                       id="flexCheckDefault3" type="checkbox">
+                                <label class="form-check-label" for="flexCheckDefault3">
+                                    <div class="extra_service_photo_inactive rounded-pill"
+                                         style="padding: 38px 28px;">
+                                        <img src="~/img/4.png" alt="photo">
+                                        <img src='~/img/4-green.png' alt='photo' style="display: none;">
+                                    </div>
+                                    <p>Inside oven</p>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 4th extra servive -->
+                        <div>
+                            <div class="form-check">
+                                <input class="d-none form-check-input click_checkbox4" value=""
+                                       id="flexCheckDefault4" type="checkbox">
+                                <label class="form-check-label" for="flexCheckDefault4">
+                                    <div class="extra_service_photo_inactive rounded-pill"
+                                         style="padding: 31px 34px;">
+                                        <img src="~/img/2.png" alt="photo">
+                                        <img src='~/img/2-green.png' alt='photo' style="display: none;">
+                                    </div>
+                                    <p>Laundry <br> wash & dry</p>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- 5th extra servive -->
+                        <div>
+                            <div class="form-check">
+                                <input class="d-none form-check-input click_checkbox5" value=""
+                                       id="flexCheckDefault5" type="checkbox">
+                                <label class="form-check-label" for="flexCheckDefault5">
+                                    <div class="extra_service_photo_inactive rounded-pill"
+                                         style="padding: 31px 30px 30px 31px;">
+                                        <img class="img_active" src="~/img/1.png" alt="photo">
+                                        <img src='~/img/1-green.png' alt='photo' style="display: none;">
+                                    </div>
+                                    <p>Interior <br> windows</p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- TAB-2 DATA part 4 -->
+                    <div class="mb-2 second_tab_headings"><b>Comments</b></div>
+                    <div class="mb-3">
+                        <textarea asp-for="comments" class="textarea" placeholder="comments" id = "comments"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <input asp-for="have_pets" style="width:18px; height:18px; margin-right:5px" type="checkbox" id="is_pet">I have pets at home
+                    </div>
+                    <hr>
+                    <!-- TAB-2 DATA Continue button  -->
+                    <div class="tabs_last_buttons">
+                        <button id="continue1" class="rounded-pill continue_btn" onclick="schedule_plan_continue();"
+                                type="submit">
+                            Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- TAB-3 DATA -->
+            <div class="tab-pane fade third_tab_data_color" id="details" role="tabpanel"
+                 aria-labelledby="detailsBtn">
+                <!-- TAB-3 DATA part 1 -->
+                <div>
+                    <label class="mb-2 second_tab_headings">
+                        <b>
+                            Enter your contact details, so we can serve you in
+                            better
+                            way!
+                        </b>
+                    </label><br>
+                    <div id="address_show_radio">
+                        @*document.querySelector('input[name="flexRadioDefault"]:checked')*@
+                        @*<div class="form-check mb-3 existing_address">
+                            <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
+                                   id="flexRadioDefault1" value="10">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <b class="second_tab_headings">Address:</b> <span id="street_span"> koginstarsse  </span>
+                                122 ,Tambarch-dizwanf 988762 <br>
+                                <b class="second_tab_headings">Phone:</b> 9948659746
+                            </label>
+                        </div>
+                        <div class="form-check mb-3 existing_address">
+                            <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
+                                   id="flexRadioDefault2" value="5">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                <b class="second_tab_headings">Address:</b> koginstarsse
+                                122 ,Tambarch-dizwanf 988762 <br>
+                                <b class="second_tab_headings">Phone:</b> 9948659746
+                            </label>
+                        </div>*@
+                        @*<div class="form-check mb-3 existing_address newly_address" style="display:none">
+                            <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
+                            id="flexRadioDefault3" value="5"
+                            <label class="form-check-label" for="flexRadioDefault3">
+                            <b class="second_tab_headings">Address:</b> koginstarsse
+                            122 ,Tambarch-dizwanf 988762 <br>
+                            <b class="second_tab_headings">Phone:</b> 9948659746
+                            </label>
+                            </div>*@
+
+                    </div>
+
+                    <!-- add new addresss form  -->
+                    <div class="collapse" id="collapseExample1">
+                        <div class="new_address_form mb-3">
+                            <form class="row g-3" id="new_add_form">
+                                <div class="col-md-6">
+                                    <label class="form-label"><b>Street name</b></label>
+                                    <input asp-for="street_name" class="form-control" placeholder="Street name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><b>House number</b></label>
+                                    <input asp-for="house_number" class="form-control" placeholder="House number">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><b>Postal code</b></label>
+                                    <input asp-for="pincode" id="form_postal" class="form-control" placeholder="" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><b>City</b></label>
+                                    <input asp-for="city" id="form_city" class="form-control" placeholder="" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><b>Phone number</b></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">+49</div>
+                                        <input asp-for="phone_number" class="form-control" placeholder="Phone number">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap">
+                                    <div class="col-auto">
+                                        <button type="submit" id="form_save" class="rounded-pill continue_btn">Save</button>
+                                    </div>
+                                    <button class="btn  rounded-pill cancel_btn collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseExample1"
+                                            aria-expanded="false" aria-controls="collapseExample1">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- add new addresss form till here -->
+                    <!-- add new button to show above form  -->
+                    <p>
+                        <button class="btn new_address rounded-pill mb-3 collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                            <b>+ Add New Address</b>
+                        </button>
+                    </p>
+                </div>
+
+                <!-- TAB-3 DATA part 2 -->
+                <div class="second_tab_headings"><b>Your Favourite Service Providers</b></div>
+                <hr class="mb-1 mt-0">
+                <div class="mb-2">You can choose your favourite service provider from the below list</div>
+                <div class="fav_sp_container">
+                    <div class="fav_sp">
+                        <img class="rounded-pill" src="~/img/cap.png" alt="photo">
+                        <p class="mb-2 second_tab_headings"><b>Sandip Patel</b></p>
+                        <button>Select</button>
+                    </div>
+                </div>
+                <hr>
+                <!-- TAB-3 DATA continue button -->
+                <div class="tabs_last_buttons">
+                    <button class="rounded-pill continue_btn" onclick=" your_details_continue()"
+                            type="submit">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- TAB-4 DATA -->
+            <div class="tab-pane fade third_tab_data_color" id="payment" role="tabpanel"
+                 aria-labelledby="paymentBtn">
+                <div class="mb-3"><b>Pay securely with Helperland payment gateway!</b></div>
+                <!-- promo code  -->
+                <div>
+                    <label class="mb-2">Promo code (optional)</label><br>
+
+                    <input class="postal_text" type="text" placeholder="Promo code (optional)">
+                    <button class="new_address rounded-pill mb-3" type="button">Apply</button>
+                </div>
+                <hr>
+                <!-- card details  -->
+                <div class="card_number">
+                    <input class="form-control mb-3" type="text" placeholder="Card number"
+                           aria-label="default input example">
+                    <!-- <p>MM/YY CVC</p> -->
+                </div>
+                <div class="Accepted_cards">
+                    <p>Accepted cards</p>
+                    <div>
+                        <img src="~/img/flag.png" alt="1">
+                        <img src="~/img/flag.png" alt="2">
+                        <img src="~/img/flag.png" alt="3">
+                    </div>
+                </div>
+                <hr class="mt-1">
+                <!-- accept term & conditioncheck box -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label before_complete_booking" for="flexCheckDefault">
+                        I Accepted <a href="#">terms and Conditions</a>. the <a href="#">cancellation policy</a>
+                        and
+                        the <a href="#">privaacy policy</a>. I confirm that Lorem ipsum dolor sit amet
+                        consectetur
+                        adipisicing elit. Blanditiis accusantium ut atque nihil sit provident, ab quas
+                        recusandae
+                        minima perferendis vero vel quae expedita, ratione quis
+                    </label>
+                </div>
+                <hr>
+                <!-- Complete Booking success modal  -->
+                <div class="tabs_last_buttons">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="rounded-pill continue_btn" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" id="complete_booking">
+                        Complete Booking
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="~/img/layer-598.png" alt="success">
+                                <div>Booking has been successfully submitted</div>
+                                <p>Service Request Id: <span id="service_id"></span></p>
+                                <button type="button" class="rounded-pill continue_btn"
+                                        data-bs-dismiss="modal">
+                                    Ok
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- payment summary container  -->
+    <div class="between_second_container">
+        <!-- payment summary card  -->
+        <div class="card">
+            <div class="card-header">
+                Payment Summary
+            </div>
+            <div class="card-body">
+                <div class="date_time_div">
+                    <div> <span id="date_text">01/01/2018</span> <span id="time_text">8:00</span></div>
+                </div>
+                <div class="card_duration">Duration</div>
+                <div class="payment_card_basic">
+                    Basic <div id="basic_text">
+                        3
+                        Hrs
+                    </div>
+                </div>
+                <div style="color: #646464;"><b>Extras</b></div>
+                <!-- aahiya loop ma nakhvu pade kadach  -->
+                <div>
+                    <div style="display: none;" class="payment_card_basic cabinet">
+                        Inside cabinets
+                        <div>30 Min</div>
+                    </div>
+                    <div style="display: none;" class="payment_card_basic fridge">
+                        Inside fridge
+                        <div>30 Min</div>
+                    </div>
+                    <div style="display: none;" class="payment_card_basic oven">
+                        Inside oven
+                        <div>30 Min</div>
+                    </div>
+                    <div style="display: none;" class="payment_card_basic laundry">
+                        Laundry wash & dry
+                        <div>30 Min</div>
+                    </div>
+                    <div style="display: none;" class="payment_card_basic window">
+                        Interior windows
+                        <div>30 Min</div>
+                    </div>
+                </div>
+                <hr class="m-1">
+                <div class="payment_card_basic">
+                    <b>Total service Time</b>
+                    <div><b><span id="total_time">3</span>Hrs</b></div>
+                </div>
+                <hr>
+                <div class="payment_card_basic">
+                    Per cleaning <div>
+                        75,000 $
+                    </div>
+                </div>
+                <hr>
+                <div class="total_payment_count">
+                    Total payment <div style="font-size: 30px;"><b> <span id="total_paym"></span>$</b></div>
+                </div>
+
+                <!-- aahithi aa extra chhe SRS ma thi -->
+                <div style="font-size: 13px;">According to xyz no tax is calculated.</div>
+                <div style="display: flex; justify-content:space-between" class="mt-2 mb-2">
+                    Effective Price <div>
+                        60,000 $
+                    </div>
+                </div>
+                <div style="font-size: 13px;" class="mb-2">You will save 20% according to xyz.</div>
+                <!-- aahi sudhi  -->
+
+            </div>
+            <div class="mycard_footer">
+                <img src="~/img/smiley.png" alt="">
+                <div>
+                    See what is always included
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions  -->
+        <div class="que_head">
+            Questions?
+        </div>
+        <div class="que_container">
+            <div class="que">
+                <img class="head-symbol" src="~/img/Rignt-accord.png" alt="">
+                <div>What's included in cleaning?</div>
+            </div>
+            <div class="que_data">
+                <div class="head-text-context">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id
+                    diam.
+                </div>
+            </div>
+            <hr style="color: #E1E1E1;">
+            <div class="que">
+                <img class="head-symbol" src="~/img/Rignt-accord.png" alt="">
+                <div>Which Helperland Professional will come to my place?</div>
+            </div>
+            <div class="que_data">
+                <div class="head-text-context">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id
+                    diam.
+                </div>
+            </div>
+            <hr style="color: #E1E1E1;">
+            <div class="que">
+                <img class="head-symbol" src="~/img/Rignt-accord.png" alt="">
+                <div>Can I skip or reschedule bookings?</div>
+            </div>
+            <div class="que_data">
+                <div class="head-text-context">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id
+                    diam.
+                </div>
+            </div>
+            <hr style="color: #E1E1E1;">
+        </div>
+
+        <!-- more help  -->
+        <a class="more_help" href="#">For more help</a>
+    </div>
+</div>
+
+
+
+<!-- for payment modal responsive  -->
+<!-- Full screen modal -->
+<!-- Button trigger modal -->
+<div class="payment_button">
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Payment Summary
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header card-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                <div class="">
+                    Payment Summary
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="">
+                <div class="">
+                    <!-- payment summary card  -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="date_time_div">
+                                <div> <span id="date_text_responsive">01/01/2018</span> <span id="time_text_responsive">8:00</span></div>
+                            </div>
+                            <div class="card_duration">Duration</div>
+                            <div class="payment_card_basic">
+                                Basic <div id="basic_text_responsive">
+                                    3
+                                    Hrs
+                                </div>
+                            </div>
+                            <div style="color: #646464;"><b>Extras</b></div>
+                            <div>
+                                <div style="display: none;" class="payment_card_basic cabinet">
+                                    Inside cabinets
+                                    <div>30 Min</div>
+                                </div>
+                                <div style="display: none;" class="payment_card_basic fridge">
+                                    Inside fridge
+                                    <div>30 Min</div>
+                                </div>
+                                <div style="display: none;" class="payment_card_basic oven">
+                                    Inside oven
+                                    <div>30 Min</div>
+                                </div>
+                                <div style="display: none;" class="payment_card_basic laundry">
+                                    Laundry wash & dry
+                                    <div>30 Min</div>
+                                </div>
+                                <div style="display: none;" class="payment_card_basic window">
+                                    Interior windows
+                                    <div>30 Min</div>
+                                </div>
+                            </div>
+                            <hr class="m-1">
+                            <div class="payment_card_basic">
+                                <b>Total service Time</b>
+                                <div><b><span id="total_time_responsive">3</span> Hrs</b></div>
+                            </div>
+                            <hr>
+                            <div class="payment_card_basic">
+                                Per cleaning <div>
+                                    18 $
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="total_payment_count">
+                                Total payment <div style="font-size: 30px;"><b> <span id="total_paym_responsive"></span> $</b></div>
+                            </div>
+
+                            <!-- aahithi aa extra chhe SRS ma thi -->
+                            <div style="font-size: 13px;">According to xyz no tax is calculated.</div>
+                            <div style="display: flex; justify-content:space-between" class="mt-2 mb-2">
+                                Effective
+                                Price <div>
+                                    60,000 $
+                                </div>
+                            </div>
+                            <div style="font-size: 13px;" class="mb-2">You will save 20% according to xyz.</div>
+                            <!-- aahi sudhi  -->
+
+                        </div>
+                        <div class="mycard_footer">
+                            <img src="~/img/smiley.png" alt="">
+                            <div>
+                                See what is always included
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questions  -->
+                    <div class="que_head">
+                        Questions?
+                    </div>
+                    <div class="que_container" style="padding:10px">
+                        <div class="que">
+                            <img class="head-symbol" src="~/img/Rignt-accord.png" alt="">
+                            <div>What's included in cleaning?</div>
+                        </div>
+                        <div class="que_data">
+                            <div class="head-text-context">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Sed id
+                                diam.
+                            </div>
+                        </div>
+                        <hr style="color: #E1E1E1;">
+                        <div class="que">
+                            <img class="head-symbol" src="~/img/Rignt-accord.png" alt="">
+                            <div>Which Helperland Professional will come to my place?</div>
+                        </div>
+                        <div class="que_data">
+                            <div class="head-text-context">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Sed id
+                                diam.
+                            </div>
+                        </div>
+                        <hr style="color: #E1E1E1;">
+                        <div class="que">
+                            <img class="head-symbol" src="~/img/Rignt-accord.png" alt="">
+                            <div>Can I skip or reschedule bookings?</div>
+                        </div>
+                        <div class="que_data">
+                            <div class="head-text-context">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Sed id
+                                diam.
+                            </div>
+                        </div>
+                        <hr style="color: #E1E1E1;">
+                    </div>
+
+                    <!-- more help  -->
+                    <div style="padding:0px 0px 15px 10px">
+                        <a class="more_help" href="#">For more help</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @*.............................................................................................................................*@
+
+<!-- newsletter  -->
+<div class="newsletter_main_container">
+    <div onclick="window.scroll(0,0)" class="scroll_img_div" id="scroll_img_div">
+        <img class="scroll_img" src="~/img/forma-1.png" alt="">
+    </div>
+</div>
+<div class="center">
+    <div class="get-news-container">
+        <p>
+            GET OUR NEWSLETTER
+        </p>
+        <form action="#" method="post" class="form-container">
+            <input class="form-container-input" type="email" placeholder="YOUR EMAIL">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+    @section Scripts{
+<script src="~/js/BookService.js"></script>
+
+}

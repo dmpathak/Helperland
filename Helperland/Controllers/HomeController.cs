@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using BCrypto = BCrypt.Net.BCrypt;
 
 namespace Helperland.Controllers
 {
@@ -32,7 +33,6 @@ namespace Helperland.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel loginViewModel)
         {
@@ -43,7 +43,7 @@ namespace Helperland.Controllers
 
                 var claims = new List<Claim>();
                 claims.Add(new Claim("username", loginViewModel.Email));
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, loginViewModel.Email));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, usercredentials.UserId.ToString()));
                 claims.Add(new Claim(ClaimTypes.Name, usercredentials.FirstName + usercredentials.LastName));
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -71,12 +71,12 @@ namespace Helperland.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-        [Authorize]
+        //[Authorize]
         public IActionResult Prices()
         {
             return View();
         }
-        [Authorize]
+    
         public IActionResult About()
         {
             return View();
@@ -182,6 +182,7 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult createAccount(CreateAccountViewModel createAccount)
         {
+            var passwordHash = BCrypto.HashPassword(createAccount.Password);
             var user = new User();
             if (ModelState.IsValid)
             {
@@ -189,7 +190,7 @@ namespace Helperland.Controllers
                 user.LastName = createAccount.LastName;
                 user.Email = createAccount.Email;
                 user.Mobile = createAccount.Mobile;
-                user.Password = createAccount.Password;
+                user.Password = passwordHash;
                 user.UserTypeId = 1;
                 user.IsRegisteredUser = false;
                 user.WorksWithPets = false;
@@ -213,6 +214,7 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Beacome_a_pro(BeacomeaproViewModel beacomeaproViewModel)
         {
+            var passwordHash = BCrypto.HashPassword(beacomeaproViewModel.Password);
             var user = new User();
             if (ModelState.IsValid)
             {
@@ -220,7 +222,7 @@ namespace Helperland.Controllers
                 user.FirstName = beacomeaproViewModel.FirstName;
                 user.LastName = beacomeaproViewModel.LastName;
                 user.Email = beacomeaproViewModel.Email;
-                user.Password = beacomeaproViewModel.Password;
+                user.Password = passwordHash;
                 user.Mobile = beacomeaproViewModel.Mobile;
                 user.UserTypeId = 2;
                 user.IsRegisteredUser = false;

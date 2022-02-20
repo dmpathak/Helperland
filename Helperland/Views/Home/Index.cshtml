@@ -16,9 +16,18 @@
     </div>
     <div class="nav">
         <ul class="nav_ul">
-            <li class="navitem ">
-                <a class="nav_link navitem_round" href="#">Book a cleaner</a>
-            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="navitem ">
+                    <a class="nav_link navitem_round" asp-controller="Book" asp-action="BookService">Book a cleaner</a>
+                </li>
+            }
+            else
+            {
+                <li class="navitem ">
+                    <a class="nav_link navitem_round" asp-controller="Home" asp-action="index" asp-route-login="true">Book a cleaner</a>
+                </li>
+            }
             <li class="navitem">
                 <a class="nav_link" asp-controller="Home" asp-action="Prices">Prices</a>
             </li>
@@ -44,7 +53,7 @@
                 <!-- popover user icon  -->
                 <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
                  data-bs-html="true"
-                 data-bs-content="<p><span> welcome,</span> <br> <span><b>User Name</b></span></p> <hr> <p><a href='#'>My Dashboard</a></p> <p><a href='#'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>" data-bs-custom-class="logout_popover">
+                 data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='#'>My Dashboard</a></p> <p><a href='#'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>" data-bs-custom-class="logout_popover">
                     <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="flag">
                     <img style="width:11px; height:6px; margin-top:10px; margin-left:7px;" src="~/img/arrow_down.png"
                      alt="flag">
@@ -53,17 +62,17 @@
             }
             else
             {
-            <li class="navitem ">
-                <a class="nav_link navitem_round" href="#" id="login_modal"
+                <li class="navitem ">
+                    <a class="nav_link navitem_round" href="#" id="login_modal"
                    data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a>
-            </li>
-            <li class="navitem ">
-                <a class="nav_link navitem_round" asp-controller="Home" asp-action="Beacome_a_pro">Become a helper</a>
-            </li>
-            <div class="dropdown">
-                <img src="~/img/flag.png" alt="flag">
-                <img src="~/img/arrow_down.png" alt="flag">
-            </div>    
+                </li>
+                <li class="navitem ">
+                    <a class="nav_link navitem_round" asp-controller="Home" asp-action="Beacome_a_pro">Become a helper</a>
+                </li>
+                <div class="dropdown">
+                    <img src="~/img/flag.png" alt="flag">
+                    <img src="~/img/arrow_down.png" alt="flag">
+                </div>
             }
 
 
@@ -98,9 +107,19 @@
         </div>
     </div>
 
-    <div class="center_button">
-        <button class="button">Let's Book a cleaner</button>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="center_button">
+            <a asp-controller="Book" asp-action="BookService"><button class="button"> Let's Book a cleaner</button></a>
+        </div>
+    }
+    else
+    {
+        <div class="center_button">
+            <a asp-controller="Home" asp-action="index" asp-route-login="true"><button class="button"> Let's Book a cleaner</button></a>
+        </div>
+
+    }
 
     <div class="last_pictures">
         <div class="individual_pictures">

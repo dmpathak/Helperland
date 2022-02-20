@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "SjCNFFApuCtg2BNVg0rXFLw5YRXnIVFzP41AMjooErOwlOHuuOUOnTAEkTyxiV2nbb/o4b95j2JxUB1mCTgjFA==",
+  "dgSpecHash": "cbticljSMQllKj6jDHAZJaOlSAECQfZH/7sAusmO3FDObSzKCRUDMOrFMJh+xwNLTUIny+d3EubBltDzIi8heA==",
   "success": true,
   "projectFilePath": "C:\\Users\\DEEP\\Desktop\\Helperland\\Helperland\\Helperland.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\DEEP\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\DEEP\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\DEEP\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.1\\microsoft.aspnetcore.cryptography.internal.6.0.1.nupkg.sha512",
     "C:\\Users\\DEEP\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.1\\microsoft.aspnetcore.cryptography.keyderivation.6.0.1.nupkg.sha512",

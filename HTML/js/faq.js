@@ -21,10 +21,10 @@ document.getElementById("for_provide_btn").onclick = () => {
   document.getElementById("info_container_provider").classList.remove("hidd")
 }
 
-$(document).ready(()=>{
-  $('.head-symbol').click((e)=>{
-    $e=e.target     
+$(document).ready(() => {
+  $('.head-symbol').click((e) => {
+    $e = e.target
     $($e).toggleClass('rotate90');
     $($e).parent().next().slideToggle(500);
-})
-})
+  })
+})  

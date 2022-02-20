@@ -91,3 +91,4 @@ C:\Users\DEEP\Desktop\Helperland\Helperland\bin\Debug\net6.0\Microsoft.AspNetCor
 C:\Users\DEEP\Desktop\Helperland\Helperland\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\DEEP\Desktop\Helperland\Helperland\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\DEEP\Desktop\Helperland\Helperland\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\DEEP\Desktop\Helperland\Helperland\bin\Debug\net6.0\BCrypt.Net-Next.dll
