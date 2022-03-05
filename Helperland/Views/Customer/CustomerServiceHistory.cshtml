@@ -1,0 +1,388 @@
+﻿@model Helperland.Models.ViewModels.CustomerDashboardViewModel;
+
+
+@{
+    ViewData["Title"] = "Customer > Service History";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+@section CustomCss{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="~/css/CustomerServiceHistory.css" />
+}
+
+
+
+
+<!-- welcome...  -->
+<div class="welcome">
+    Welcome, @User.Identity.Name!
+</div>
+
+<!-- between -->
+<div class="between_main_container">
+    <div class="between_1st_container" id="open_side_manu_id">
+        <p class="between_1st_container_data"><a asp-controller="Customer" asp-action="CustomerDashboard">Dashboard</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data" style="background-color: #146371;"><a asp-controller="Customer" asp-action="CustomerServiceHistory">Service History</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Service Schedule</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Customer" asp-action="CustomerFavouritePros">Favourite Pros</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Invoices</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Notifications</a></p>
+        <hr style="opacity: 0.2;">
+    </div>
+    <div class="sec_main_container">
+        <div class="between_2nd_container_upper_header">
+            <p style="color:#646464; font-size:22px"><b>Service History</b></p>
+            <input class="expert_btn" type="button" value="Export">
+        </div>
+        <!-- <div class="">
+            <img src="~/img/sort.png" alt="">
+        </div> -->
+        <div class="responsive_filter" id="responsive_filter_id" data-bs-toggle="popover" data-bs-custom-class="filter_popover"
+             data-bs-placement="bottom" data-bs-html="true" data-bs-content="
+                <div class='popover_container'>
+                    <label class='form-check-label' for='service_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_asd' data-dt-col=0 data-dt-sort='asc'>
+                        Service Date: Most Recent
+                    </label>
+                    <label class='form-check-label' for='service_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_dec' data-dt-col=0 data-dt-sort='dec'>
+                        Service Date: older
+                    </label>
+                    <label class='form-check-label' for='provider_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_asd' data-dt-col=1 data-dt-sort='asc'>
+                        Service provider: A to Z
+                    </label>
+                    <label class='form-check-label' for='provider_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_dec' data-dt-col=1 data-dt-sort='dec'>
+                        Service provider: Z to A
+                    </label>
+                    <label class='form-check-label' for='payment_asc'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_asc' data-dt-col=2 data-dt-sort='asc'>
+                        Payment: low to high
+                    </label>
+                    <label class='form-check-label' for='payment_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_dec' data-dt-col=2 data-dt-sort='dec'>
+                        Payment: high to low
+                    </label>
+                </div>
+                ">
+                <img id="responsive_filter_img" src="~/img/filter.png" alt="">
+
+            </div>
+        <div class="between_table_header_container">
+            <table id="example" style="width:100%">
+                <thead style="height: 56px;">
+                    <tr>
+                        <td class="between_table_header ">Service Id</td>
+                        <td class="between_table_header ">Service Date</td>
+                        <td class="between_table_header ">Service Provider</td>
+                        <td class="between_table_header ">Payment</td>
+                        <td class="between_table_header ">Status</td>
+                        <td class="between_table_header ">Rate SP</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @foreach (var history in ViewBag.current_user_history)
+                    {
+
+                        <tr>
+                            <td class="between_table_data"><span onclick="first_modal(@history.myserviceid)" id="ServiceId" class="hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@history.myserviceid">@history.myserviceid</span></td>
+                            <td class="between_table_data">
+                                <div onclick="first_modal(@history.myserviceid)" class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@history.myserviceid">
+                                    <img src="~/img/calendar2.png" alt="">
+                                    <div><b id="date">@history.myservice_start_date</b> </div>
+                                </div>
+                                <div onclick="first_modal(@history.myserviceid)" class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@history.myserviceid">
+                                    <img src="~/img/layer-14.png" alt="">
+                                    <div><span id="start_time">@history.myservice_start_time</span> - <span id="end_time">@history.myservice_end_time</span></div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div class="d-flex">
+                                    <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                    <div>
+                                        <div id="service_provide_name">@history.mysericeprovider_name</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            @for (var i = 0; i < 5; i++)
+                                            {
+                                                if (i < @history.my_provider_rating)
+                                                {
+                                                    <img class="star_imgs" src="~/img/star1.png" alt="">
+
+                                                }
+                                                else
+                                                {
+
+                                                    <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                }
+                                            }
+                                            <p id="rate" class="ms-1">@history.my_provider_rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <p class="doller between_2nd_container_data_service"> <span>@history.mypayment</span> €</p>
+                            </td>
+                            @if (@history.status == 2)
+                            {
+                                <td class="between_table_data completed_btn">
+                                    <input style="background-color:#67b644;" type="button" value="Completed">
+                                </td>
+                                <td class="between_table_data action_button">
+                                    <input type="button" value="Rate SP" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@history.myserviceid">
+                                </td>
+                            }
+                            @if (@history.status == 3)
+                            {
+                                <td class="between_table_data completed_btn">
+                                    <input style="background-color:#ff6b6b;" type="button" value="Cancelled">
+                                </td>
+                                <td class="between_table_data action_button_disabled">
+                                    <input type="button" value="Rate SP" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@history.myserviceid" disabled>
+                                </td>
+                            }
+
+
+                        </tr>
+
+
+                        @*modal for service request detail *@
+                        <!-- Modal -->
+                        <div class="modal fade" id="servicedetail_@history.myserviceid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabel">Service Details</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <b> <h6><span id="date_modal">05/10/2021</span> <span id="starttime_modal">08:00</span> - <span id="endtime_modal">11:30</span></h6>  </b>
+                                        <p> <b>Duration:</b> <span id="duration_modal">3.5</span> Hrs </p>
+
+                                        <hr class="mb-2 mt-2" />
+
+                                        <p> <b>Service Id:</b> <span id="serviceid_modal">1234</span></p>
+                                        <p> <b>Extras:</b> <span id="extras_modal">Inside Cabinets</span> </p>
+                                        <p> <b>Net Amount:</b> <span class="service_detail_modal_amount"> <span id="amount_modal">87</span> $ </span>  </p>
+                                        <hr class="mb-2 mt-2" />
+
+                                        <p> <b>Service Address:</b> <span id="address_modal">Fetch address Here</span></p>
+                                        <p> <b>Billing Address:</b> <span>Same as Cleaning Address</span></p>
+                                        <p> <b>Phne:</b> <span id="phone_modal">9475895642</span></p>
+                                        <p> <b>Email:</b> <span id="mail_modal">abc@gmail.com</span></p>
+                                        <hr class="mb-2 mt-2" />
+
+                                        <p> <b>Comments</b> </p>
+                                        <p> <img id="for_pet_img" src="~/img/not-included.png" alt="" style="width: 25px"><span id="pet"> I don't Have pets at home</span> </p>
+                                        <hr class="mb-2 mt-2" />
+
+                                        <div class="d-flex align-items-center">
+                                            @*<div class="completed_btn">
+                                                <a class="mx-1 " value="Reschadule">Reschedule</a>
+                                                </div>
+                                                <div class="detail_modal_reschedule" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@history.myserviceid">
+
+                                                <a class="mx-1" value="Cancel">Rate SP</a>
+                                                </div>*@
+                                            @if (@history.status == 2)
+                                            {
+                                                <div class="completed_btn">
+                                                    <input style="background-color:#67b644;" type="button" value="Completed">
+                                                </div>
+                                                <div class="action_button ms-3">
+                                                    <input type="button" value="Rate SP" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@history.myserviceid">
+                                                </div>
+                                            }
+                                            @if (@history.status == 3)
+                                            {
+                                                <div class="completed_btn">
+                                                    <input style="background-color:#ff6b6b;" type="button" value="Cancelled">
+                                                </div>
+                                                <div class="action_button_disabled ms-3">
+                                                    <input type="button" value="Rate SP" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@history.myserviceid" disabled>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*modal for Rate SP *@
+                        <!-- Modal -->
+                        <div class="modal fade" id="cancel_@history.myserviceid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="padding: 0rem 1rem 1rem 1rem;">
+                                        <input type="text" value="@history.myserviceid" class="d-none">
+                                        <div>
+                                            <div class="d-flex">
+                                                <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                                <div>
+                                                    <div id="service_provide_name">@history.mysericeprovider_name</div>
+                                                    <div style="display: flex; margin-top:4px;">
+                                                        @for (var i = 0; i < 5; i++)
+                                                        {
+                                                            if (i < @history.my_provider_rating)
+                                                            {
+                                                                <img class="star_imgs" src="~/img/star1.png" alt="">
+
+                                                            }
+                                                            else
+                                                            {
+
+                                                                <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                            }
+                                                        }
+                                                        <p id="rate" class="ms-1">@history.my_provider_rating</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3"><b>Rate your service provider</b></div>
+                                        </div>
+
+                                        
+                                                
+                                        <form asp-controller="Customer" asp-action="SubmitRate">
+                                            <hr class="my-2">
+                                            <div class="mb-3">
+                                                
+                                                <input class="d-none" id="htmlrate1_@history.myserviceid" asp-for="OnTimeArrival" value="5">
+                                                <input class="d-none" id="htmlrate2_@history.myserviceid" asp-for="Friendly" value="5">
+                                                <input class="d-none" id="htmlrate3_@history.myserviceid" asp-for="QualityOfService" value="5">
+                                                <input class="d-none" asp-for="ServiceId" value="@history.myserviceid">
+                                                
+                                                @*stars 1*@
+                                                <span class=" d-flex align-items-center"><span class="me-3">On time arrival</span> 
+                                                    <div class="stars w-auto position-relative d-flex align-items-center justify-content-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <div class="cover position-absolute top-0 end-0 h-100"></div>
+                                                    </div>
+                                                </span>
+                                            </div>
+
+
+                                            <div class="mb-3">
+                                                
+                                            
+                                            @*stars 1*@
+                                                <span class=" d-flex align-items-center "><span class="me-3">Friendly</span> 
+                                                    <div class="stars1 w-auto position-relative d-flex align-items-center justify-content-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <div class="cover1 position-absolute top-0 end-0 h-100"></div>
+                                                    </div>
+                                                </span>
+                                            
+                                            
+                                            </div>
+                                            <div class="mb-3">
+                                                
+                                            @*stars 2*@
+                                                <span class=" d-flex align-items-center "><span class="me-3">Quality of service</span> 
+                                                    <div class="stars2 w-auto position-relative d-flex align-items-center justify-content-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+                                                            <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
+5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z" />
+                                                        </svg>
+                                                        <div class="cover2 position-absolute top-0 end-0 h-100"></div>
+                                                    </div>
+                                                </span>
+                                            
+                                            </div>
+
+
+                                            <div>Feedback on service provider</div>
+                                            <textarea asp-for="Comments" class="w-100" rows="2"></textarea>
+
+                                            <div class="action_button">
+                                                <button type="submit" class="rate_submit mt-2">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="~/js/CustomerServiceHistory.js"></script>
+}

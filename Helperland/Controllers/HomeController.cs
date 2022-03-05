@@ -33,12 +33,16 @@ namespace Helperland.Controllers
             return View();
         }
 
+        //usertypeid => 1  user 
+        //usertypeid => 2  serviceprovider
+
+
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel loginViewModel)
         {
             var user = new User();
-            var usercredentials = context.Users.Where(x => x.Email == loginViewModel.Email && x.Password == loginViewModel.Password).FirstOrDefault();
-            if (usercredentials != null)
+            var usercredentials = context.Users.Where(x => x.Email == loginViewModel.Email).FirstOrDefault();
+            if (usercredentials != null && BCrypt.Net.BCrypt.Verify(loginViewModel.Password, usercredentials.Password))
             {
 
                 var claims = new List<Claim>();
@@ -52,13 +56,13 @@ namespace Helperland.Controllers
 
                 if (usercredentials.UserTypeId == 1)
                 {
-                    return RedirectToAction("Prices", "Home");
+                    return RedirectToAction("CustomerDashboard", "Customer");
 
                 }
                 else if (usercredentials.UserTypeId == 2)
                 {
 
-                    return RedirectToAction("About", "Home");
+                    return RedirectToAction("Prices", "Home");
                 }
             }
             TempData["isvalid"] = true;
@@ -76,7 +80,7 @@ namespace Helperland.Controllers
         {
             return View();
         }
-    
+
         public IActionResult About()
         {
             return View();
@@ -143,30 +147,31 @@ namespace Helperland.Controllers
 
                     To = loginViewModel.ForgetPasswordEmail,
                     Subject = "This mail is generated for Forgot Password",
-                    Body = "<a href = 'https://localhost:7053/Home/Resetpassword/"+ usercredentials.UserId + "'> Click Here to ResetPassword </a>"
+                    Body = "<a href = 'https://localhost:7053/Home/Resetpassword/" + usercredentials.UserId + "'> Click Here to ResetPassword </a>"
 
 
                 };
                 sendemail.emailSend(email);
 
             }
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Resetpassword(string id)
         {
-            
+
             return View();
         }
         [HttpPost]
         public IActionResult Resetpassword(ResetPassword reset, string id)
-        {   
+        {
             int myid = Convert.ToInt32(id);
             var user = context.Users.Where(e => e.UserId == myid).FirstOrDefault();
             if (user != null)
             {
-            user.Password = reset.NewPassword;
+                var passwordHash = BCrypto.HashPassword(reset.NewPassword);
+                user.Password = passwordHash;
             }
 
             context.Users.Attach(user);

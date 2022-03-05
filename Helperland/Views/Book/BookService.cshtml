@@ -116,6 +116,7 @@
                                     <input asp-for="date" onchange="datechange();" id="date"  placeholder="01/01/2018">
                                     
                                     <select asp-for="time" onchange="timechange();" id="time" class="form-select-sm">
+                                        <option value="">---</option>
                                         <option value="8:00">8:00</option>
                                         <option value="8:30">8:30</option>
                                         <option value="9:00">9:00</option>
@@ -152,6 +153,7 @@
                             <div class="second_tab_data_select">
                                 <form id="basic_time">
                                     <select asp-for="basic_time" class="form-select-sm" onchange="basicchange();" id="basic">
+                                        <option value="">-- Hrs</option>
                                         <option value="3">3 Hrs</option>
                                         <option value="3.5">3.5 Hrs</option>
                                         <option value="4">4 Hrs</option>
@@ -264,7 +266,7 @@
                         <textarea asp-for="comments" class="textarea" placeholder="comments" id = "comments"></textarea>
                     </div>
                     <div class="mb-4">
-                        <input asp-for="have_pets" style="width:18px; height:18px; margin-right:5px" type="checkbox" id="is_pet">I have pets at home
+                        <input asp-for="have_pets" style="width:18px; height:18px; margin-right:5px" id="is_pet">I have pets at home
                     </div>
                     <hr>
                     <!-- TAB-2 DATA Continue button  -->
@@ -454,7 +456,9 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="~/img/layer-598.png" alt="success">
+
+                                <img src="~/img/success_tick.png" alt="success" class="modal_success_img">
+                               
                                 <div>Booking has been successfully submitted</div>
                                 <p>Service Request Id: <span id="service_id"></span></p>
                                 <button type="button" class="rounded-pill continue_btn"
@@ -479,12 +483,12 @@
             </div>
             <div class="card-body">
                 <div class="date_time_div">
-                    <div> <span id="date_text">01/01/2018</span> <span id="time_text">8:00</span></div>
+                    <div> <span id="date_text"></span> <span id="time_text"></span></div>
                 </div>
                 <div class="card_duration">Duration</div>
                 <div class="payment_card_basic">
                     Basic <div id="basic_text">
-                        3
+                        0
                         Hrs
                     </div>
                 </div>
@@ -520,7 +524,7 @@
                 <hr>
                 <div class="payment_card_basic">
                     Per cleaning <div>
-                        75,000 $
+                        18 $
                     </div>
                 </div>
                 <hr>
@@ -588,7 +592,7 @@
         </div>
 
         <!-- more help  -->
-        <a class="more_help" href="#">For more help</a>
+        <a asp-controller="Home" asp-action="Faq" class="more_help">For more help</a>
     </div>
 </div>
 
@@ -621,12 +625,12 @@
 
                         <div class="card-body">
                             <div class="date_time_div">
-                                <div> <span id="date_text_responsive">01/01/2018</span> <span id="time_text_responsive">8:00</span></div>
+                                <div> <span id="date_text_responsive"></span> <span id="time_text_responsive"></span></div>
                             </div>
                             <div class="card_duration">Duration</div>
                             <div class="payment_card_basic">
                                 Basic <div id="basic_text_responsive">
-                                    3
+                                    0
                                     Hrs
                                 </div>
                             </div>
@@ -734,7 +738,7 @@
 
                     <!-- more help  -->
                     <div style="padding:0px 0px 15px 10px">
-                        <a class="more_help" href="#">For more help</a>
+                        <a asp-controller="Home" asp-action="Faq" class="more_help" >For more help</a>
                     </div>
                 </div>
             </div>

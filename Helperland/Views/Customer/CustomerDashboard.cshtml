@@ -1,0 +1,283 @@
+﻿@model Helperland.Models.ViewModels.CustomerDashboardViewModel;
+
+@{
+    ViewData["Title"] = "Customer > Dashboard";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+@section CustomCss{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="~/css/CustomerDashboard.css" />
+}
+
+
+
+<!-- welcome...  -->
+<div onload="Dashboardpage_load()" class="welcome">
+    Welcome, @User.Identity.Name!
+</div>
+
+<!-- between -->
+<div class="between_main_container">
+    <div class="between_1st_container" id="open_side_manu_id">
+        <p class="between_1st_container_data" style="background-color: #146371;"><a asp-controller="Customer" asp-action="CustomerDashboard">Dashboard</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Customer" asp-action="CustomerServiceHistory">Service History</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Service Schedule</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Customer" asp-action="CustomerFavouritePros">Favourite Pros</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Invoices</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Notifications</a></p>
+        <hr style="opacity: 0.2;">
+    </div>
+    <div class="sec_main_container">
+        <div class="between_2nd_container_upper_header">
+            <p><b>Current Service Requests</b></p>
+            <button class="expert_btn"><a asp-controller="Book" asp-action="BookService">Add New Service Request</a></button>
+        </div>
+        <!-- <div class="">
+            <img src="~/img/sort.png" alt="">
+        </div> -->
+        <div class="responsive_filter" id="responsive_filter_id" data-bs-toggle="popover" data-bs-custom-class="filter_popover"
+             data-bs-placement="bottom" data-bs-html="true" data-bs-content="
+                <div class='popover_container'>
+                    <label class='form-check-label' for='service_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_asd' data-dt-col=0 data-dt-sort='asc'>
+                        Service Id: Most Recent
+                    </label>
+                    <label class='form-check-label' for='service_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_dec' data-dt-col=0 data-dt-sort='dec'>
+                        Service Id: older
+                    </label>
+                    <label class='form-check-label' for='provider_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_asd' data-dt-col=1 data-dt-sort='asc'>
+                        Service Date: Most Recent
+                    </label>
+                    <label class='form-check-label' for='provider_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_dec' data-dt-col=1 data-dt-sort='dec'>
+                        Service Date: Z to A
+                    </label>
+                    <label class='form-check-label' for='payment_asc'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_asc' data-dt-col=2 data-dt-sort='asc'>
+                        Payment: older
+                    </label>
+                    <label class='form-check-label' for='payment_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_dec' data-dt-col=2 data-dt-sort='dec'>
+                        Payment: high to low
+                    </label>
+                </div>
+                ">
+                <img id="responsive_filter_img" src="~/img/filter.png" alt="">
+
+            </div>
+        <div class="between_table_header_container">
+            <table id="example">
+                <thead>
+                    <tr>
+                        <td class="between_table_header ">Service Id</td>
+                        <td class="between_table_header ">Service Date</td>
+                        <td class="between_table_header ">Service Provider</td>
+                        <td class="between_table_header ">Payment</td>
+                        <td class="between_table_header ">Actions</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var user_data in ViewBag.current_user_data)
+                    {
+
+                        <tr>
+                            <td class="between_table_data"><span onclick="first_modal(@user_data.myServiceId)" id="ServiceId" class="hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@user_data.myServiceId">@user_data.myServiceId</span></td>
+                            <td class="between_table_data">
+                                <div onclick="first_modal(@user_data.myServiceId)" class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@user_data.myServiceId">
+                                    <img src="~/img/calendar2.png" alt="">
+                                    <div><b id="date">@user_data.myservice_start_date</b> </div>
+                                </div>
+                                <div onclick="first_modal(@user_data.myServiceId)" class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@user_data.myServiceId">
+                                    <img src="~/img/layer-14.png" alt="">
+                                    <div><span id="start_time">@user_data.myservice_start_time</span> - <span id="end_time">@user_data.myservice_end_time</span></div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div class="d-flex">
+                                    <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                    <div>
+                                        <div id="service_provide_name">@user_data.mysericeprovider_name</div>
+                                        <div style="display: flex; margin-top:4px;">
+                                            @for (var i = 0; i < 5; i++)
+                                            {
+                                                if (i < @user_data.my_provider_rating)
+                                                {
+                                                    <img class="star_imgs" src="~/img/star1.png" alt="">
+
+                                                }
+                                                else
+                                                {
+
+                                                    <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                }
+                                            }
+                                            <p id="rate" class="ms-1">@user_data.my_provider_rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <p class="doller between_2nd_container_data_service"> <span>@user_data.mypayment</span> €</p>
+                            </td>
+                            <td class="between_table_data">
+                                <div class="d-flex">
+                                    <div class="completed_btn">
+                                        <input type="button" value="Reschadule" data-bs-toggle="modal" data-bs-target="#reschedule_@user_data.myServiceId">
+                                    </div>
+                                    <div class=" action_button">
+                                        <input  type="button" value="Cancel" data-bs-toggle="modal" data-bs-target="#cancel_@user_data.myServiceId">
+                                        @*onclick="cancel(@user_data.myServiceId)"*@
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        @*modal for service request detail *@
+                        <!-- Modal -->
+                        <div class="modal fade" id="servicedetail_@user_data.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabel">Service Details</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <b> <h6><span id="date_modal">05/10/2021</span> <span id="starttime_modal">08:00</span> - <span id="endtime_modal">11:30</span></h6>  </b>
+                                        <p> <b>Duration:</b> <span id="duration_modal">3.5</span> Hrs </p>
+
+                                        <hr class="mb-2 mt-2" />
+
+                                        <p> <b>Service Id:</b> <span id="serviceid_modal">1234</span></p>
+                                        <p> <b>Extras:</b> <span id="extras_modal">Inside Cabinets</span> </p>
+                                        <p> <b>Net Amount:</b> <span class="service_detail_modal_amount"> <span id="amount_modal">87</span> $ </span>  </p>
+                                        <hr class="mb-2 mt-2" />
+
+                                        <p> <b>Service Address:</b> <span id="address_modal">Fetch address Here</span></p>
+                                        <p> <b>Billing Address:</b> <span>Same as Cleaning Address</span></p>
+                                        <p> <b>Phne:</b> <span id="phone_modal">9475895642</span></p>
+                                        <p> <b>Email:</b> <span id="mail_modal">abc@gmail.com</span></p>
+                                        <hr class="mb-2 mt-2" />
+
+                                        <p> <b>Comments</b> </p>
+                                        <p> <img id="for_pet_img" src="~/img/not-included.png" alt="" style="width: 25px"><span id="pet"> I don't Have pets at home</span> </p>
+                                        <hr class="mb-2 mt-2" />
+
+                                        <div class="d-flex">
+                                            <button class="detail_modal_reschedule" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#reschedule_@user_data.myServiceId">
+                                                <img src="~/img/reschedule-icon-small.png" alt="">
+                                                <a class="mx-1 " value="Reschadule">Reschedule</a>
+                                            </button>
+                                            <div class="cancel_modal" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@user_data.myServiceId">
+                                                <img src="~/img/close-icon-small.png" alt="">
+                                                <div id="reschedule_error" class="text-danger"></div>
+                                                <div id="reschedule_success" class="text-success"></div>
+                                                <a class="mx-1" value="Cancel" >Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*modal for Reschedule service request *@
+                        <!-- Modal -->
+                        <div class="modal fade" id="reschedule_@user_data.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Reschedule Service Request</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Select New Date & Time
+                                        <form asp-controller="Customer" asp-action="CustomerDashboard2">
+                                            <div class="mb-2">
+                                                <input asp-for="ServiceId" value="@user_data.myServiceId" class="d-none">
+                                                <input asp-for="date" id="reschedule_data1" class="reschedule_data1" placeholder="DD/MM/YYYY">
+                                                <select asp-for="start_time" id="reschedule_data2" class="reschedule_data2">
+                                                    <option value="">---</option>
+                                                    <option value="8:00">8:00</option>
+                                                    <option value="8:30">8:30</option>
+                                                    <option value="9:00">9:00</option>
+                                                    <option value="9:30">9:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit"  class="Reschedule_modal mt-2">Update</button>
+                                            @*onclick="reschedule(@user_data.myServiceId);"*@
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*modal for Cancel service request *@
+                        <!-- Modal -->
+                        <div class="modal fade" id="cancel_@user_data.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"><b>Cancel Service Request</b></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Why you wany to cancel the service request?
+                                        <form asp-controller="Customer" asp-action="CustomerDashboard3">
+                                            <div class="mb-2">
+                                                <input asp-for="ServiceId" value="@user_data.myServiceId" class="d-none">
+                                                <textarea asp-for="why_cancel" class="cancel_textarea" rows="3"></textarea>
+                                            </div>
+                                            <button type="submit" class="Reschedule_modal mt-2">Cancel Now</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+@*export script*@
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+<script src="~/js/CustomerDashboard.js"></script>
+}

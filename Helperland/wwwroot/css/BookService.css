@@ -546,8 +546,9 @@ a:hover {
     font-size: 22px;
     margin-bottom: 15px;
 }
-
-
+.modal_success_img{
+    width:120px !important;
+}
 
 /* payment card  */
 .card {

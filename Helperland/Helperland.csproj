@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Service Provider\" />
     <Folder Include="wwwroot\files\upload\" />
   </ItemGroup>
 

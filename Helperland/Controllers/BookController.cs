@@ -88,9 +88,11 @@ namespace Helperland.Controllers
             s1.ServiceStartDate = datefinal;
             s1.ServiceHours = Convert.ToDouble(avail.basic_time);
             s1.ExtraHours = Convert.ToDouble(avail.total_time) - Convert.ToDouble(avail.basic_time);
+            s1.TotalCost = Int32.Parse(avail.total_time) * 18;
             s1.Comments = avail.comments;
             s1.HasPets = avail.have_pets;
             s1.ZipCode = avail.pincode;
+            s1.Status = 1;
             context.ServiceRequests.Add(s1);
             context.SaveChanges();
 
@@ -106,19 +108,18 @@ namespace Helperland.Controllers
             context.ServiceRequestAddresses.Add(s2);
             context.SaveChanges();
 
+            var count = 0;
             foreach (var service in avail.extra_services)
             {
-                var s3 = new ServiceRequestExtra();
-                s3.ServiceRequestId = s1.ServiceRequestId;
+                count = count + 1;
+
                 if (service == true)
                 {
-                    s3.ServiceExtraId = 1;
+                    var s3 = new ServiceRequestExtra();
+                    s3.ServiceRequestId = s1.ServiceRequestId;
+                    s3.ServiceExtraId = count;
+                    context.ServiceRequestExtras.Add(s3);
                 }
-                else
-                {
-                    s3.ServiceExtraId = 0;
-                }
-                context.ServiceRequestExtras.Add(s3);
             }
             context.SaveChanges();
 
