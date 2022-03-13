@@ -812,3 +812,51 @@ table.dataTable thead td {
     margin-right: 3px !important;
     font-size: 14px !important;
 }
+
+
+
+/*loader css*/
+
+body.loading {
+    height: 100vh;
+    overflow: hidden;
+}
+
+    body.loading .loaderContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+.loaderContainer .loader {
+    height: 80px;
+    width: 80px;
+    border: 8px solid transparent;
+    border-top-color: #1d7a8c;
+    border-bottom-color: #1d7a8c;
+}
+
+body.loading .loaderContainer .loader {
+    animation: loaderAnimation linear 1s infinite;
+}
+
+@keyframes loaderAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loaderContainer {
+    z-index: 1000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+}

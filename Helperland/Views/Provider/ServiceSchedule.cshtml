@@ -1,0 +1,55 @@
+﻿@model Helperland.Models.ViewModels.ProviderDashboardViewModel;
+
+@{
+    ViewData["Title"] = "Service Provider > Service Schedule";
+    Layout = "~/Views/Shared/_ProviderLayout.cshtml";
+}
+@section CustomCss{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="~/css/ProviderServiceSchedule.css" />
+}
+
+
+
+<!-- welcome...  -->
+<div onload="Dashboardpage_load()" class="welcome">
+    Welcome, @User.Identity.Name!
+</div>
+
+<!-- between -->
+<div class="between_main_container">
+    <div class="between_1st_container" id="open_side_manu_id">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">Dashboard</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">New Service Requests</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="UpcomingService">Upcoming Services</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data" style="background-color: #146371;"><a asp-controller="Provider" asp-action="ServiceSchedule">Service Schedule</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="ServiceHistory">Service History</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="MyRatings">My Ratings</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="BlockCustomer">Block Customer</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Invoices</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Notifications</a></p>
+        <hr style="opacity: 0.2;">
+    </div>
+    <div class="sec_main_container">
+        <div class="between_2nd_container_upper_header">
+            <p>Service Schedule</p>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script src="~/js/ProviderServiceSchedule.js"></script>
+}

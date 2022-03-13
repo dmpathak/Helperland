@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <div class="loaderContainer">
+        <div class="loader rounded-circle"></div>
+    </div>
 
     <div class="Faq_header">
         <a asp-controller="Home" asp-action="Index"><img src="~/img/logo-small.png" alt="logo" class="faq-nav-logo"></a>
@@ -27,11 +30,11 @@
             </div>
             <!-- popover user icon  -->
             <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
-                data-bs-html="true"
-                data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='/Customer/CustomerDashboard'>My Dashboard</a></p> <p><a href='/Customer/CustomerMySettings'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>">
+                 data-bs-html="true"
+                 data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='/Customer/CustomerDashboard'>My Dashboard</a></p> <p><a href='/Customer/CustomerMySettings'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>">
                 <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="usericon">
                 <img style="width:11px; height:6px; margin-top:14px; margin-left:7px;" src="~/img/arrow_down.png"
-                    alt="arrow">
+                     alt="arrow">
             </div>
         </div>
         <div class="nav-expand-btn-container">
@@ -52,25 +55,24 @@
             <p class="between_1st_container_dat">Welcome, <br> <b>@User.Identity.Name</b></p>
             <hr style="opacity: 0.2; margin:0px !important">
             <p class="between_1st_container_dat"><a asp-controller="Customer" asp-action="CustomerDashboard">Dashboard</a></p>
-            <p class="between_1st_container_dat"><a href="#">New Service Requests</a></p>
-            <p class="between_1st_container_dat"><a href="#" style="color: #146371;">Upcoming Services</a></p>
-            <p class="between_1st_container_dat"><a href="#">Service Schedule</a></p>
             <p class="between_1st_container_dat"><a asp-controller="Customer" asp-action="CustomerServiceHistory">Service History</a></p>
-            <p class="between_1st_container_dat"><a href="#">My Ratings</a></p>
-            <p class="between_1st_container_dat"><a href="#">Block Customer</a></p>
+            <p class="between_1st_container_dat"><a href="#">Service Schedule</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Customer" asp-action="CustomerFavouritePros">Favourite Pros</a></p>
+            <p class="between_1st_container_dat"><a href="#">Invoices</a></p>
             <p class="between_1st_container_dat"><a asp-controller="Customer" asp-action="CustomerMySettings">My Settings</a></p>
             <p class="between_1st_container_dat"><a asp-controller="Home" asp-action="Logout">Logout</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
+            <p class="between_1st_container_dat"><a asp-controller="Book" asp-action="BookService">Book now</a></p>
             <p class="between_1st_container_dat"><a asp-controller="Home" asp-action="Prices">Prices & services</a></p>
             <p class="between_1st_container_dat"><a href="#">Warranty</a></p>
             <p class="between_1st_container_dat"><a href="#">Blog</a></p>
             <p class="between_1st_container_dat"><a asp-controller="Home" asp-action="Contact">Contact</a></p>
             <hr style="opacity: 0.2; margin:0px !important">
             <p class="between_1st_container_dat">
-            <div style="display: flex; justify-content:center; margin-bottom:30px;">
-                <img style="margin-right:10px" src="~/img/ic-facebook.png" alt="fb">
-                <img src="~/img/insta.png" alt="insta">
-            </div>
+                <div style="display: flex; justify-content:center; margin-bottom:30px;">
+                    <img style="margin-right:10px" src="~/img/ic-facebook.png" alt="fb">
+                    <img src="~/img/insta.png" alt="insta">
+                </div>
             </p>
         </div>
     </div>

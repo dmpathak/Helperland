@@ -1,4 +1,15 @@
-﻿$(document).ready(function () {
+﻿const body = document.querySelector("body")
+const loading = (isloading) => {
+    if (isloading) {
+        body.classList.add("loading");
+    }
+    else {
+        body.classList.remove("loading");
+    }
+
+}
+
+$(document).ready(function () {
     var table = $('#example').DataTable({
         dom: 'tlip',
         responsive: false,

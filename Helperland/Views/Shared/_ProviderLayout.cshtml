@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Helperland</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    @RenderSection("CustomCss",required:false)
+</head>
+
+<body>
+
+    <div class="Faq_header">
+        <a asp-controller="Home" asp-action="Index"><img src="~/img/logo-small.png" alt="logo" class="faq-nav-logo"></a>
+        <div class="nav-btn-container">
+            @*<a class="nav-round-btn-book" asp-controller="Book" asp-action="BookService">Book Now</a>*@
+            <div class="nav-btn"><a asp-controller="Home" asp-action="Prices">Prices & services</a></div>
+            <div class="nav-btn"><a href="#">Warranty</a></div>
+            <div class="nav-btn"><a href="#">Blog</a></div>
+            <div><a class="nav-btn" asp-controller="Home" asp-action="Contact">Contact</a></div>
+            <div class="notifications">
+                <a href="#">
+                    <img src="~/img/icon-notification.png" alt="notification">
+                    <div class="notification_number">2</div>
+                </a>
+            </div>
+            <!-- popover user icon  -->
+            <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
+                data-bs-html="true"
+                data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='/Provider/NewServiceRequest'>My Dashboard</a></p> <p><a href='/Provider/MySettings'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>">
+                <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="usericon">
+                <img style="width:11px; height:6px; margin-top:14px; margin-left:7px;" src="~/img/arrow_down.png"
+                    alt="arrow">
+            </div>
+        </div>
+        <div class="nav-expand-btn-container">
+            <div class="notific">
+                <div class="notifications expand-btn">
+                    <a href="#">
+                        <img style="width:29px; height:32px;" src="~/img/icon-notification.png" alt="notification">
+                        <div class="notification_number">2</div>
+                    </a>
+                </div>
+            </div>
+            <img class="hamburger" id="expand_btn" src="~/img/expand-btn.svg" alt="hamburger_img">
+        </div>
+    </div>
+    <div class="expand-btn-container" id="expand_btn_container">
+        <div id="expand_btn_res">x</div>
+        <div class="expand-btn-inner-container">
+            <p class="between_1st_container_dat">Welcome, <br> <b>@User.Identity.Name</b></p>
+            <hr style="opacity: 0.2; margin:0px !important">
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="NewServiceRequest">Dashboard</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="NewServiceRequest">New Service Requests</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="UpcomingService">Upcoming Services</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="ServiceSchedule">Service Schedule</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="ServiceHistory">Service History</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="MyRatings">My Ratings</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="BlockCustomer">Block Customer</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Provider" asp-action="MySettings">My Settings</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Home" asp-action="Logout">Logout</a></p>
+            <hr style="opacity: 0.2; margin:0px !important">
+            <p class="between_1st_container_dat"><a asp-controller="Home" asp-action="Prices">Prices & services</a></p>
+            <p class="between_1st_container_dat"><a href="#">Warranty</a></p>
+            <p class="between_1st_container_dat"><a href="#">Blog</a></p>
+            <p class="between_1st_container_dat"><a asp-controller="Home" asp-action="Contact">Contact</a></p>
+            <hr style="opacity: 0.2; margin:0px !important">
+            <p class="between_1st_container_dat">
+            <div style="display: flex; justify-content:center; margin-bottom:30px;">
+                <img style="margin-right:10px" src="~/img/ic-facebook.png" alt="fb">
+                <img src="~/img/insta.png" alt="insta">
+            </div>
+            </p>
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+
+    <!-- footer  -->
+    <div class="footer">
+        <img class="footer_logo" src="~/img/logo.png" alt="logo">
+        <div>
+            <ul class="footer_data">
+                <li class="footer_link"><a asp-controller="Home" asp-action="Index">HOME</a></li>
+                <li class="footer_link"><a asp-controller="Home" asp-action="About">ABOUT</a></li>
+                <li class="footer_link"><a href="#">TESTIMONIALS</a></li>
+                <li class="footer_link"><a asp-controller="Home" asp-action="Faq">FAQS</a></li>
+                <li class="footer_link"><a href="#">INSURANCE</a></li>
+                <li class="footer_link"><a href="#">POLICY</a></li>
+                <li class="footer_link"><a href="#">IMPRESSUM</a></li>
+            </ul>
+        </div>
+        <div>
+            <img class="footer_icon1" src="~/img/ic-facebook.png" alt="fb">
+            <img class="footer_icon2" src="~/img/insta.png" alt="insta">
+        </div>
+    </div>
+    <!-- last div  -->
+    <div class="last_div">
+        <hr>
+        <div class="last_div_data">
+            ©2018 Helperland. All rights reserved. <a href="#">Terms and Conditions</a> <div style="margin: 5.5px;">|</div> <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/jquery-validate/jquery.validate.js"></script>
+    <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    @RenderSection("jquery", required: false)
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

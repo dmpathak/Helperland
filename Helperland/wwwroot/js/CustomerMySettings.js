@@ -1,4 +1,16 @@
-﻿// for left-right side manu 
+﻿const body = document.querySelector("body")
+const loading = (isloading) => {
+    if (isloading) {
+        body.classList.add("loading");
+    }
+    else {
+        body.classList.remove("loading");
+    }
+
+}
+
+
+// for left-right side manu
 document.getElementById("expand_btn").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
     console.log("Open");
@@ -41,8 +53,7 @@ document.querySelector("#my_datail_save").addEventListener("click", (e) => {
         details.year = document.getElementById("tab_1_year").value;
         details.language = document.getElementById("lang").value;
 
-        console.log(details);
-
+        loading(true);
 
         fetch("/Customer/settingtab1", {
             method: "POST",
@@ -51,6 +62,7 @@ document.querySelector("#my_datail_save").addEventListener("click", (e) => {
             },
             body: JSON.stringify(details)
         }).then(res => res.json()).then(datafromcontroller => {
+            loading(false);
 
             document.getElementById("tab_1_f_name").value = datafromcontroller.fname;
             document.getElementById("tab_1_l_name").value = datafromcontroller.lname;
@@ -86,8 +98,7 @@ function edit(event, id) {
     details.city = document.getElementById("cty_" + id).value;
     details.mobile = document.getElementById("phn_" + id).value;
 
-    console.log(details);
-
+    loading(true);
     fetch("/Customer/settingtab2_edit", {
         method: "POST",
         headers: {
@@ -95,7 +106,7 @@ function edit(event, id) {
         },
         body: JSON.stringify(details)
     }).then(res => res.json()).then(datafromcontroller => {
-
+        loading(false);
         document.getElementById("address_" + id).innerHTML = datafromcontroller.address;
         document.getElementById("ph_" + id).innerHTML = datafromcontroller.phone;
 
@@ -128,8 +139,7 @@ function add(event) {
     new_data.city = document.getElementById("new4").value;
     new_data.mobile = document.getElementById("new5").value;
 
-    console.log(new_data)
-
+    loading(true);
     fetch("/Customer/settingtab2_new", {
         method: "POST",
         headers: {
@@ -137,7 +147,7 @@ function add(event) {
         },
         body: JSON.stringify(new_data)
     }).then(res => res.json()).then(datafromcontroller => {
-
+        loading(false);
 
         document.getElementById("for_innerhtml").innerHTML += `
 
@@ -229,8 +239,8 @@ document.getElementById("psssubmit").addEventListener("click", (e) => {
         pass.newpassword = document.getElementById("exampleInputPassword2").value;
         pass.confirmpassword = document.getElementById("exampleInputPassword3").value;
 
-        console.log(pass);
 
+        loading(true);
         fetch("/Customer/settingtab3", {
             method: "POST",
             headers: {
@@ -238,17 +248,17 @@ document.getElementById("psssubmit").addEventListener("click", (e) => {
             },
             body: JSON.stringify(pass)
         }).then(res => res.json()).then(datafromcontroller => {
+            loading(false);
+
             if (datafromcontroller == "true") {
                 document.getElementById("pass_success").style.color = "#198754"
-                document.getElementById("pass_success").innerHTML += `Your Password has been changed sucessfully...!`
+                document.getElementById("pass_success").innerHTML = `Your Password has been changed sucessfully...!`
             }
             if (datafromcontroller == "false") {
 
                 document.getElementById("pass_success").style.color = "#DC3545"
-                document.getElementById("pass_success").innerHTML += `Incorrect old password, Your Password has not been changed...! `
+                document.getElementById("pass_success").innerHTML = `Incorrect old password, Your Password has not been changed...! `
             }
-
-
 
         }).catch(err => console.log(err));
     }

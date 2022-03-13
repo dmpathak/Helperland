@@ -35,8 +35,10 @@ namespace Helperland.Models.ViewModels
         [Required]
         public string house_number { get; set; }
 
+        [Required]
         public string? city { get; set; }
 
+        [Required]
         public string? phone_number { get; set; }
 
         public string email { get; set; }

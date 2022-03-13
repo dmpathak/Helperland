@@ -16,7 +16,11 @@
             <div class="nav-btn-container">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a asp-controller="Book" asp-action="BookService" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+                    @if (ViewBag.usertypeid == 1)
+                    {
+                        <a asp-controller="Book" asp-action="BookService" class="nav-round-btn-book nav_btn_hover1">Book Now</a>
+                    }
+
                 }
                 else
                 {
@@ -35,14 +39,28 @@
                             <div class="notification_number">2</div>
                         </a>
                     </div>
+                    
                     <!-- popover user icon  -->
-                    <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
+                    @if (ViewBag.usertypeid == 1)
+                    {
+                        <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
                  data-bs-html="true"
-                 data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href=''/Customer/CustomerDashboard''>My Dashboard</a></p> <p><a href='/Customer/CustomerMySettings'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>" data-bs-custom-class="logout_popover">
-                        <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="flag">
-                        <img style="width:11px; height:6px; margin-top:10px; margin-left:7px;" src="~/img/arrow_down.png"
+                 data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='/Customer/CustomerDashboard'>My Dashboard</a></p> <p><a href='/Customer/CustomerMySettings'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>" data-bs-custom-class="logout_popover">
+                            <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="flag">
+                            <img style="width:11px; height:6px; margin-top:10px; margin-left:7px;" src="~/img/arrow_down.png"
                      alt="flag">
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown_imgs" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
+                 data-bs-html="true"
+                 data-bs-content="<p><span> welcome,</span> <br> <span><b>@User.Identity.Name</b></span></p> <hr> <p><a href='/Provider/NewServiceRequest'>My Dashboard</a></p> <p><a href='/Provider/MySettings'>My Settings</a></p> <p><a href='/Home/Logout'>Logout</a></p>" data-bs-custom-class="logout_popover">
+                            <img style="width:36px; height:36px;" src="~/img/admin-user.png" alt="flag">
+                            <img style="width:11px; height:6px; margin-top:10px; margin-left:7px;" src="~/img/arrow_down.png"
+                     alt="flag">
+                        </div>
+                    }
                 }
                 else
                 {
@@ -58,12 +76,15 @@
             <div class="expand-btn-inner-container">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @*<a asp-controller="Book" asp-action="BookService" class="nav-round-btn-book nav_btn_hover1">Book Now</a>*@
-                    <div class="expand-btn"><a asp-controller="Book" asp-action="BookService">Book now</a></div>
+
+                    @if (ViewBag.usertypeid == 1)
+                    {
+                        <div class="expand-btn"><a asp-controller="Book" asp-action="BookService">Book now</a></div>
+                    }
+
                 }
                 else
                 {
-                    @*<a asp-controller="Home" asp-action="index" asp-route-login="true" class="nav-round-btn-book nav_btn_hover1">Book Now</a>*@
                     <div class="expand-btn"><a asp-controller="Home" asp-action="index" asp-route-login="true">Book now</a></div>
                 }
                 <div class="expand-btn"><a asp-controller="Home" asp-action="Prices">Prices & services</a></div>
@@ -72,10 +93,20 @@
                 <div class="expand-btn"><a class="nav-btn" asp-controller="Home" asp-action="Contact">Contact</a></div>
                 @*for logout *@
                 @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="expand-btn"><a href="#">My Dashboard</a></div>
-                    <div class="expand-btn"><a href="#">My Settings</a></div>
-                    <div class="expand-btn"><a asp-controller="Home" asp-action="Logout">Logout</a></div>
+                {   
+                    
+                    @if (ViewBag.usertypeid == 1)
+                    {
+                        <div class="expand-btn"><a href="/Customer/CustomerDashboard">My Dashboard</a></div>
+                        <div class="expand-btn"><a href="/Customer/CustomerMySettings">My Settings</a></div>
+                        <div class="expand-btn"><a asp-controller="Home" asp-action="Logout">Logout</a></div>
+                    }
+                    else 
+                    {
+                        <div class="expand-btn"><a href="/Provider/NewServiceRequest">My Dashboard</a></div>
+                        <div class="expand-btn"><a href="/Provider/MySettings">My Settings</a></div>
+                        <div class="expand-btn"><a asp-controller="Home" asp-action="Logout">Logout</a></div>
+                    }
                 }
                 else
                 {

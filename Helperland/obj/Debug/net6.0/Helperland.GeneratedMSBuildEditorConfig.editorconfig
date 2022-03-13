@@ -67,12 +67,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXNldHBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/BlockCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcQmxvY2tDdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/MyRatings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcTXlSYXRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/MySettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcTXlTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/NewServiceRequest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcTmV3U2VydmljZVJlcXVlc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/ServiceHistory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcU2VydmljZUhpc3RvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/ServiceSchedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcU2VydmljZVNjaGVkdWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Provider/UpcomingService.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmlkZXJcVXBjb21pbmdTZXJ2aWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/_CustomerLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DdXN0b21lckxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/_ProviderLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm92aWRlckxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Shared/_ValidationScriptsPartial.cshtml]

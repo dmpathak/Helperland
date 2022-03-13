@@ -20,7 +20,15 @@ namespace Helperland.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
         public IActionResult BookService()
-        {
+        { 
+            //in bookservice i've used _layout.cshtml, that's why i used this if condition otherwise i know this should be only for usertype => 1
+            if (User.Identity.IsAuthenticated)
+            {
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+
+                ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
 

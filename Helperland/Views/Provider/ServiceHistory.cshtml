@@ -1,0 +1,180 @@
+﻿@model Helperland.Models.ViewModels.ProviderDashboardViewModel;
+
+@{
+    ViewData["Title"] = "Service Provider > Service History";
+    Layout = "~/Views/Shared/_ProviderLayout.cshtml";
+}
+@section CustomCss{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="~/css/ProviderServiceHistory.css" />
+}
+
+
+
+<!-- welcome...  -->
+<div onload="Dashboardpage_load()" class="welcome">
+    Welcome, @User.Identity.Name!
+</div>
+
+<!-- between -->
+<div class="between_main_container">
+    <div class="between_1st_container" id="open_side_manu_id">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">Dashboard</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">New Service Requests</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="UpcomingService">Upcoming Services</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="ServiceSchedule">Service Schedule</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data" style="background-color: #146371;"><a asp-controller="Provider" asp-action="ServiceHistory">Service History</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="MyRatings">My Ratings</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="BlockCustomer">Block Customer</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Invoices</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Notifications</a></p>
+        <hr style="opacity: 0.2;">
+    </div>
+    <div class="sec_main_container">
+        <div class="between_2nd_container_upper_header">
+            <p>Service History</p>
+        </div>
+        <div class="responsive_filter" id="responsive_filter_id" data-bs-toggle="popover" data-bs-custom-class="filter_popover"
+             data-bs-placement="bottom" data-bs-html="true" data-bs-content="
+                <div class='popover_container'>
+                    <label class='form-check-label' for='service_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_asd' data-dt-col=0 data-dt-sort='asc'>
+                        Service Id: Most Recent
+                    </label>
+                    <label class='form-check-label' for='service_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_dec' data-dt-col=0 data-dt-sort='dec'>
+                        Service Id: older
+                    </label>
+                    <label class='form-check-label' for='provider_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_asd' data-dt-col=1 data-dt-sort='asc'>
+                        Service Date: Most Recent
+                    </label>
+                    <label class='form-check-label' for='provider_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_dec' data-dt-col=1 data-dt-sort='dec'>
+                        Service Date: Z to A
+                    </label>
+
+                </div>
+                ">
+                <img id="responsive_filter_img" src="~/img/filter.png" alt="">
+
+            </div>
+        <div class="between_table_header_container">
+            <table id="example">
+                <thead>
+                    <tr>
+                        <td class="between_table_header ">Service Id</td>
+                        <td class="between_table_header ">Service Date</td>
+                        <td class="between_table_header ">Customer Details</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @foreach (var history in ViewBag.current_history)
+                    {
+
+                        <tr>
+                            <td class="between_table_data"><span id="ServiceId" class="hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@history.myServiceId" onclick="for_map_show(@history.myServiceId);">@history.myServiceId</span></td>
+                            <td class="between_table_data ">
+                                <div class="text-align-center d-flex flex-column align-items-center justify-content-center">
+                                    <div class="text-align-start">
+
+                                        <div class="data_adjust hover_for_modalopen " data-bs-toggle="modal" data-bs-target="#servicedetail_@history.myServiceId" onclick="for_map_show(@history.myServiceId);">
+                                            <img src="~/img/calendar2.png" alt="">
+                                            <div><b id="date">@history.myservice_start_date</b> </div>
+                                        </div>
+                                        <div class="data_adjust hover_for_modalopen align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#servicedetail_@history.myServiceId" onclick="for_map_show(@history.myServiceId);">
+                                            <img src="~/img/layer-14.png" alt="">
+                                            <div><span id="start_time">@history.myservice_start_time</span> - <span id="end_time">@history.myservice_end_time</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="between_table_data">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div><img class="me-1" src="~/img/layer-15.png" alt=""></div>
+                                    <div style="text-align: justify;">
+                                        <p>@history.my_customer_name.FirstName @history.my_customer_name.LastName</p>
+                                        <p>@history.my_customer_address.AddressLine1 @history.my_customer_address.AddressLine2 </p>
+                                        <p>@history.my_customer_address.PostalCode @history.my_customer_address.City</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        @*ServiceCollection detail modal*@
+                        <div class="modal fade" id="servicedetail_@history.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabel">Service Details</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="first_part_modal col-12 col-lg-6">
+                                                <b> <h6><span id="date_modal">@history.myservice_start_date</span> <span id="starttime_modal">@history.myservice_start_time</span> - <span id="endtime_modal">@history.myservice_end_time</span></h6>  </b>
+                                                <p> <b>Duration:</b> <span id="duration_modal">@history.service_duration</span> Hrs </p>
+
+                                                <hr class="mb-2 mt-2" />
+
+                                                <p> <b>Service Id:</b> <span id="serviceid_modal">@history.myServiceId</span></p>
+                                                <p> <b>Extras:</b> <span id="extras_modal">@history.extras</span> </p>
+                                                <p> <b>Net Amount:</b> <span class="service_detail_modal_amount"> <span id="amount_modal">@history.mypayment</span> $ </span>  </p>
+                                                <hr class="mb-2 mt-2" />
+
+                                                <p> <b>Customer Name:</b> <span id="address_modal">@history.my_customer_name.FirstName @history.my_customer_name.LastName</span></p>
+                                                <p> <b>Service Address:</b> <span id="address_modal">@history.my_customer_address.AddressLine1 @history.my_customer_address.AddressLine2 @history.my_customer_address.PostalCode @history.my_customer_address.City</span></p>
+                                                <p> <b>Customer E-mail:</b> <span id="mail_modal">@history.my_customer_name.email</span></p>
+                                                <p> <b>Customer Phone:</b> <span id="phn_modal">@history.my_customer_name.phn</span></p>
+                                                <hr class="mb-2 mt-2" />
+
+                                                <p> <b>Comments</b> </p>
+                                                @if (@history.pet)
+                                                {
+                                                    <p> <img id="for_pet_img" src="~/img/success_tick.png" alt="" style="width: 25px"><span id="pet"> I Have pets at home</span> </p>
+
+                                                }
+                                                else
+                                                {
+                                                    <p> <img id="for_pet_img" src="~/img/not-included.png" alt="" style="width: 25px"><span id="pet"> I don't Have pets at home</span> </p>
+                                                }
+                                                <hr class="mb-2 mt-2" />
+
+                                            </div>
+                                            <input class="d-none" type="text" value="@history.my_customer_address.PostalCode" id="mappostal_@history.myServiceId" />
+                                            <div class="second_part_modal col-12 col-lg-6" id="second_part_modal_@history.myServiceId">
+                                                put open street map here
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="~/js/ProviderServiceHistory.js"></script>
+}

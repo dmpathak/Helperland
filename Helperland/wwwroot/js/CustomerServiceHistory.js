@@ -1,6 +1,18 @@
-﻿$(document).ready(function () {
+﻿const body = document.querySelector("body")
+const loading = (isloading) => {
+    if (isloading) {
+        body.classList.add("loading");
+    }
+    else {
+        body.classList.remove("loading");
+    }
+
+}
+
+$(document).ready(function () {
+
     var table = $('#example').DataTable({
-        dom: 'tlip',
+        dom: 'Btlip',
         responsive: false,
         pagingType: 'full_numbers',
         'columnDefs': [{ 'orderable': false, 'targets': [4, 5] }],
@@ -12,7 +24,9 @@
                 "last": '<img src="../img/first-page.png" style="transform:rotate(180deg)" alt="">'
             },
             'info': "Total Record: _MAX_",
-        }
+
+        },
+        buttons: ["excel"],
     });
 
     // filter popover 
@@ -23,6 +37,9 @@
             })
         })
     })
+
+    $(".between_2nd_container_upper_header").insertBefore(".dt-button");
+    $(".buttons-excel").html("Export");
 });
 
 // for left-right side manu 
@@ -52,7 +69,7 @@ function first_modal(id) {
     myservice_id.ServiceId = id;
     console.log(id);
 
-
+    loading(true);
     fetch("/Customer/CustomerDashboard1", {
         method: "POST",
         headers: {
@@ -60,6 +77,7 @@ function first_modal(id) {
         },
         body: JSON.stringify(myservice_id)
     }).then(res => res.json()).then(datafromcontroller => {
+        loading(false);
         const m = document.querySelector("#servicedetail_" + id)
 
         m.querySelector("#date_modal").innerHTML = datafromcontroller.service_date;
@@ -87,35 +105,35 @@ function first_modal(id) {
 
 //  ..... 2nd modal data change.......
 
-function reschedule(id) {
-    var reschedule_data = {}
+//function reschedule(id) {
+//    var reschedule_data = {}
 
-    reschedule_data.ServiceId = id;
-    reschedule_data.date = document.getElementById("reschedule_data1").value;
-    reschedule_data.start_time = document.getElementById("reschedule_data2").value;
+//    reschedule_data.ServiceId = id;
+//    reschedule_data.date = document.getElementById("reschedule_data1").value;
+//    reschedule_data.start_time = document.getElementById("reschedule_data2").value;
 
-    alert(reschedule_data.ServiceId);
-    fetch("/Customer/CustomerServiceHistory", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(reschedule_data)
-    }).then(res => res.json()).then(datafromcontroller => {
+//    loading(true);
+//    fetch("/Customer/CustomerServiceHistory", {
+//        method: "POST",
+//        headers: {
+//            "Content-Type": "application/json"
+//        },
+//        body: JSON.stringify(reschedule_data)
+//    }).then(res => res.json()).then(datafromcontroller => {
 
-        //if (datafromcontroller == true) {
-        //    document, getElementById("reschedule_error").innerHTML +=
-        //        `Another service request has been assigned to the service provider on ${Date} from ${Start_time} to ${End_time}`;
+//        if (datafromcontroller == true) {
+//            document, getElementById("reschedule_error").innerHTML +=
+//                `Another service request has been assigned to the service provider on ${Date} from ${Start_time} to ${End_time}`;
 
-        //}
-        //else {
-        //    alert("Service Rescheduled Successfully..!")
-        //}
+//        }
+//        else {
+//            alert("Service Rescheduled Successfully..!")
+//        }
 
-    }).catch(err => console.log(err));
+//    }).catch(err => console.log(err));
 
 
-};
+//};
 
 
 

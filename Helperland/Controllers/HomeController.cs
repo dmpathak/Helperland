@@ -29,7 +29,13 @@ namespace Helperland.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+            var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
 
+            ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
 
@@ -62,7 +68,7 @@ namespace Helperland.Controllers
                 else if (usercredentials.UserTypeId == 2)
                 {
 
-                    return RedirectToAction("Prices", "Home");
+                    return RedirectToAction("NewServiceRequest", "Provider");
                 }
             }
             TempData["isvalid"] = true;
@@ -78,19 +84,47 @@ namespace Helperland.Controllers
         //[Authorize]
         public IActionResult Prices()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+
+                ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
 
         public IActionResult About()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+
+                ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
         public IActionResult Faq()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+
+                ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
         public IActionResult Contact()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+
+                ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
         [HttpPost]
@@ -160,7 +194,13 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult Resetpassword(string id)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
 
+                ViewBag.usertypeid = current_user_data.UserTypeId;
+            }
             return View();
         }
         [HttpPost]

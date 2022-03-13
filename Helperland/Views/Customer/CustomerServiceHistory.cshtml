@@ -37,7 +37,7 @@
     <div class="sec_main_container">
         <div class="between_2nd_container_upper_header">
             <p style="color:#646464; font-size:22px"><b>Service History</b></p>
-            <input class="expert_btn" type="button" value="Export">
+            @*<input class="expert_btn" type="button" value="Export">*@
         </div>
         <!-- <div class="">
             <img src="~/img/sort.png" alt="">
@@ -105,28 +105,31 @@
                                 </div>
                             </td>
                             <td class="between_table_data">
-                                <div class="d-flex">
-                                    <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
-                                    <div>
-                                        <div id="service_provide_name">@history.mysericeprovider_name</div>
-                                        <div style="display: flex; margin-top:4px;">
-                                            @for (var i = 0; i < 5; i++)
-                                            {
-                                                if (i < @history.my_provider_rating)
+                                @if (history.mysericeprovider_name != null)
+                                {
+                                    <div class="d-flex">
+                                        <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                        <div>
+                                            <div id="service_provide_name">@history.mysericeprovider_name</div>
+                                            <div style="display: flex; margin-top:4px;">
+                                                @for (var i = 0; i < 5; i++)
                                                 {
-                                                    <img class="star_imgs" src="~/img/star1.png" alt="">
+                                                    if (i < @history.my_provider_rating)
+                                                    {
+                                                        <img class="star_imgs" src="~/img/star1.png" alt="">
 
-                                                }
-                                                else
-                                                {
+                                                    }
+                                                    else
+                                                    {
 
-                                                    <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                        <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                    }
                                                 }
-                                            }
-                                            <p id="rate" class="ms-1">@history.my_provider_rating</p>
+                                                <p id="rate" class="ms-1">@history.my_provider_rating</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </td>
                             <td class="between_table_data">
                                 <p class="doller between_2nd_container_data_service"> <span>@history.mypayment</span> €</p>
@@ -254,19 +257,20 @@
                                             <div class="mt-3"><b>Rate your service provider</b></div>
                                         </div>
 
-                                        
-                                                
+
+
                                         <form asp-controller="Customer" asp-action="SubmitRate">
                                             <hr class="my-2">
                                             <div class="mb-3">
-                                                
+
                                                 <input class="d-none" id="htmlrate1_@history.myserviceid" asp-for="OnTimeArrival" value="5">
                                                 <input class="d-none" id="htmlrate2_@history.myserviceid" asp-for="Friendly" value="5">
                                                 <input class="d-none" id="htmlrate3_@history.myserviceid" asp-for="QualityOfService" value="5">
                                                 <input class="d-none" asp-for="ServiceId" value="@history.myserviceid">
-                                                
+
                                                 @*stars 1*@
-                                                <span class=" d-flex align-items-center"><span class="me-3">On time arrival</span> 
+                                                <span class=" d-flex align-items-center">
+                                                    <span class="me-3">On time arrival</span>
                                                     <div class="stars w-auto position-relative d-flex align-items-center justify-content-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
                                                             <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
@@ -295,10 +299,11 @@
 
 
                                             <div class="mb-3">
-                                                
-                                            
-                                            @*stars 1*@
-                                                <span class=" d-flex align-items-center "><span class="me-3">Friendly</span> 
+
+
+                                                @*stars 1*@
+                                                <span class=" d-flex align-items-center ">
+                                                    <span class="me-3">Friendly</span>
                                                     <div class="stars1 w-auto position-relative d-flex align-items-center justify-content-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
                                                             <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
@@ -323,13 +328,14 @@
                                                         <div class="cover1 position-absolute top-0 end-0 h-100"></div>
                                                     </div>
                                                 </span>
-                                            
-                                            
+
+
                                             </div>
                                             <div class="mb-3">
-                                                
-                                            @*stars 2*@
-                                                <span class=" d-flex align-items-center "><span class="me-3">Quality of service</span> 
+
+                                                @*stars 2*@
+                                                <span class=" d-flex align-items-center ">
+                                                    <span class="me-3">Quality of service</span>
                                                     <div class="stars2 w-auto position-relative d-flex align-items-center justify-content-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
                                                             <path data-serviceid="@history.myserviceid" fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882
@@ -354,7 +360,7 @@
                                                         <div class="cover2 position-absolute top-0 end-0 h-100"></div>
                                                     </div>
                                                 </span>
-                                            
+
                                             </div>
 
 
@@ -384,5 +390,8 @@
 @section Scripts{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="~/js/CustomerServiceHistory.js"></script>
 }

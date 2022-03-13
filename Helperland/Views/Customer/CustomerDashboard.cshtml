@@ -101,28 +101,32 @@
                                 </div>
                             </td>
                             <td class="between_table_data">
-                                <div class="d-flex">
-                                    <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
-                                    <div>
-                                        <div id="service_provide_name">@user_data.mysericeprovider_name</div>
-                                        <div style="display: flex; margin-top:4px;">
-                                            @for (var i = 0; i < 5; i++)
-                                            {
-                                                if (i < @user_data.my_provider_rating)
-                                                {
-                                                    <img class="star_imgs" src="~/img/star1.png" alt="">
+                                @if (user_data.mysericeprovider_name != null)
+                                {
 
-                                                }
-                                                else
+                                    <div class="d-flex">
+                                        <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                        <div>
+                                            <div id="service_provide_name">@user_data.mysericeprovider_name</div>
+                                            <div style="display: flex; margin-top:4px;">
+                                                @for (var i = 0; i < 5; i++)
                                                 {
+                                                    if (i < @user_data.my_provider_rating)
+                                                    {
+                                                        <img class="star_imgs" src="~/img/star1.png" alt="">
 
-                                                    <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                    }
                                                 }
-                                            }
-                                            <p id="rate" class="ms-1">@user_data.my_provider_rating</p>
+                                                <p id="rate" class="ms-1">@user_data.my_provider_rating</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </td>
                             <td class="between_table_data">
                                 <p class="doller between_2nd_container_data_service"> <span>@user_data.mypayment</span> €</p>
@@ -130,10 +134,10 @@
                             <td class="between_table_data">
                                 <div class="d-flex">
                                     <div class="completed_btn">
-                                        <input type="button" value="Reschadule" data-bs-toggle="modal" data-bs-target="#reschedule_@user_data.myServiceId">
+                                        <input type="button" value="Reschedule" data-bs-toggle="modal" data-bs-target="#reschedule_@user_data.myServiceId">
                                     </div>
-                                    <div class=" action_button">
-                                        <input  type="button" value="Cancel" data-bs-toggle="modal" data-bs-target="#cancel_@user_data.myServiceId">
+                                    <div class="action_button">
+                                        <input type="button" value="Cancel" data-bs-toggle="modal" data-bs-target="#cancel_@user_data.myServiceId">
                                         @*onclick="cancel(@user_data.myServiceId)"*@
                                     </div>
                                 </div>
@@ -178,9 +182,7 @@
                                             </button>
                                             <div class="cancel_modal" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#cancel_@user_data.myServiceId">
                                                 <img src="~/img/close-icon-small.png" alt="">
-                                                <div id="reschedule_error" class="text-danger"></div>
-                                                <div id="reschedule_success" class="text-success"></div>
-                                                <a class="mx-1" value="Cancel" >Cancel</a>
+                                                <a class="mx-1" value="Cancel">Cancel</a>
                                             </div>
                                         </div>
                                     </div>
@@ -200,11 +202,11 @@
                                     </div>
                                     <div class="modal-body">
                                         Select New Date & Time
-                                        <form asp-controller="Customer" asp-action="CustomerDashboard2">
+                                        <form>
                                             <div class="mb-2">
                                                 <input asp-for="ServiceId" value="@user_data.myServiceId" class="d-none">
-                                                <input asp-for="date" id="reschedule_data1" class="reschedule_data1" placeholder="DD/MM/YYYY">
-                                                <select asp-for="start_time" id="reschedule_data2" class="reschedule_data2">
+                                                <input asp-for="date" id="reschedule_data1_@user_data.myServiceId" class="reschedule_data1" placeholder="DD/MM/YYYY">
+                                                <select asp-for="start_time" id="reschedule_data2_@user_data.myServiceId" class="reschedule_data2">
                                                     <option value="">---</option>
                                                     <option value="8:00">8:00</option>
                                                     <option value="8:30">8:30</option>
@@ -229,8 +231,11 @@
                                                     <option value="18:00">18:00</option>
                                                 </select>
                                             </div>
-                                            <button type="submit"  class="Reschedule_modal mt-2">Update</button>
-                                            @*onclick="reschedule(@user_data.myServiceId);"*@
+
+                                            <div id="reschedule_error_@user_data.myServiceId" class="text-danger"></div>
+                                            <div id="reschedule_success_@user_data.myServiceId" class="text-success"></div>
+                                            <button type="submit" onclick="reschedule(event,@user_data.myServiceId);" class="Reschedule_modal mt-2">Update</button>
+
                                         </form>
                                     </div>
                                 </div>

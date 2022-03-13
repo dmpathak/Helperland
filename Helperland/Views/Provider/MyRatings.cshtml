@@ -1,0 +1,173 @@
+﻿@model Helperland.Models.ViewModels.ProviderDashboardViewModel;
+
+@{
+    ViewData["Title"] = "Service Provider > My Ratings";
+    Layout = "~/Views/Shared/_ProviderLayout.cshtml";
+}
+@section CustomCss{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="~/css/ProviderMyRatings.css" />
+}
+
+
+
+<!-- welcome...  -->
+<div onload="Dashboardpage_load()" class="welcome">
+    Welcome, @User.Identity.Name!
+</div>
+
+<!-- between -->
+<div class="between_main_container">
+    <div class="between_1st_container" id="open_side_manu_id">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">Dashboard</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">New Service Requests</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="UpcomingService">Upcoming Services</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="ServiceSchedule">Service Schedule</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="ServiceHistory">Service History</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data" style="background-color: #146371;"><a asp-controller="Provider" asp-action="MyRatings">My Ratings</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="BlockCustomer">Block Customer</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Invoices</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Notifications</a></p>
+        <hr style="opacity: 0.2;">
+    </div>
+    <div class="sec_main_container">
+        <div class="d-flex mb-3 justify-content-between">
+
+            <div class="between_2nd_container_upper_header">
+                <p>My Ratings</p>
+            </div>
+            <div class="responsive_filter" id="responsive_filter_id" data-bs-toggle="popover" data-bs-custom-class="filter_popover"
+                 data-bs-placement="bottom" data-bs-html="true" data-bs-content="
+                <div class='popover_container'>
+                    <label class='form-check-label' for='service_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_asd' data-dt-col=0 data-dt-sort='asc'>
+                        Customer Name: Ascending
+                    </label>
+                    <label class='form-check-label' for='service_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='service_dec' data-dt-col=0 data-dt-sort='dec'>
+                        Customer Name: Descending
+                    </label>
+                    <label class='form-check-label' for='provider_asd'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_asd' data-dt-col=1 data-dt-sort='asc'>
+                        Service Date: Most Recent
+                    </label>
+                    <label class='form-check-label' for='provider_dec'>
+                        <input class='form-check-input' type='radio' name='flexRadioDefault' id='provider_dec' data-dt-col=1 data-dt-sort='dec'>
+                        Service Date: Oldest
+                    </label>
+                    <label class='form-check-label' for='payment_asc'>
+                         <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_asc' data-dt-col=2 data-dt-sort='asc'>
+                         Rating: low to high
+                    </label>
+                    <label class='form-check-label' for='payment_dec'>
+                         <input class='form-check-input' type='radio' name='flexRadioDefault' id='payment_dec' data-dt-col=2 data-dt-sort='dec'>
+                         Payment: high to low
+                     </label>
+                </div>
+                ">
+                  <div id="responsive_filter_img" class="d-flex ratings_filter">
+
+                     <h6>Sorting</h6>
+                    <img class="ms-2"  src="~/img/filter.png" alt="">
+                  </div>
+
+            </div>
+        </div>
+        <div class="between_table_header_container">
+            <table id="example" style="color:#646464;">
+                <thead class="d-none">
+                    <tr>
+                        <td>h1</td>
+                        <td>h2</td>
+                        <td>h3</td>
+                        <td>h4</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var ratedata in ViewBag.mydata)
+                    {
+
+                        <tr class="d-flex flex-wrap justify-content-between mb-2">
+                            <td class="col-12 col-sm-3">
+                                <div>@ratedata.date_time.serviceid</div>
+                                <div><b>@ratedata.my_customer_name.FirstName @ratedata.my_customer_name.LastName</b></div>
+                            </td>
+                            <td class="col-12 col-sm-3">
+                                <div class="data_adjust hover_for_modalopen " data-bs-toggle="modal" data-bs-target="">
+                                    <img src="~/img/calendar2.png" alt="">
+                                    <div><b id="date">@ratedata.date_time.myservice_start_date</b> </div>
+                                </div>
+                                <div class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="">
+                                    <img src="~/img/layer-14.png" alt="">
+                                    <div><span id="start_time">@ratedata.date_time.myservice_start_time</span> - <span id="end_time">@ratedata.date_time.myservice_end_time</span></div>
+                                </div>
+
+                            </td>
+                            <td class="col-12 col-sm-3">
+                                <div><b>Ratings</b></div>
+                                <div style="display: flex; margin-top:4px;">
+                                    @for (var i = 0; i < 5; i++)
+                                    {
+                                        if (i < @ratedata.rating)
+                                        {
+                                            <img class="star_imgs" src="~/img/star1.png" alt="">
+
+                                        }
+                                        else
+                                        {
+
+                                            <img class="star_imgs" src="~/img/star2.png" alt="">
+                                        }
+                                    }
+                                    @if (@ratedata.rating <= 1)
+                                    {
+                                        <p id="rate" class="ms-1">Verry Poor</p>
+                                    }
+                                    @if (@ratedata.rating <= 2)
+                                    {
+                                        <p id="rate" class="ms-1">Poor</p>
+                                    }
+                                    @if (@ratedata.rating <= 3)
+                                    {
+                                        <p id="rate" class="ms-1">Good</p>
+                                    }
+                                    @if (@ratedata.rating <= 4)
+                                    {
+                                        <p id="rate" class="ms-1">Verry Good</p>
+                                    }
+                                    @if (@ratedata.rating <= 5)
+                                    {
+                                        <p id="rate" class="ms-1">Excellent</p>
+                                    }
+                                </div>
+                            </td>
+                            <td class="col-12 float-start">
+                                <hr style="width:97%" />
+                                <b>Customer Comment</b>
+                                <p>@ratedata.cmt</p>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script src="~/js/ProviderMyRatings.js"></script>
+}

@@ -26,7 +26,8 @@ namespace Helperland.Controllers
             var New = 1;
             var completed = 2;
             var cancelled = 3;
-            var refunded = 4;
+            var accepted = 4;
+            var refunded = 5;
             var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var current_user_data = new List<object>();
             var my_adata = context.ServiceRequests.Where(x => x.UserId == current_user_Id && x.Status == 1);
@@ -34,6 +35,18 @@ namespace Helperland.Controllers
 
             foreach (var eachdata in my_adata)
             {
+
+                var my_user_name = (
+                                    from r in context.ServiceRequests
+                                    join u in context.Users
+                                    on r.ServiceProviderId equals u.UserId
+                                    where r.ServiceId == eachdata.ServiceId
+                                    select u.FirstName).FirstOrDefault();
+                if (my_user_name == null)
+                {
+                    my_user_name = null;
+                }
+
                 current_user_data.Add(new
                 {
 
@@ -52,12 +65,14 @@ namespace Helperland.Controllers
                     my_provider_rating = (
                                     from r in context.ServiceRequests
                                     join e in context.Ratings
-                                    on r.ServiceRequestId equals e.ServiceRequestId
+                                    on r.ServiceProviderId equals e.RatingTo
                                     where r.ServiceId == eachdata.ServiceId
                                     select e.Ratings).FirstOrDefault(),
 
                     serviceprovider_id = eachdata.ServiceProviderId,
-                    mysericeprovider_name = "Name of provider",
+
+                    mysericeprovider_name = my_user_name,
+                    //mysericeprovider_name = "Name of provider",
 
                     mypayment = eachdata.TotalCost
 
@@ -140,38 +155,42 @@ namespace Helperland.Controllers
         }
 
         [HttpPost]
-        public IActionResult CustomerDashboard2(CustomerDashboardViewModel dashboard)
+        public IActionResult CustomerDashboard2([FromBody] CustomerDashboardViewModel dashboard)
         {
             var request = context.ServiceRequests.Where(x => x.ServiceId == dashboard.ServiceId).FirstOrDefault();
 
-
+            
             var s = dashboard.date.Split("/");
             var d = dashboard.start_time.Split(":");
             DateTime datefinal = new DateTime(Int32.Parse(s[2]), Int32.Parse(s[1]), Int32.Parse(s[0]), Int32.Parse(d[0]), Int32.Parse(d[1]), 0);
 
 
             var total_hours = Convert.ToDouble(request.ServiceHours + request.ExtraHours);
-            var datefinal_end = datefinal.AddHours(total_hours).AddMinutes(30);
+            var datefinal_end = datefinal.AddHours(total_hours).AddMinutes(60);
 
             var request_forloop = context.ServiceRequests.Where(x => x.ServiceProviderId == request.ServiceProviderId).ToList();
 
-            foreach (var reschedule in request_forloop)
+            if (request.ServiceProviderId != null)
             {
-                var request_start = reschedule.ServiceStartDate;
 
-                var request_end = request_start.AddHours(total_hours).AddMinutes(30);
-
-                if ((DateTime.Compare(request_start, datefinal) <= 0 && DateTime.Compare(request_end, datefinal) > 0) || (DateTime.Compare(request_start, datefinal_end) < 0 && DateTime.Compare(request_end, datefinal_end) >= 0))
+                foreach (var reschedule in request_forloop)
                 {
-                    //return Json(false);
-                    return RedirectToAction("CustomerDashboard", "Customer");
+                    var request_start = reschedule.ServiceStartDate;
+
+                    var request_end = request_start.AddHours(total_hours).AddMinutes(60);
+
+                    if ((DateTime.Compare(request_start, datefinal) <= 0 && DateTime.Compare(request_end, datefinal) > 0) || (DateTime.Compare(request_start, datefinal_end) < 0 && DateTime.Compare(request_end, datefinal_end) >= 0) || (DateTime.Compare(request_end, datefinal_end) > 0 && DateTime.Compare(request_start, datefinal) < 0))
+                    {
+                        return Json(false);
+                        //return RedirectToAction("CustomerDashboard", "Customer");
+                    }
                 }
             }
 
             request.ServiceStartDate = datefinal;
             context.SaveChanges();
-            return RedirectToAction("CustomerDashboard", "Customer");
-            //return Json(true);
+            //return RedirectToAction("CustomerDashboard", "Customer");
+            return Json(true);
 
 
 
@@ -212,7 +231,7 @@ namespace Helperland.Controllers
                 }
                 else
                 {
-                    sericeprovider_name = "Name of provider";
+                    sericeprovider_name = null;
                 }
                 current_user_history.Add(new
                 {
@@ -265,7 +284,7 @@ namespace Helperland.Controllers
                 current_service_rate.Ratings = Convert.ToDecimal((current_service_rate.Ratings + (dashboard.OnTimeArrival + dashboard.Friendly + dashboard.QualityOfService) / 3) / 2);
                 current_service_rate.RatingFrom = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                //aahiya dynamic value nakvi atyare service id 1466 mate j 6e 
+
                 current_service_rate.RatingTo = 6;
                 current_service_rate.RatingDate = DateTime.Now;
 
@@ -281,8 +300,7 @@ namespace Helperland.Controllers
                 Add_new_service_rating.RatingFrom = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
 
-                //aahiya dynamic value nakvi atyare service id 1466 mate j 6e etle aahiya 6 ni badle je user hoi eni userid nakhvi (user table mi col1)
-                //5 -> helper, 6-> sp2 
+
                 Add_new_service_rating.RatingTo = 5;
                 Add_new_service_rating.RatingDate = DateTime.Now;
                 context.Ratings.Add(Add_new_service_rating);

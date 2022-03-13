@@ -1,0 +1,80 @@
+﻿@model Helperland.Models.ViewModels.ProviderDashboardViewModel;
+
+@{
+    ViewData["Title"] = "Service Provider > Block Customer";
+    Layout = "~/Views/Shared/_ProviderLayout.cshtml";
+}
+@section CustomCss{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="~/css/ProviderBlockCustomer.css" />
+}
+
+
+
+<!-- welcome...  -->
+<div onload="Dashboardpage_load()" class="welcome">
+    Welcome, @User.Identity.Name!
+</div>
+
+<!-- between -->
+<div class="between_main_container">
+    <div class="between_1st_container" id="open_side_manu_id">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">Dashboard</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="NewServiceRequest">New Service Requests</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="UpcomingService">Upcoming Services</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="ServiceSchedule">Service Schedule</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="ServiceHistory">Service History</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a asp-controller="Provider" asp-action="MyRatings">My Ratings</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data" style="background-color: #146371;"><a asp-controller="Provider" asp-action="BlockCustomer">Block Customer</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Invoices</a></p>
+        <hr style="opacity: 0.2;">
+        <p class="between_1st_container_data"><a href="#">Notifications</a></p>
+        <hr style="opacity: 0.2;">
+    </div>
+    <div class="sec_main_container">
+        <div class="between_table_header_container">
+            <table id="example" class="d-none">
+
+                <div class="block_card_resp d-flex flex-wrap">
+                    @foreach (var data in ViewBag.blockdata)
+                    {
+
+                        <div class="card text-center ms-3 me-3 mb-3" style="width: 19rem; color:#646464;">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3"><div><img class="cap_img" src="~/img/cap.png" alt=""></div></h5>
+                                <input asp-for="UserId" id="userid_@data.customer_data.userid" class="d-none" value="@data.customer_data.userid" />
+                                <p class="card-text mb-3"><b>@data.customer_data.FirstName @data.customer_data.LastName</b></p>
+                                @if (@data.is_block == false)
+                                {
+                                    <input class="action_button_block" id="block_@data.customer_data.userid" type="button" onclick="block(@data.customer_data.userid);" value="Block" />
+                                }
+                                else
+                                {
+                                    <input class="action_button_unblock" id="unblock_@data.customer_data.userid" type="button" onclick="unblock(@data.customer_data.userid);" value="Unblock" />
+                                    
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script src="~/js/ProviderBlockCustomer.js"></script>
+}
