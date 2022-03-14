@@ -113,8 +113,8 @@
                             </label><br>
                             <div class="second_tab_data_select">
                                 <form id="clening_date_time">
-                                    <input asp-for="date" onchange="datechange();" id="date"  placeholder="01/01/2018">
-                                    
+                                    <input asp-for="date" onchange="datechange();" id="date" placeholder="01/01/2018">
+
                                     <select asp-for="time" onchange="timechange();" id="time" class="form-select-sm">
                                         <option value="">---</option>
                                         <option value="8:00">8:00</option>
@@ -141,7 +141,11 @@
                                     </select>
                                 </form>
                             </div>
+
+                            <div class="text-danger" id="date_empty_error"></div>
+                            <div class="text-danger" id="starttime_empty_error"></div>
                             <div class="text-danger" id="wrong_date"></div>
+                            <div class="text-danger" id="gone_date"></div>
                         </div>
                         <div>
                             <label class="mb-2 second_tab_headings">
@@ -150,6 +154,7 @@
                                     stay?
                                 </b>
                             </label><br>
+
                             <div class="second_tab_data_select">
                                 <form id="basic_time">
                                     <select asp-for="basic_time" class="form-select-sm" onchange="basicchange();" id="basic">
@@ -176,8 +181,10 @@
                                     </select>
                                 </form>
                             </div>
+                            <div class="text-danger" id="basic_empty_error"></div>
                         </div>
                     </div>
+                    <div class="text-danger text-center" id="time_exeed"></div>
                     <hr>
                     <!-- TAB-2 DATA part 3 -->
                     <div class="second_tab_headings mb-4"><b>Extra Service</b></div>
@@ -263,7 +270,7 @@
                     <!-- TAB-2 DATA part 4 -->
                     <div class="mb-2 second_tab_headings"><b>Comments</b></div>
                     <div class="mb-3">
-                        <textarea asp-for="comments" class="textarea" placeholder="comments" id = "comments"></textarea>
+                        <textarea asp-for="comments" class="textarea" placeholder="comments" id="comments"></textarea>
                     </div>
                     <div class="mb-4">
                         <input asp-for="have_pets" style="width:18px; height:18px; margin-right:5px" id="is_pet">I have pets at home
@@ -292,36 +299,9 @@
                             way!
                         </b>
                     </label><br>
-                    <div id="address_show_radio">
-                        @*document.querySelector('input[name="flexRadioDefault"]:checked')*@
-                        @*<div class="form-check mb-3 existing_address">
-                            <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
-                                   id="flexRadioDefault1" value="10">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                <b class="second_tab_headings">Address:</b> <span id="street_span"> koginstarsse  </span>
-                                122 ,Tambarch-dizwanf 988762 <br>
-                                <b class="second_tab_headings">Phone:</b> 9948659746
-                            </label>
-                        </div>
-                        <div class="form-check mb-3 existing_address">
-                            <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
-                                   id="flexRadioDefault2" value="5">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                <b class="second_tab_headings">Address:</b> koginstarsse
-                                122 ,Tambarch-dizwanf 988762 <br>
-                                <b class="second_tab_headings">Phone:</b> 9948659746
-                            </label>
-                        </div>*@
-                        @*<div class="form-check mb-3 existing_address newly_address" style="display:none">
-                            <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
-                            id="flexRadioDefault3" value="5"
-                            <label class="form-check-label" for="flexRadioDefault3">
-                            <b class="second_tab_headings">Address:</b> koginstarsse
-                            122 ,Tambarch-dizwanf 988762 <br>
-                            <b class="second_tab_headings">Phone:</b> 9948659746
-                            </label>
-                            </div>*@
+                    <span id="add_address_error" class="text-danger"></span>
 
+                    <div id="address_show_radio">
                     </div>
 
                     <!-- add new addresss form  -->
@@ -342,7 +322,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><b>City</b></label>
-                                    <input asp-for="city" id="form_city" class="form-control" placeholder="" >
+                                    <input asp-for="city" id="form_city" class="form-control" placeholder="">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><b>Phone number</b></label>
@@ -372,6 +352,7 @@
                             <b>+ Add New Address</b>
                         </button>
                     </p>
+
                 </div>
 
                 <!-- TAB-3 DATA part 2 -->
@@ -458,7 +439,7 @@
                             <div class="modal-body">
 
                                 <img src="~/img/success_tick.png" alt="success" class="modal_success_img">
-                               
+
                                 <div>Booking has been successfully submitted</div>
                                 <p>Service Request Id: <span id="service_id"></span></p>
                                 <button type="button" class="rounded-pill continue_btn"
@@ -738,7 +719,7 @@
 
                     <!-- more help  -->
                     <div style="padding:0px 0px 15px 10px">
-                        <a asp-controller="Home" asp-action="Faq" class="more_help" >For more help</a>
+                        <a asp-controller="Home" asp-action="Faq" class="more_help">For more help</a>
                     </div>
                 </div>
             </div>
@@ -746,7 +727,7 @@
     </div>
 </div>
 
-    @*.............................................................................................................................*@
+@*.............................................................................................................................*@
 
 <!-- newsletter  -->
 <div class="newsletter_main_container">
@@ -767,7 +748,7 @@
 </div>
 
 
-    @section Scripts{
+@section Scripts{
 <script src="~/js/BookService.js"></script>
 
 }

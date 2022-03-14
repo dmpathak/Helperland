@@ -62,14 +62,14 @@ namespace Helperland.Models.ViewModels
 
 
         //3
-        [Required]
+        [Required(ErrorMessage = "please enter oldpassword")]
         public string oldpassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "please enter newpassword")]
         [RegularExpression("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{6,14}$", ErrorMessage = "You must enter At least one upper case, one lower case, one digit and Minimum six in length")]
         public string newpassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "please enter confirmpassword")]
         [Compare("newpassword", ErrorMessage = "The Password and Confirm Password fields do not match.")]
         public string confirmpassword { get; set; }
 

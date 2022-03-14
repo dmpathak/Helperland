@@ -67,38 +67,78 @@ namespace Helperland.Controllers
 
                 var isblock = context.FavoriteAndBlockeds.Where(x => x.UserId == current_provider_id && x.TargetUserId == item.UserId).FirstOrDefault();
 
-                if (item.ServiceProviderId == null && isblock.IsBlocked == false)
+                if (isblock != null)
                 {
 
-                    new_requests.Add(new
+                    if (item.ServiceProviderId == null && isblock.IsBlocked == false)
                     {
-                        //serviceprovider_id = item.ServiceProviderId,
-                        myServiceId = item.ServiceId,
 
-                        myservice_start_date = item.ServiceStartDate.Day + "/" + item.ServiceStartDate.Month + "/" + item.ServiceStartDate.Year,
-                        myservice_start_time = item.ServiceStartDate.Hour + ":" + item.ServiceStartDate.Minute,
-                        myservice_end_time = item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Hours + ":" + item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Minutes,
-                        service_duration = item.ServiceHours + item.ExtraHours,
+                        new_requests.Add(new
+                        {
+                            //serviceprovider_id = item.ServiceProviderId,
+                            myServiceId = item.ServiceId,
 
-                        extras = x,
+                            myservice_start_date = item.ServiceStartDate.Day + "/" + item.ServiceStartDate.Month + "/" + item.ServiceStartDate.Year,
+                            myservice_start_time = item.ServiceStartDate.Hour + ":" + item.ServiceStartDate.Minute,
+                            myservice_end_time = item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Hours + ":" + item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Minutes,
+                            service_duration = item.ServiceHours + item.ExtraHours,
 
-                        my_customer_address = (
-                                        from r in context.ServiceRequests
-                                        join a in context.ServiceRequestAddresses
-                                        on r.ServiceRequestId equals a.ServiceRequestId
-                                        where r.ServiceId == item.ServiceId
-                                        select new { AddressLine1 = a.AddressLine1, AddressLine2 = a.AddressLine2, PostalCode = a.PostalCode, City = a.City }).FirstOrDefault(),
-                        my_customer_name = (
-                                        from r in context.ServiceRequests
-                                        join u in context.Users
-                                        on r.UserId equals u.UserId
-                                        where r.ServiceId == item.ServiceId
-                                        select new { FirstName = u.FirstName, LastName = u.LastName }).FirstOrDefault(),
+                            extras = x,
 
-                        mypayment = item.TotalCost,
+                            my_customer_address = (
+                                            from r in context.ServiceRequests
+                                            join a in context.ServiceRequestAddresses
+                                            on r.ServiceRequestId equals a.ServiceRequestId
+                                            where r.ServiceId == item.ServiceId
+                                            select new { AddressLine1 = a.AddressLine1, AddressLine2 = a.AddressLine2, PostalCode = a.PostalCode, City = a.City }).FirstOrDefault(),
+                            my_customer_name = (
+                                            from r in context.ServiceRequests
+                                            join u in context.Users
+                                            on r.UserId equals u.UserId
+                                            where r.ServiceId == item.ServiceId
+                                            select new { FirstName = u.FirstName, LastName = u.LastName }).FirstOrDefault(),
 
-                        pet = item.HasPets
-                    });
+                            mypayment = item.TotalCost,
+
+                            pet = item.HasPets
+                        });
+                    }
+                }
+                else
+                {
+                    if (item.ServiceProviderId == null)
+                    {
+
+                        new_requests.Add(new
+                        {
+                            //serviceprovider_id = item.ServiceProviderId,
+                            myServiceId = item.ServiceId,
+
+                            myservice_start_date = item.ServiceStartDate.Day + "/" + item.ServiceStartDate.Month + "/" + item.ServiceStartDate.Year,
+                            myservice_start_time = item.ServiceStartDate.Hour + ":" + item.ServiceStartDate.Minute,
+                            myservice_end_time = item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Hours + ":" + item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Minutes,
+                            service_duration = item.ServiceHours + item.ExtraHours,
+
+                            extras = x,
+
+                            my_customer_address = (
+                                            from r in context.ServiceRequests
+                                            join a in context.ServiceRequestAddresses
+                                            on r.ServiceRequestId equals a.ServiceRequestId
+                                            where r.ServiceId == item.ServiceId
+                                            select new { AddressLine1 = a.AddressLine1, AddressLine2 = a.AddressLine2, PostalCode = a.PostalCode, City = a.City }).FirstOrDefault(),
+                            my_customer_name = (
+                                            from r in context.ServiceRequests
+                                            join u in context.Users
+                                            on r.UserId equals u.UserId
+                                            where r.ServiceId == item.ServiceId
+                                            select new { FirstName = u.FirstName, LastName = u.LastName }).FirstOrDefault(),
+
+                            mypayment = item.TotalCost,
+
+                            pet = item.HasPets
+                        });
+                    }
                 }
             }
             ViewBag.current_new_req = new_requests;
@@ -394,8 +434,8 @@ namespace Helperland.Controllers
                     date_time = (
                                  from r in context.Ratings
                                  join s in context.ServiceRequests
-                                 on r.RatingTo equals s.UserId
-                                 where r.ServiceRequestId == data.ServiceRequestId
+                                 on r.RatingFrom equals s.UserId
+                                 where s.ServiceRequestId == data.ServiceRequestId
                                  select new { serviceid = s.ServiceId, myservice_start_date = s.ServiceStartDate.Day + "/" + s.ServiceStartDate.Month + "/" + s.ServiceStartDate.Year, myservice_start_time = s.ServiceStartDate.Hour + ":" + s.ServiceStartDate.Minute, myservice_end_time = s.ServiceStartDate.AddHours(Convert.ToDouble(s.ServiceHours + s.ExtraHours)).TimeOfDay.Hours + ":" + s.ServiceStartDate.AddHours(Convert.ToDouble(s.ServiceHours + s.ExtraHours)).TimeOfDay.Minutes, service_duration = s.ServiceHours + s.ExtraHours }).FirstOrDefault(),
 
 
@@ -409,18 +449,20 @@ namespace Helperland.Controllers
 
                 });
 
-                ViewBag.mydata = mydata;
-                return View();
+                //return View();
             }
+            ViewBag.mydata = mydata;
             return View();
         }
 
         [HttpGet]
         public IActionResult BlockCustomer()
         {
+
             var current_provider_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var service_data = context.ServiceRequests.Where(x => x.ServiceProviderId == current_provider_id).ToList();
             var blockdata = new List<object>();
+
 
             foreach (var data in service_data)
             {
@@ -600,22 +642,26 @@ namespace Helperland.Controllers
         }
 
         [HttpPost]
-        public IActionResult settingtab2([FromBody]ProviderDashboardViewModel provider)
+        public IActionResult settingtab2([FromBody] ProviderDashboardViewModel provider)
         {
             var current_provider_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var pass_data = context.Users.Where(x => x.UserId == current_provider_id).FirstOrDefault();
-
-            if (pass_data != null && BCrypto.Verify(provider.oldpassword, pass_data.Password))
+            if (provider.oldpassword != "" && provider.newpassword != "" && provider.confirmpassword != "")
             {
-                pass_data.Password = BCrypto.HashPassword(provider.newpassword); ;
 
-                context.SaveChanges();
-                return Json("true");
+                if (pass_data != null && BCrypto.Verify(provider.oldpassword, pass_data.Password))
+                {
+                    pass_data.Password = BCrypto.HashPassword(provider.newpassword);
+
+                    context.SaveChanges();
+                    return Json("true");
+                }
+                else
+                {
+                    return Json("false");
+                }
             }
-            else
-            {
-                return Json("false");
-            }
+            return Json("datanone");
         }
     }
 }

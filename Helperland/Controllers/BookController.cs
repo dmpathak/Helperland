@@ -20,7 +20,7 @@ namespace Helperland.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
         public IActionResult BookService()
-        { 
+        {
             //in bookservice i've used _layout.cshtml, that's why i used this if condition otherwise i know this should be only for usertype => 1
             if (User.Identity.IsAuthenticated)
             {
@@ -36,30 +36,46 @@ namespace Helperland.Controllers
         public IActionResult CheckAvailability([FromBody] CheckavailViewModel avail)
         {
             var database_zipcode = context.Users.Where(x => x.ZipCode == avail.MyCheckavail && x.UserTypeId == 2).FirstOrDefault();
-            var database_avail = new Zipcode();
+            //var database_avail = new Zipcode();
             if (avail.MyCheckavail != null && database_zipcode != null)
             {
                 var currentuserId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var address_data = new List<object>();
-                var my_address = context.UserAddresses.Where(x => x.UserId == currentuserId && x.PostalCode == avail.MyCheckavail);
+                var my_address = context.UserAddresses.Where(x => x.UserId == currentuserId && x.PostalCode == avail.MyCheckavail).ToList();
 
-                foreach (var eachaddress in my_address)
+                if (my_address.Count != 0)
                 {
-                    Console.WriteLine(eachaddress.AddressLine2);
-                    address_data.Add(new
+
+
+                    foreach (var eachaddress in my_address)
                     {
-                        address = "" + eachaddress.AddressLine1 + " " + eachaddress.AddressLine2 + " " + eachaddress.City + " " + eachaddress.State,
-                        phone = eachaddress.Mobile,
-                        address_id = eachaddress.AddressId
-                    });
-                }
-                var data = new
-                {
-                    is_available = true,
-                    addresses = address_data
-                };
+                        Console.WriteLine(eachaddress.AddressLine2);
+                        address_data.Add(new
+                        {
+                            address = "" + eachaddress.AddressLine1 + " " + eachaddress.AddressLine2 + " " + eachaddress.City + " " + eachaddress.State,
+                            phone = eachaddress.Mobile,
+                            address_id = eachaddress.AddressId
+                        });
+                    }
 
-                return Json(data);
+                    var data = new
+                    {
+                        is_available = true,
+                        addresses = address_data
+                    };
+
+                    return Json(data);
+                }
+                else
+                {
+                    var data = new
+                    {
+                        is_available = true,
+                        addresses = false
+                    };
+
+                    return Json(data);
+                }
             }
             else
             {
@@ -87,16 +103,26 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult FinaldataSubmit([FromBody] CheckavailViewModel avail)
         {
+            var requests = context.ServiceRequests.ToList();
             var s1 = new ServiceRequest();
             s1.UserId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            s1.ServiceId = new Random().Next(1000, 9999);
+
+            var random_service_id = new Random().Next(1000, 9999);
+            var database_service_id = context.ServiceRequests.Where(x => x.ServiceId == random_service_id).FirstOrDefault();
+            while (database_service_id != null)
+            {
+                random_service_id = new Random().Next(1000, 9999);
+                database_service_id = context.ServiceRequests.Where(x => x.ServiceId == random_service_id).FirstOrDefault();
+            }
+
+            s1.ServiceId = random_service_id;
             var s = avail.date.Split("/");
             var d = avail.time.Split(":");
             var datefinal = new DateTime(Int32.Parse(s[2]), Int32.Parse(s[1]), Int32.Parse(s[0]), Int32.Parse(d[0]), Int32.Parse(d[1]), 0);
             s1.ServiceStartDate = datefinal;
             s1.ServiceHours = Convert.ToDouble(avail.basic_time);
             s1.ExtraHours = Convert.ToDouble(avail.total_time) - Convert.ToDouble(avail.basic_time);
-            s1.TotalCost = Int32.Parse(avail.total_time) * 18;
+            s1.TotalCost = Convert.ToDecimal(avail.total_time) * 18;
             s1.Comments = avail.comments;
             s1.HasPets = avail.have_pets;
             s1.ZipCode = avail.pincode;

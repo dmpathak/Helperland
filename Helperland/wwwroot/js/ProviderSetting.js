@@ -42,49 +42,6 @@ function check(myid) {
 
 }
 
-//setting tab 2
-//document.getElementById("psssubmit").addEventListener("click", (e) => {
-
-//    const validator = $("#passform").validate();
-//    if (validator.form()) {
-//        e.preventDefault();
-
-//        var pass = {};
-
-//        pass.oldpassword = document.getElementById("exampleInputPassword1").value;
-//        pass.newpassword = document.getElementById("exampleInputPassword2").value;
-//        pass.confirmpassword = document.getElementById("exampleInputPassword3").value;
-
-
-//        //loading(true);
-//        fetch("/Provider/settingtab2", {
-//            method: "POST",
-//            headers: {
-//                "Content-Type": "application/json"
-//            },
-//            body: JSON.stringify(pass)
-//        }).then(res => res.json()).then(datafromcontroller => {
-//            //loading(false);
-
-//            if (datafromcontroller == "true") {
-//                document.getElementById("pass_success").style.color = "#198754"
-//                document.getElementById("pass_success").innerHTML = `Your Password has been changed sucessfully...!`
-//            }
-//            if (datafromcontroller == "false") {
-
-//                document.getElementById("pass_success").style.color = "#DC3545"
-//                document.getElementById("pass_success").innerHTML = `Incorrect old password, Your Password has not been changed...! `
-//            }
-
-//        }).catch(err => console.log(err));
-//    }
-//});
-
-//document.getElementById("passform").addEventListener("submit", (e) => {
-//    e.preventDefault();
-//});
-
-
 function passsave(e) {
 
     e.preventDefault();
@@ -114,6 +71,11 @@ function passsave(e) {
 
             document.getElementById("pass_success").style.color = "#DC3545"
             document.getElementById("pass_success").innerHTML = `Incorrect old password, Your Password has not been changed...! `
+        }
+        if (datafromcontroller == "datanone") {
+
+            document.getElementById("pass_success").style.color = "#DC3545"
+            document.getElementById("pass_success").innerHTML = `Any Field should not be null here...! `
         }
 
     }).catch(err => console.log(err));

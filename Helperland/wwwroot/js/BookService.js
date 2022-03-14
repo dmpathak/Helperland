@@ -107,30 +107,80 @@ var booking_details = {};
 function schedule_plan_continue() {
     let checked_services = [];
     let extra_time = 0;
-    booking_details.date = document.getElementById("date").value;
-    booking_details.time = document.getElementById("time").value;
-    booking_details.basic_time = document.getElementById("basic").value;
-    ["1", "2", "3", "4", "5"].forEach(tempid => {
-        checked_services.push(document.getElementById(`flexCheckDefault${tempid}`).checked)
-        if (document.getElementById(`flexCheckDefault${tempid}`).checked) {
-            extra_time += 0.5;
-        }
-    })
-    booking_details.extra_services = checked_services;
-    booking_details.comments = document.getElementById("comments").value;
-    booking_details.have_pets = document.getElementById("is_pet").checked;
-    booking_details.total_time = `${Number(document.getElementById("basic").value) + extra_time}`;
 
-    document.getElementById("detailsBtn").disabled = false;
-    document.getElementById("detailsBtn").click();
-    document.getElementById("schedulePlanBtn").classList.add("filled");
+    if (document.getElementById("date").value && document.getElementById("time").value && document.getElementById("basic").value) {
+
+        document.getElementById("date_empty_error").innerHTML = ``;
+        document.getElementById("starttime_empty_error").innerHTML = ``;
+        document.getElementById("basic_empty_error").innerHTML = ``;
+
+        booking_details.date = document.getElementById("date").value;
+        booking_details.time = document.getElementById("time").value;
+        booking_details.basic_time = document.getElementById("basic").value;
+        ["1", "2", "3", "4", "5"].forEach(tempid => {
+            checked_services.push(document.getElementById(`flexCheckDefault${tempid}`).checked)
+            if (document.getElementById(`flexCheckDefault${tempid}`).checked) {
+                extra_time += 0.5;
+            }
+        })
+        booking_details.extra_services = checked_services;
+        booking_details.comments = document.getElementById("comments").value;
+        booking_details.have_pets = document.getElementById("is_pet").checked;
+        booking_details.total_time = `${Number(document.getElementById("basic").value) + extra_time}`;
+
+
+        if ((extra_time + Number(document.getElementById("time").value.split(":")[0]) + Number(document.getElementById("basic").value.split(" ")[0])) > 21) {
+            document.getElementById("time_exeed").innerText = `your service time is more than 21:00 hr`;
+        }
+        else {
+            document.getElementById("time_exeed").innerhtml = ``;
+            document.getElementById("detailsBtn").disabled = false;
+            document.getElementById("detailsBtn").click();
+            document.getElementById("schedulePlanBtn").classList.add("filled");
+        }
+
+        
+    }
+    else {
+
+        if (document.getElementById("date").value) {
+            document.getElementById("date_empty_error").innerHTML = ``;
+        }
+        else {
+            document.getElementById("date_empty_error").innerHTML = `Please! Enter Service Date`;
+        }
+
+        if (document.getElementById("time").value) {
+            document.getElementById("starttime_empty_error").innerHTML = ``;
+        }
+        else {
+            document.getElementById("starttime_empty_error").innerHTML = `Please! Enter Service StartTime`;
+        }
+
+        if (document.getElementById("basic").value) {
+            document.getElementById("basic_empty_error").innerHTML = ``;
+        }
+        else {
+            document.getElementById("basic_empty_error").innerHTML = `Please! Enter Basic Time`;
+        }
+    }
+
+   
 }
+
+
 function your_details_continue() {
 
-    booking_details.address_id = Number(document.querySelector('input[name="flexRadioDefault"]:checked').value);
-    document.getElementById("paymentBtn").disabled = false;
-    document.getElementById("paymentBtn").click();
-    document.getElementById("detailsBtn").classList.add("filled");
+    if (document.querySelector('input[name="flexRadioDefault"]:checked') != null) {
+
+        booking_details.address_id = Number(document.querySelector('input[name="flexRadioDefault"]:checked').value);
+        document.getElementById("paymentBtn").disabled = false;
+        document.getElementById("paymentBtn").click();
+        document.getElementById("detailsBtn").classList.add("filled");
+    }
+    else {
+        document.getElementById("add_address_error").innerHTML = `Please! Select Any Address`;
+    }
 }
 
 
@@ -147,11 +197,26 @@ function datechange() {
         document.getElementById("date_text_responsive").innerHTML = date_id.value;
         console.log(date_id.value);
         document.getElementById("wrong_date").innerHTML = "";
+        document.getElementById("date_empty_error").innerHTML = ``;
+        document.getElementById("gone_date").innerHTML = "";
     }
     else {
         document.getElementById("wrong_date").innerHTML = "Please ! Enter Valid Date Format";
     }
+
+    var today = new Date();
+    let entered_date = new Date(Number(date_id.value.split("/")[2]), Number(date_id.value.split("/")[1]) - 1, Number(date_id.value.split("/")[0]), today.getHours(), today.getMinutes(), today.getSeconds())
+    //console.log(entered_date);
+    //console.log(entered_date.getTime());
+    //console.log((new Date()).getTime());
+    if (entered_date.getTime() + 50000 > (new Date()).getTime()) {
+        document.getElementById("gone_date").innerHTML = "";
+    }
+    else {
+        document.getElementById("gone_date").innerHTML = "You Can't Peak date before Today";
+    } 
 }
+
 // (timechange on 2nd tab )
 function timechange() {
     var time_id = document.getElementById("time");
@@ -159,6 +224,9 @@ function timechange() {
         time_id.options[time_id.selectedIndex].text;
     document.getElementById("time_text_responsive").innerHTML =
         time_id.options[time_id.selectedIndex].text;
+    if (document.getElementById("time").value) {
+        document.getElementById("starttime_empty_error").innerHTML = ``;
+    }
 }
 // (basic staytime change on 2nd tab )
 function basicchange() {
@@ -168,15 +236,27 @@ function basicchange() {
     document.getElementById("basic_text_responsive").innerHTML =
         basic_id.options[basic_id.selectedIndex].text;
 
+    let time = parseFloat(basic_id.options[basic_id.selectedIndex].text);
+    [1, 2, 3, 4, 5].forEach((each_id) => {
+        if (document.querySelector(`.click_checkbox${each_id}`).checked) {
+            time += 0.5
+        }
+        console.log(time)
+    })
     document.getElementById("total_time").innerHTML =
-        basic_id.options[basic_id.selectedIndex].value;
+        time;
     document.getElementById("total_time_responsive").innerHTML =
-        basic_id.options[basic_id.selectedIndex].value;
+        time;
 
     document.getElementById("total_paym").innerHTML =
-        basic_id.options[basic_id.selectedIndex].value * 18;
+        time * 18;
     document.getElementById("total_paym_responsive").innerHTML =
-        basic_id.options[basic_id.selectedIndex].value * 18;
+        time
+        * 18;
+
+    if (document.getElementById("basic").value) {
+        document.getElementById("basic_empty_error").innerHTML = ``;
+    }
 }
 
 // 2nd part (Extra Services)
@@ -312,6 +392,7 @@ avail_btn.addEventListener("click", (e) => {
 
 
             if (datareturnedfromcontroller.is_available == true) {
+                console.log(datareturnedfromcontroller.is_available);
                 Array.from(datareturnedfromcontroller.addresses).forEach(eachadd => {
                     document.getElementById("address_show_radio").innerHTML += `
 
@@ -327,7 +408,9 @@ avail_btn.addEventListener("click", (e) => {
                     `;
                 })
 
-                document.getElementsByName("flexRadioDefault")[0].checked = true;
+                if (datareturnedfromcontroller.addresses != false) {
+                    document.getElementsByName("flexRadioDefault")[0].checked = true;
+                }
 
                 booking_details.pincode = document.getElementById("MyCheckavail").value;
                 document.getElementById("schedulePlanBtn").disabled = false;
@@ -378,6 +461,7 @@ form_save.addEventListener("click", (event) => {
     })
         .then(res => res.json()).then(datareturnedfromcontroller => {
 
+            document.getElementById("add_address_error").innerHTML = ``;
             //console.log("Data aavi gyo 6e")
             //console.log(datareturnedfromcontroller)
             //console.log(mydata.house_number)
@@ -399,7 +483,7 @@ form_save.addEventListener("click", (event) => {
 
 // fetch api for final data submission
 var final = document.getElementById("complete_booking");
-    final.addEventListener("click", (event) => {
+final.addEventListener("click", (event) => {
     //event.preventDefault();
     console.log("booking_details");
     console.log(booking_details);

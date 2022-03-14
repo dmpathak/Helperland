@@ -414,21 +414,22 @@
                     <form id="passform">
                         <div class="col-sm-4 mb-3">
                             <label for="exampleInputPassword1" class="form-label"> <b>Old Password</b> </label>
-                            <input asp-for="oldpassword" type="password" value="" class="form-control" id="exampleInputPassword1" placeholder="Current Password">
-                            <span asp-validation-for="oldpassword" class="text-danger"></span>
+                            <input asp-for="oldpassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Current Password">
+                            <span asp-validation-for="oldpassword" class="text-danger" id="old"></span>
                         </div>
                         <div class="col-sm-4 mb-3">
                             <label for="exampleInputPassword2" class="form-label"> <b>New Password</b> </label>
-                            <input asp-for="newpassword" type="password" value="" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                            <span asp-validation-for="newpassword" class="text-danger"></span>
+                            <input asp-for="newpassword" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                            <span asp-validation-for="newpassword" class="text-danger" id="new"></span>
                         </div>
                         <div class="col-sm-4 mb-3">
                             <label for="exampleInputPassword3" class="form-label"> <b>Confirm Password</b> </label>
-                            <input asp-for="confirmpassword" type="password" value="" class="form-control" id="exampleInputPassword3" placeholder="Confirm Password">
-                            <span asp-validation-for="confirmpassword" class="text-danger"></span>
+                            <input asp-for="confirmpassword" type="password" class="form-control" id="exampleInputPassword3" placeholder="Confirm Password">
+                            <span asp-validation-for="confirmpassword" class="text-danger" id="confirm"></span>
                         </div>
 
                         <div id="pass_success"></div>
+                        <div id="empty_field_error"></div>
                         <button type="submit" id="psssubmit" onclick="passsave(event)" class="rate_submit mb-3">Save</button>
                     </form>
                 </div>
