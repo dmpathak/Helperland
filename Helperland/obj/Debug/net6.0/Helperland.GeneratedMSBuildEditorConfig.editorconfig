@@ -15,6 +15,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\DEEP\Desktop\Helperland\Helperland
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Admin/Service_requests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2VydmljZV9yZXF1ZXN0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Admin/User_management.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcl9tYW5hZ2VtZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DEEP/Desktop/Helperland/Helperland/Views/Book/BookService.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xCb29rU2VydmljZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Globalization;
 using BCrypto = BCrypt.Net.BCrypt;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helperland.Controllers
 {
+    [Authorize]
     public class ProviderController : Controller
     {
         private readonly ILogger<ProviderController> _logger;
@@ -27,7 +27,7 @@ namespace Helperland.Controllers
         public IActionResult NewServiceRequest()
         {
             var current_provider_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var requests = context.ServiceRequests;
+            var requests = context.ServiceRequests.Where(x => x.Status == 1);
             var new_requests = new List<object>();
 
             foreach (var item in requests)
@@ -67,11 +67,8 @@ namespace Helperland.Controllers
 
                 var isblock = context.FavoriteAndBlockeds.Where(x => x.UserId == current_provider_id && x.TargetUserId == item.UserId).FirstOrDefault();
 
-                if (isblock != null)
+                if (isblock == null || (isblock != null && isblock.IsBlocked == false))
                 {
-
-                    if (item.ServiceProviderId == null && isblock.IsBlocked == false)
-                    {
 
                         new_requests.Add(new
                         {
@@ -102,43 +99,6 @@ namespace Helperland.Controllers
 
                             pet = item.HasPets
                         });
-                    }
-                }
-                else
-                {
-                    if (item.ServiceProviderId == null)
-                    {
-
-                        new_requests.Add(new
-                        {
-                            //serviceprovider_id = item.ServiceProviderId,
-                            myServiceId = item.ServiceId,
-
-                            myservice_start_date = item.ServiceStartDate.Day + "/" + item.ServiceStartDate.Month + "/" + item.ServiceStartDate.Year,
-                            myservice_start_time = item.ServiceStartDate.Hour + ":" + item.ServiceStartDate.Minute,
-                            myservice_end_time = item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Hours + ":" + item.ServiceStartDate.AddHours(Convert.ToDouble(item.ServiceHours + item.ExtraHours)).TimeOfDay.Minutes,
-                            service_duration = item.ServiceHours + item.ExtraHours,
-
-                            extras = x,
-
-                            my_customer_address = (
-                                            from r in context.ServiceRequests
-                                            join a in context.ServiceRequestAddresses
-                                            on r.ServiceRequestId equals a.ServiceRequestId
-                                            where r.ServiceId == item.ServiceId
-                                            select new { AddressLine1 = a.AddressLine1, AddressLine2 = a.AddressLine2, PostalCode = a.PostalCode, City = a.City }).FirstOrDefault(),
-                            my_customer_name = (
-                                            from r in context.ServiceRequests
-                                            join u in context.Users
-                                            on r.UserId equals u.UserId
-                                            where r.ServiceId == item.ServiceId
-                                            select new { FirstName = u.FirstName, LastName = u.LastName }).FirstOrDefault(),
-
-                            mypayment = item.TotalCost,
-
-                            pet = item.HasPets
-                        });
-                    }
                 }
             }
             ViewBag.current_new_req = new_requests;
@@ -171,6 +131,7 @@ namespace Helperland.Controllers
                 if (current_provider_data.Count == 0)
                 {
                     service_data.ServiceProviderId = current_user_Id;
+                    service_data.Status = 4;
                     context.SaveChanges();
                     return Json(new { error = "success" });
                 }
@@ -199,6 +160,7 @@ namespace Helperland.Controllers
                         }
                     }
                     service_data.ServiceProviderId = current_user_Id;
+                    service_data.Status = 4;
                     context.SaveChanges();
                     return Json(new { error = "success" });
                 }
@@ -250,7 +212,7 @@ namespace Helperland.Controllers
                     }
                 }
 
-                if (item1.ServiceProviderId == current_user_Id && item1.Status == 1)
+                if (item1.ServiceProviderId == current_user_Id && item1.Status == 4)
                 {
                     var for_complete_btn = "";
                     if (DateTime.Now > item1.ServiceStartDate.AddHours(Convert.ToDouble(item1.ServiceHours + item1.ExtraHours)))
@@ -303,7 +265,8 @@ namespace Helperland.Controllers
         {
             var cancel = context.ServiceRequests.Where(x => x.ServiceId == action.ServiceId).FirstOrDefault();
 
-            cancel.Status = 3;
+            cancel.Status = 1;
+            cancel.ServiceProviderId = null;
             cancel.Comments = action.comment;
 
             context.SaveChanges();
@@ -460,13 +423,13 @@ namespace Helperland.Controllers
         {
 
             var current_provider_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var service_data = context.ServiceRequests.Where(x => x.ServiceProviderId == current_provider_id).ToList();
+            List<int> service_data = context.ServiceRequests.Where(x => x.ServiceProviderId == current_provider_id && x.Status == 2).Select(x => x.UserId).Distinct().ToList();
             var blockdata = new List<object>();
 
 
             foreach (var data in service_data)
             {
-                var isblock = context.FavoriteAndBlockeds.Where(x => x.UserId == current_provider_id && x.TargetUserId == data.UserId).FirstOrDefault();
+                var isblock = context.FavoriteAndBlockeds.Where(x => x.UserId == current_provider_id && x.TargetUserId == data).FirstOrDefault();
 
                 if (isblock != null)
                 {
@@ -478,7 +441,7 @@ namespace Helperland.Controllers
                         from r in context.ServiceRequests
                         join u in context.Users
                         on r.UserId equals u.UserId
-                        where r.UserId == data.UserId
+                        where r.UserId == data
                         select new { userid = u.UserId, FirstName = u.FirstName, LastName = u.LastName }).FirstOrDefault(),
 
                         is_block = isblock.IsBlocked,
@@ -495,7 +458,7 @@ namespace Helperland.Controllers
                         from r in context.ServiceRequests
                         join u in context.Users
                         on r.UserId equals u.UserId
-                        where r.UserId == data.UserId
+                        where r.UserId == data
                         select new { userid = u.UserId, FirstName = u.FirstName, LastName = u.LastName }).FirstOrDefault(),
 
                         is_block = false,

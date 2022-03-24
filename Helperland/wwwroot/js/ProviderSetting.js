@@ -15,6 +15,11 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 })
 
 
+//to set database value of select options
+$("#tab_1_date").val($("#tab_1_date").attr("value"))
+$("#tab_1_month").val($("#tab_1_month").attr("value"))
+$("#tab_1_year").val($("#tab_1_year").attr("value"))
+
 
 //setting tab 1
 function mygender(g_id) {

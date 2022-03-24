@@ -31,16 +31,17 @@ namespace Helperland.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-            var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+                var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var current_user_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
 
-            ViewBag.usertypeid = current_user_data.UserTypeId;
+                ViewBag.usertypeid = current_user_data.UserTypeId;
             }
             return View();
         }
 
         //usertypeid => 1  user 
         //usertypeid => 2  serviceprovider
+        //usertypeid => 3  admin
 
 
         [HttpPost]
@@ -51,29 +52,62 @@ namespace Helperland.Controllers
             if (usercredentials != null && BCrypt.Net.BCrypt.Verify(loginViewModel.Password, usercredentials.Password))
             {
 
-                var claims = new List<Claim>();
-                claims.Add(new Claim("username", loginViewModel.Email));
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, usercredentials.UserId.ToString()));
-                claims.Add(new Claim(ClaimTypes.Name, usercredentials.FirstName + usercredentials.LastName));
-
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(claimsPrincipal);
-
                 if (usercredentials.UserTypeId == 1)
                 {
-                    return RedirectToAction("CustomerDashboard", "Customer");
+                    if (usercredentials.IsActive)
+                    {
+                        var claims = new List<Claim>();
+                        claims.Add(new Claim("username", loginViewModel.Email));
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, usercredentials.UserId.ToString()));
+                        claims.Add(new Claim(ClaimTypes.Name, usercredentials.FirstName + usercredentials.LastName));
+
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                        await HttpContext.SignInAsync(claimsPrincipal);
+                        return RedirectToAction("CustomerDashboard", "Customer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home", new { login = "true" });
+                    }
 
                 }
-                else if (usercredentials.UserTypeId == 2)
+                if (usercredentials.UserTypeId == 2)
                 {
+                    if (usercredentials.IsActive)
+                    {
+                        var claims = new List<Claim>();
+                        claims.Add(new Claim("username", loginViewModel.Email));
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, usercredentials.UserId.ToString()));
+                        claims.Add(new Claim(ClaimTypes.Name, usercredentials.FirstName + usercredentials.LastName));
 
-                    return RedirectToAction("NewServiceRequest", "Provider");
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                        await HttpContext.SignInAsync(claimsPrincipal);
+                        return RedirectToAction("NewServiceRequest", "Provider");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home", new { login = "true" });
+                    }
+                }
+                if (usercredentials.UserTypeId == 3)
+                {
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim("username", loginViewModel.Email));
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, usercredentials.UserId.ToString()));
+                    claims.Add(new Claim(ClaimTypes.Name, usercredentials.FirstName + usercredentials.LastName));
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrincipal);
+                    return RedirectToAction("Service_requests", "Admin");
                 }
             }
             TempData["isvalid"] = true;
             return RedirectToAction("Index", "Home", new { login = "true" });
         }
+
         [Authorize]
         public IActionResult Logout()
         {
@@ -81,7 +115,7 @@ namespace Helperland.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-        //[Authorize]
+
         public IActionResult Prices()
         {
             if (User.Identity.IsAuthenticated)
@@ -243,7 +277,7 @@ namespace Helperland.Controllers
                 user.ModifiedDate = DateTime.Now;
                 user.ModifiedBy = 0;
                 user.IsApproved = false;
-                user.IsActive = false;
+                user.IsActive = true;
                 user.IsDeleted = false;
 
                 context.Users.Add(user);

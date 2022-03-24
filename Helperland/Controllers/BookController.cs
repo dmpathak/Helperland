@@ -4,9 +4,11 @@ using Helperland.Models.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helperland.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly ILogger<BookController> _logger;

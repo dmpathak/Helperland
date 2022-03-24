@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Globalization;
 using BCrypto = BCrypt.Net.BCrypt;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helperland.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly ILogger<CustomerController> _logger;
@@ -47,36 +49,65 @@ namespace Helperland.Controllers
                     my_user_name = null;
                 }
 
-                current_user_data.Add(new
+                if (eachdata.ServiceProviderId != null)
                 {
+                    var ratings = context.Ratings.Where(x => x.RatingTo == eachdata.ServiceProviderId).Average(x => x.Ratings);
 
-                    myServiceId = eachdata.ServiceId,
+                    current_user_data.Add(new
+                    {
 
-
-                    service_start_date_time = eachdata.ServiceStartDate,
-                    myservice_start_date = eachdata.ServiceStartDate.Day + "/" + eachdata.ServiceStartDate.Month + "/" + eachdata.ServiceStartDate.Year,
-                    myservice_start_time = eachdata.ServiceStartDate.Hour + ":" + eachdata.ServiceStartDate.Minute,
-                    service_duration = eachdata.ServiceHours + eachdata.ExtraHours,
+                        myServiceId = eachdata.ServiceId,
 
 
-                    //myservice_end_time = Convert.ToDecimal(eachdata.ServiceStartDate.Hour + "." + eachdata.ServiceStartDate.Minute) + Convert.ToDecimal(eachdata.ServiceHours + "." + eachdata.ExtraHours),
-                    myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
+                        service_start_date_time = eachdata.ServiceStartDate,
+                        myservice_start_date = eachdata.ServiceStartDate.Day + "/" + eachdata.ServiceStartDate.Month + "/" + eachdata.ServiceStartDate.Year,
+                        myservice_start_time = eachdata.ServiceStartDate.Hour + ":" + eachdata.ServiceStartDate.Minute,
+                        service_duration = eachdata.ServiceHours + eachdata.ExtraHours,
 
-                    my_provider_rating = (
-                                    from r in context.ServiceRequests
-                                    join e in context.Ratings
-                                    on r.ServiceProviderId equals e.RatingTo
-                                    where r.ServiceId == eachdata.ServiceId
-                                    select e.Ratings).FirstOrDefault(),
+                        myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
 
-                    serviceprovider_id = eachdata.ServiceProviderId,
+                        //my_provider_rating = (
+                        //                from r in context.ServiceRequests
+                        //                join e in context.Ratings
+                        //                on r.ServiceProviderId equals e.RatingTo
+                        //                where r.ServiceId == eachdata.ServiceId
+                        //                select e.Ratings).FirstOrDefault(),
+                        my_provider_rating = ratings,
 
-                    mysericeprovider_name = my_user_name,
-                    //mysericeprovider_name = "Name of provider",
 
-                    mypayment = eachdata.TotalCost
+                        serviceprovider_id = eachdata.ServiceProviderId,
 
-                });
+                        mysericeprovider_name = my_user_name,
+
+                        mypayment = eachdata.TotalCost
+
+                    });
+                }
+                else
+                {
+                    current_user_data.Add(new
+                    {
+
+                        myServiceId = eachdata.ServiceId,
+
+
+                        service_start_date_time = eachdata.ServiceStartDate,
+                        myservice_start_date = eachdata.ServiceStartDate.Day + "/" + eachdata.ServiceStartDate.Month + "/" + eachdata.ServiceStartDate.Year,
+                        myservice_start_time = eachdata.ServiceStartDate.Hour + ":" + eachdata.ServiceStartDate.Minute,
+                        service_duration = eachdata.ServiceHours + eachdata.ExtraHours,
+
+                        myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
+
+                        my_provider_rating = 0,
+
+                        serviceprovider_id = eachdata.ServiceProviderId,
+
+                        mysericeprovider_name = my_user_name,
+
+                        mypayment = eachdata.TotalCost
+
+                    });
+                }
             }
 
             Console.WriteLine(current_user_data);
@@ -159,7 +190,7 @@ namespace Helperland.Controllers
         {
             var request = context.ServiceRequests.Where(x => x.ServiceId == dashboard.ServiceId).FirstOrDefault();
 
-            
+
             var s = dashboard.date.Split("/");
             var d = dashboard.start_time.Split(":");
             DateTime datefinal = new DateTime(Int32.Parse(s[2]), Int32.Parse(s[1]), Int32.Parse(s[0]), Int32.Parse(d[0]), Int32.Parse(d[1]), 0);
@@ -233,34 +264,62 @@ namespace Helperland.Controllers
                 {
                     sericeprovider_name = null;
                 }
-                current_user_history.Add(new
+
+                if (eachdata.ServiceProviderId != null)
                 {
 
-                    myserviceid = eachdata.ServiceId,
+                    var rating = context.Ratings.Where(x => x.RatingTo == eachdata.ServiceProviderId).Average(x => x.Ratings);
 
-                    service_start_date_time = eachdata.ServiceStartDate,
-                    myservice_start_date = eachdata.ServiceStartDate.Day + "/" + eachdata.ServiceStartDate.Month + "/" + eachdata.ServiceStartDate.Year,
-                    myservice_start_time = eachdata.ServiceStartDate.Hour + ":" + eachdata.ServiceStartDate.Minute,
-                    service_duration = eachdata.ServiceHours + eachdata.ExtraHours,
+                    current_user_history.Add(new
+                    {
 
-                    myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
+                        myserviceid = eachdata.ServiceId,
 
-                    // rating should particular service provider
-                    my_provider_rating = (
-                                    from r in context.ServiceRequests
-                                    join e in context.Ratings
-                                    on r.ServiceRequestId equals e.ServiceRequestId
-                                    where r.ServiceId == eachdata.ServiceId
-                                    select e.Ratings).FirstOrDefault(),
+                        service_start_date_time = eachdata.ServiceStartDate,
+                        myservice_start_date = eachdata.ServiceStartDate.Day + "/" + eachdata.ServiceStartDate.Month + "/" + eachdata.ServiceStartDate.Year,
+                        myservice_start_time = eachdata.ServiceStartDate.Hour + ":" + eachdata.ServiceStartDate.Minute,
+                        service_duration = eachdata.ServiceHours + eachdata.ExtraHours,
 
-                    serviceprovider_id = eachdata.ServiceProviderId,
+                        myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
 
-                    mysericeprovider_name = sericeprovider_name,
-                    mypayment = eachdata.TotalCost,
+                        // rating should particular service provider
+                        my_provider_rating = rating,
 
-                    status = eachdata.Status,
+                        serviceprovider_id = eachdata.ServiceProviderId,
 
-                });
+                        mysericeprovider_name = sericeprovider_name,
+                        mypayment = eachdata.TotalCost,
+
+                        status = eachdata.Status,
+
+                    });
+                }
+                else
+                {
+                    current_user_history.Add(new
+                    {
+
+                        myserviceid = eachdata.ServiceId,
+
+                        service_start_date_time = eachdata.ServiceStartDate,
+                        myservice_start_date = eachdata.ServiceStartDate.Day + "/" + eachdata.ServiceStartDate.Month + "/" + eachdata.ServiceStartDate.Year,
+                        myservice_start_time = eachdata.ServiceStartDate.Hour + ":" + eachdata.ServiceStartDate.Minute,
+                        service_duration = eachdata.ServiceHours + eachdata.ExtraHours,
+
+                        myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
+
+                        // rating should particular service provider
+                        my_provider_rating = 0,
+
+                        serviceprovider_id = eachdata.ServiceProviderId,
+
+                        mysericeprovider_name = sericeprovider_name,
+                        mypayment = eachdata.TotalCost,
+
+                        status = eachdata.Status,
+
+                    });
+                }
             }
             Console.WriteLine(current_user_history);
             ViewBag.current_user_history = current_user_history;
@@ -285,7 +344,7 @@ namespace Helperland.Controllers
                 current_service_rate.RatingFrom = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
 
-                current_service_rate.RatingTo = 6;
+                current_service_rate.RatingTo = Convert.ToInt32(service_req.ServiceProviderId);
                 current_service_rate.RatingDate = DateTime.Now;
 
             }
@@ -300,8 +359,7 @@ namespace Helperland.Controllers
                 Add_new_service_rating.RatingFrom = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
 
-
-                Add_new_service_rating.RatingTo = 5;
+                Add_new_service_rating.RatingTo = Convert.ToInt32(service_req.ServiceProviderId);
                 Add_new_service_rating.RatingDate = DateTime.Now;
                 context.Ratings.Add(Add_new_service_rating);
             }

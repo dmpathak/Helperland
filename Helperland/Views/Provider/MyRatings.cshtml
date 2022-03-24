@@ -128,23 +128,23 @@
                                             <img class="star_imgs" src="~/img/star2.png" alt="">
                                         }
                                     }
-                                    @if (@ratedata.rating <= 1)
+                                    @if (@ratedata.rating <= 1 && @ratedata.rating >= 0)
                                     {
                                         <p id="rate" class="ms-1">Verry Poor</p>
                                     }
-                                    @if (@ratedata.rating <= 2)
+                                    @if (@ratedata.rating <= 2 && @ratedata.rating >= 1)
                                     {
                                         <p id="rate" class="ms-1">Poor</p>
                                     }
-                                    @if (@ratedata.rating <= 3)
+                                    @if (@ratedata.rating <= 3 && @ratedata.rating >= 2)
                                     {
                                         <p id="rate" class="ms-1">Good</p>
                                     }
-                                    @if (@ratedata.rating <= 4)
+                                    @if (@ratedata.rating <= 4 && @ratedata.rating >= 3)
                                     {
                                         <p id="rate" class="ms-1">Verry Good</p>
                                     }
-                                    @if (@ratedata.rating <= 5)
+                                    @if (@ratedata.rating <= 5 && @ratedata.rating >= 4)
                                     {
                                         <p id="rate" class="ms-1">Excellent</p>
                                     }

@@ -1,0 +1,563 @@
+﻿@model Helperland.Models.ViewModels.AdminViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin > Service Requests</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="~/css/AdminServiceRequest.css">
+</head>
+
+<body>
+    <!-- navbar  -->
+    <div class="main_navbar">
+        <p style="cursor: pointer;">helperland</p>
+        <div class="second_nav">
+            <img src="~/img/admin-user.png" alt="">
+            <p>James Smith</p>
+            <a asp-action="Logout" asp-controller="Home"><img src="~/img/logout.png" alt=""></a>
+        </div>
+    </div>
+
+    <!-- main content  -->
+    <div class="main_content">
+        <div class="main_contant_1" id="main_contant_1">
+            <ul>
+                <li><a href="#">Service Management</a></li>
+                <li><a href="#">Role Management</a></li>
+                <li>
+                    <button class="drop_btn" data-bs-toggle="collapse" href="#collapseExample0" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                        <a href="#">
+                            Coupon Code Management
+                            <img class="main_container_1_arrow" src="~/img/admin-arrow.png" alt="">
+                    </button>
+                    <div class="collapse" id="collapseExample0">
+                        <div class="collaps_inner_div">
+                            <p><a href="#">Coupon Codes</a></p>
+                            <p><a href="#">Usage History</a></p>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#">Escalation Management</a></li>
+                <li style="color: #1FB6FF;">Service Requests</li>
+                <li><a href="#">Service Providers</a></li>
+                <li><a asp-action="User_management" asp-controller="Admin">User Management</a></li>
+                <li>
+                    <button class="drop_btn" data-bs-toggle="collapse" href="#collapseExample1" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                        <a href="#">Finance Module</a>
+                        <img class="main_container_1_arrow" src="~/img/admin-arrow.png" alt="">
+                    </button>
+                    <div class="collapse" id="collapseExample1">
+                        <div class="collaps_inner_div">
+                            <p><a href="#">All Transactions</a></p>
+                            <p><a href="#">Generate Payment</a></p>
+                            <p><a href="#">Customer Invoices</a></p>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#">Zip Code Management</a></li>
+                <li><a href="#">Rating Management</a></li>
+                <li><a href="#">Inquiry Management</a></li>
+                <li><a href="#">Newsletter Management</a></li>
+                <li>
+                    <button class="drop_btn" data-bs-toggle="collapse" href="#collapseExample2" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                        <a href="#">Content Management</a>
+                        <img class="main_container_1_arrow" src="~/img/admin-arrow.png" alt="">
+                    </button>
+                    <div class="collapse" id="collapseExample2">
+                        <div class="collaps_inner_div">
+                            <p><a href="#">Blog</a></p>
+                            <p><a href="#">FAQs</a></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="pg_10_left_toggler" id="pg_10_left_toggler">
+            </div>
+        </div>
+        <div class="main_contant_2">
+            <div class="user_management_div">
+                <div class="for_usermanagement">Service Requests</div>
+            </div>
+
+            <div class="form_div">
+                <form>
+                    <div class="row align-items-center justify-content-space-between he">
+                        <div class="col-auto">
+                            <input type="text" class="form-control for_height" name="fname" id="selected_sid"
+                                   placeholder="Service ID" value="" />
+                        </div>
+                        <div class="col-auto">
+                            <select id="selected_cust" class="form-select for_height" value="">
+                                <option value="">Customer</option>
+                                @foreach(var cust_name in ViewBag.User_Names)
+                                {
+                                <option value="@cust_name">@cust_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select id="selected_pro" class="form-select for_height" aria-label="Subect" value="">
+                                <option value="">Provider</option>
+                                @foreach(var pro_name in ViewBag.SP_Names)
+                                {
+                                <option value="@pro_name">@pro_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select id="selected_status" class="form-select for_height" aria-label="Subect" value="">
+                                <option value="">Status</option>
+                                <option value="New">New</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="accepted">accepted</option>
+                                @*<option value="refunded">refunded</option>*@
+                            </select>
+                        </div>
+                        <div class="col-auto date_img">
+                            <!-- <img src="~/img/admin-calendar-blue.png" alt=""> -->
+                            <input type="text" class="form-control for_height" name="from" id="from_dt" placeholder="from date" readonly/>
+                            <!-- <div>From Date</div> -->
+                        </div>
+                        <div class="col-auto date_img">
+                            <!-- <img src="~/img/admin-calendar-blue.png" alt=""> -->
+                            <input type="text" class="form-control for_height" name="to" id="to_dt" placeholder="To date" readonly/>
+                            <!-- <div>To Date</div> -->
+                        </div>
+
+                        <div class="col-auto">
+
+                            <button class="form_btn submit border-0 outline-0" type="button" id="search_data">Search</button>
+                        </div>
+                        <div class=" col-auto">
+
+                            <button class="form_btn1 submit  outline-0" type="reset" id="clear_data">Clear</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="between_table_header_container">
+                <table id="example" style="width:100%">
+                    <thead style="height: 56px;">
+                        <tr>
+                            <td class="between_table_header ">Service ID</td>
+                            <td class="between_table_header ">Service date</td>
+                            <td class="between_table_header ">Customer details</td>
+                            <td class="between_table_header ">Net Amount</td>
+                            <td class="between_table_header " style="width: 200px;">Service provider</td>
+                            <td class="between_table_header " style="width: 100px;">Status</td>
+                            <td class="between_table_header " style="width: 100px;">Actions</td>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @foreach (var dta in ViewBag.data)
+                        {
+                            <tr>
+                                <td class="between_table_data hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@dta.serviceid">@dta.serviceid</td>
+                                <td class="between_table_data">
+                                    <div class="hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@dta.serviceid">
+                                        <div class="service_date_data">
+                                            <div><img src="~/img/calendar2.png" alt="cal"></div>
+                                            <p>@dta.servicedate</p>
+                                        </div>
+                                        <div class="service_date_data">
+                                            <div><img src="~/img/layer-14.png" alt="time"></div>
+                                            <p>@dta.service_start_time - @dta.service_end_time</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="between_table_data hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@dta.serviceid">
+                                    <div>
+                                        <div class="service_date_data">
+                                            <div>@dta.customer_detail.f_name @dta.customer_detail.l_name</div>
+                                        </div>
+                                        <div class="service_date_data">
+                                            <div><img src="~/img/layer-15.png" alt="time"></div>
+                                            <div>@dta.service_address.line1 @dta.service_address.line2,@dta.service_address.postal @dta.service_address.city</div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="between_table_data">@dta.payment<span> $ </span></td>
+
+                                <td class="between_table_data">
+                                    @if (dta.provider_fname != null)
+                                    {
+                                        <div class="d-flex">
+                                            @if (@dta.profile_picture != null)
+                                            {
+                                                <div class="avtar_img"><img src=@dta.profile_picture alt=""></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                            }
+
+                                            <div>
+                                                <div id="service_provide_name">@dta.provider_fname @dta.provider_lname</div>
+                                                <div style="display: flex; margin-top:4px;">
+                                                    @for (var i = 0; i < 5; i++)
+                                                    {
+                                                        @if (i < @dta.my_provider_rating)
+                                                        {
+                                                            <img class="star_imgs" src="~/img/star1.png" alt="">
+
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                        }
+                                                    }
+                                                    <p id="rate" class="ms-1">@Math.Round(dta.my_provider_rating,2)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+
+                                </td>
+
+                                @if (@dta.status == 1)
+                                {
+                                    <td class="between_table_data"><button class="active_btn_new">New</button></td>
+                                }
+                                @if (@dta.status == 2)
+                                {
+                                    <td class="between_table_data"><button class="active_btn_completed">Completed</button></td>
+                                }
+                                @if (@dta.status == 3)
+                                {
+                                    <td class="between_table_data"><button class="active_btn_cancelled">Cancelled</button></td>
+                                }
+                                @if (@dta.status == 4)
+                                {
+                                    <td class="between_table_data"><button class="active_btn_accept">accepted</button></td>
+                                }
+
+
+                                @if (@dta.status == 1 || @dta.status == 4)
+                                {
+                                    <td class="between_table_data">
+                                        <div class="action_div" data-bs-toggle="popover" data-bs-placement="bottom"
+                                     data-bs-html="true"
+                                     data-bs-content="<p> <a class='for_getting_id' id='@dta.serviceid' > Edit & Reschedule</a> </p> <p> <a href='#'>Cancel SR by Cust</a> </p> <p> <a href='#'> Inquiry </a> </p> <p> <a href='#'> History Log </a> </p> <p> <a href='#'> Download Invoice </a> </p> <p> <a href='#'> Other Transactions </a> </p>">
+                                            <img src="~/img/group-38.png" alt="">
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="between_table_data">
+                                        <div class="action_div" data-bs-toggle="popover" data-bs-placement="bottom"
+                                     data-bs-html="true"
+                                     data-bs-content="<p> <a class='refund_id_get' id='@dta.serviceid' >Refund</a> </p> <p> <a href='#'>Cancel SR by Cust</a> </p> <p> <a href='#'> Inquiry </a> </p> <p> <a href='#'> History Log </a> </p> <p> <a href='#'> Download Invoice </a> </p> <p> <a href='#'> Other Transactions </a> </p>">
+                                            <img src="~/img/group-38.png" alt="">
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
+
+                            @*Service detail modal *@
+                            <div class="modal fade" id="servicedetail_@dta.serviceid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title" id="exampleModalLabel">Service Details</p>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row" style="color:#646464;">
+                                                <div class="first_part_modal col-12 col-lg-8">
+                                                    <b> <h6><span id="date_modal">@dta.servicedate</span> <span id="starttime_modal">@dta.service_start_time</span> - <span id="endtime_modal">@dta.service_end_time</span></h6>  </b>
+                                                    <p> <b>Duration:</b> <span id="duration_modal">@dta.service_duration</span> Hrs </p>
+
+                                                    <hr class="mb-2 mt-2" />
+
+                                                    <p> <b>Service Id:</b> <span id="serviceid_modal">@dta.serviceid</span></p>
+                                                    <p> <b>Extras:</b> <span id="extras_modal">@dta.extras</span> </p>
+                                                    <p> <b>Net Amount:</b> <span class="service_detail_modal_amount"> <span id="amount_modal">@dta.payment</span> $ </span>  </p>
+                                                    <hr class="mb-2 mt-2" />
+
+                                                    <p> <b>Service Address:</b> <span id="address_modal">@dta.service_address.line1 @dta.service_address.line2,@dta.service_address.postal @dta.service_address.city</span></p>
+                                                    <p> <b>Billing Address:</b> <span id="address_modal">@dta.service_address.line1 @dta.service_address.line2,@dta.service_address.postal @dta.service_address.city</span></p>
+
+                                                    <p> <b>Phone:</b> <span id="phone_modal">@dta.service_address.mobile</span></p>
+                                                    <p> <b>Email:</b> <span id="mail_modal">@dta.service_address.email</span></p>
+                                                    <hr class="mb-2 mt-2" />
+
+                                                    <p> <b>Comments</b> </p>
+                                                    @if (@dta.servicepets)
+                                                    {
+                                                        <p> <img id="for_pet_img" src="~/img/success_tick.png" alt="" style="width: 25px"><span id="pet"> I Have pets at home</span> </p>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <p> <img id="for_pet_img" src="~/img/not-included.png" alt="" style="width: 25px"><span id="pet"> I don't Have pets at home</span> </p>
+                                                    }
+                                                    <hr class="mb-2 mt-2" />
+
+                                                </div>
+                                                @if (dta.provider_fname != null)
+                                                {
+                                                    <div class="second_part_modal col-12 col-lg-4">
+                                                        <b>Service Provider Details</b>
+                                                        <div class="d-flex mt-2">
+                                                            @if (@dta.profile_picture != null)
+                                                            {
+                                                                <div class="avtar_img"><img src=@dta.profile_picture alt=""></div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="cap_img"><img src="~/img/cap.png" alt=""></div>
+                                                            }
+
+                                                            <div>
+                                                                <div id="service_provide_name">@dta.provider_fname @dta.provider_lname</div>
+                                                                <div style="display: flex; margin-top:4px;">
+                                                                    @for (var i = 0; i < 5; i++)
+                                                                    {
+                                                                        @if (i < @dta.my_provider_rating)
+                                                                        {
+                                                                            <img class="star_imgs" src="~/img/star1.png" alt="">
+
+                                                                        }
+                                                                        else
+                                                                        {
+
+                                                                            <img class="star_imgs" src="~/img/star2.png" alt="">
+                                                                        }
+                                                                    }
+                                                                    <p id="rate" class="ms-1">@Math.Round(dta.my_provider_rating,2)</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*edit & reschedule modal *@
+
+                            <div class="modal fade" id="for_edit_@dta.serviceid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content" style="color: #646464;">
+                                        <div class="modal-header" style="color: #646464;">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Service Request</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <form id="passform">
+
+                                                <input class="d-none" type="text" id="id_@dta.serviceid" value="@dta.serviceid" />
+
+                                                <div class="row">
+                                                    <div class="mb-2  col-12 col-sm-6">
+                                                        <label><b>Date</b></label>
+                                                        <input type="text" class="form-control" value="@dta.servicedate" id="date_@dta.serviceid" onchange="datechange(@dta.serviceid);">
+                                                        <div class="text-danger" id="errordate_@dta.serviceid"></div>
+                                                        <div class="text-danger" id="wrong_date_@dta.serviceid"></div>
+                                                        <div class="text-danger" id="gone_date_@dta.serviceid"></div>
+                                                    </div>
+                                                    <div class="mb-2  col-12 col-sm-6">
+                                                        <label><b>Time</b></label>
+                                                        <select class="form-select" aria-label="Default select example" value="@dta.service_start_time" id="start_time_@dta.serviceid">
+                                                            <option value=""></option>
+                                                            <option value="08:00">8:00</option>
+                                                            <option value="08:30">8:30</option>
+                                                            <option value="09:00">9:00</option>
+                                                            <option value="09:30">9:30</option>
+                                                            <option value="10:00">10:00</option>
+                                                            <option value="10:30">10:30</option>
+                                                            <option value="11:00">11:00</option>
+                                                            <option value="11:30">11:30</option>
+                                                            <option value="12:00">12:00</option>
+                                                            <option value="12:30">12:30</option>
+                                                            <option value="13:00">13:00</option>
+                                                            <option value="13:30">13:30</option>
+                                                            <option value="14:00">14:00</option>
+                                                            <option value="14:30">14:30</option>
+                                                            <option value="15:00">15:00</option>
+                                                            <option value="15:30">15:30</option>
+                                                            <option value="16:00">16:00</option>
+                                                            <option value="16:30">16:30</option>
+                                                            <option value="17:00">17:00</option>
+                                                            <option value="17:30">17:30</option>
+                                                            <option value="18:00">18:00</option>
+                                                        </select>
+                                                        <span class="text-danger" id="errortime_@dta.serviceid"></span>
+                                                    </div>
+
+                                                    <b>Service Address</b>
+                                                    <div class="mb-2  col-12 col-sm-6">
+                                                        <label>Street name</label>
+                                                        <input type="text" class="form-control" value="@dta.service_address.line1" id="street_@dta.serviceid">
+                                                        <span class="text-danger" id="errorstreet_@dta.serviceid"></span>
+                                                    </div>
+                                                    <div class="mb-2  col-12 col-sm-6">
+                                                        <label>House number</label>
+                                                        <input type="text" class="form-control" value="@dta.service_address.line2" id="house_@dta.serviceid">
+                                                        <span class="text-danger" id="errorhouse_@dta.serviceid"></span>
+                                                    </div>
+                                                    <div class="mb-2  col-12 col-sm-6">
+                                                        <label>Postal code</label>
+                                                        <input type="text" class="form-control" value="@dta.service_address.postal" id="postal_@dta.serviceid">
+                                                        <span class="text-danger" id="errorpostal_@dta.serviceid"></span>
+                                                    </div>
+                                                    <div class="mb-2  col-12 col-sm-6">
+                                                        <label>City</label>
+                                                        <select class="form-select" aria-label="Default select example" value="@dta.service_address.city" id="city_@dta.serviceid">
+                                                            <option value=""></option>
+                                                            <option value="Braunschweig">Braunschweig</option>
+                                                            <option value="Cottbus">Cottbus</option>
+                                                            <option value="Kassel">Kassel</option>
+                                                            <option value="Darmstadt">Darmstadt</option>
+                                                            <option value="Erfurt">Erfurt</option>
+                                                        </select>
+                                                        <span class="text-danger" id="errorcity_@dta.serviceid"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label>Why do you want to reschedule service request?</label>
+                                                    <textarea class="form-control" rows="3" placeholder="Why do you want to reschedule service request?" id="textarea_@dta.serviceid"></textarea>
+                                                </div>
+                                                <input class="update_btn" id="update_btn_@dta.serviceid" onclick="update(event,@dta.serviceid)" type="button" value="Update" />
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*refund modal *@
+
+                            <div class="modal fade refund_modal_width" id="for_refund_@dta.serviceid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content" style="color: #646464;">
+                                        <div class="modal-header" style="color: #646464;">
+                                            <h5 class="modal-title" id="exampleModalLabel"><b>Refund Amount</b></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <form id="passform">
+
+                                                <input class="d-none" type="text" id="my_refund_id_@dta.serviceid" value="@dta.serviceid" />
+                                                <span class="text-danger" id="fully_refunded_@dta.serviceid"></span>
+                                                <div class="d-flex justify-content-around">
+                                                    <div>
+                                                        <p class="mb-0">Paid Amount</p>
+                                                        <p><span id="paid_amount_@dta.serviceid">@dta.payment</span> <span>$</span></p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="mb-0">Refunded Amount</p>
+                                                        <p><span id="refunded_amount_@dta.serviceid">@dta.refunded_amount</span> <span>$</span></p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="mb-0">In Balance Amount</p>
+                                                        <p><span id="balance_amount_@dta.serviceid">@dta.inbalance_amount</span> <span>$</span></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-12 col-md-6">
+                                                        <label class="form-label"><b>Amount</b></label>
+                                                        <div class="input-group mb-1">
+                                                            <input type="text" class="form-control rounded-0" id="amount_@dta.serviceid" value="">
+                                                          
+                                                            <select class="btn btn-outline-secondary bg-transparent text-dark rounded-0" id="amount_method_@dta.serviceid">
+                                                                <option value="Linear">Linear</option>
+                                                                <option value="Percentage">Percentage</option>
+                                                            </select>
+                                                        </div>
+                                                        <span class="text-danger" id="erroramount_@dta.serviceid"></span>
+                                                    </div>
+
+                                                    <div  class="col-12 col-md-6">
+                                                        <label class="form-label"><b>Calculate</b></label>
+                                                        <div class="input-group mb-3">
+                                                            <button class="btn btn-outline-secondary bg-transparent text-dark rounded-0" type="button" onclick="calculate_btn(@dta.serviceid);">Calculate</button>
+                                                            <input type="text" class="form-control rounded-0" placeholder="" id="calculate_text_@dta.serviceid" value="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlTextarea1" class="form-label"><b>Why you want to refund amount?</b></label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Why you want to refund amount?"></textarea>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlTextarea2" class="form-label"><b>Call Center EMP Notes</b></label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Enter Notes"></textarea>
+                                                </div>
+
+                                                <input class="update_btn" id="refund_btn_@dta.serviceid" onclick="refund(event,@dta.serviceid)" type="button" value="Refund" />
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </tbody>
+
+                </table>
+
+
+
+            </div>
+
+
+            <p class="reserve">©2018 Helperland. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+</body>
+
+<script src="~/js/AdminServiceRequest.js"></script>
+
+</html>
