@@ -13,11 +13,9 @@ const loading = (isloading) => {
 // for left-right side manu
 document.getElementById("expand_btn").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Open");
 })
 document.getElementById("expand_btn_res").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Return");
 })
 
 // for popover 
@@ -92,31 +90,67 @@ function edit(event, id) {
 
     var details = {}
     details.id = id;
+    //console.log(id);
     details.street = document.getElementById("strt_" + id).value;
     details.house = document.getElementById("house_" + id).value;
     details.postcode = document.getElementById("pin_" + id).value;
     details.city = document.getElementById("cty_" + id).value;
     details.mobile = document.getElementById("phn_" + id).value;
 
-    loading(true);
-    fetch("/Customer/settingtab2_edit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(details)
-    }).then(res => res.json()).then(datafromcontroller => {
-        loading(false);
-        document.getElementById("address_" + id).innerHTML = datafromcontroller.address;
-        document.getElementById("ph_" + id).innerHTML = datafromcontroller.phone;
+    if (document.getElementById("strt_" + id).value && document.getElementById("house_" + id).value && document.getElementById("pin_" + id).value && document.getElementById("cty_" + id).value && document.getElementById("phn_" + id).value) {
+        console.log(details)
+        loading(true);
+        fetch("/Customer/settingtab2_edit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(details)
+        }).then(res => res.json()).then(datafromcontroller => {
+            loading(false);
+            document.getElementById("address_" + id).innerHTML = datafromcontroller.address;
+            document.getElementById("ph_" + id).innerHTML = datafromcontroller.phone;
 
 
-        const modalhtml = document.querySelector("#edit_" + id)
+            const modalhtml = document.querySelector("#edit_" + id)
 
-        var modal = bootstrap.Modal.getOrCreateInstance(modalhtml)
-        modal.hide();
+            var modal = bootstrap.Modal.getOrCreateInstance(modalhtml)
+            modal.hide();
 
-    }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }
+    else {
+        if (document.getElementById("strt_" + id).value) {
+            document.getElementById("street_err_" + id).innerHTML = ``
+        }
+        else {
+            document.getElementById("street_err_" + id).innerHTML = `Please, Enter Street`
+        }
+        if (document.getElementById("house_" + id).value) {
+            document.getElementById("house_err_" + id).innerHTML = ``
+        }
+        else {
+            document.getElementById("house_err_" + id).innerHTML = `Please, Enter House`
+        }
+        if (document.getElementById("pin_" + id).value) {
+            document.getElementById("postal_err_" + id).innerHTML = ``
+        }
+        else {
+            document.getElementById("postal_err_" + id).innerHTML = `Please, Enter Postal`
+        }
+        if (document.getElementById("cty_" + id).value) {
+            document.getElementById("city_err_" + id).innerHTML = ``
+        }
+        else {
+            document.getElementById("city_err_" + id).innerHTML = `Please, Enter City`
+        }
+        if (document.getElementById("phn_" + id).value) {
+            document.getElementById("number_err_" + id).innerHTML = ``
+        }
+        else {
+            document.getElementById("number_err_" + id).innerHTML = `Please, Enter Number`
+        }
+    }
 }
 function openmodal(id) {
 
@@ -130,26 +164,35 @@ function openmodal(id) {
 
 function add(event) {
 
-    event.preventDefault()
+    event.preventDefault();
 
     var new_data = {}
-    new_data.street = document.getElementById("new1").value;
-    new_data.house = document.getElementById("new2").value;
-    new_data.postcode = document.getElementById("new3").value;
-    new_data.city = document.getElementById("new4").value;
-    new_data.mobile = document.getElementById("new5").value;
 
-    loading(true);
-    fetch("/Customer/settingtab2_new", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(new_data)
-    }).then(res => res.json()).then(datafromcontroller => {
-        loading(false);
+    if (document.getElementById("new1").value && document.getElementById("new2").value && document.getElementById("new3").value && document.getElementById("new4").value && document.getElementById("new5").value) {
 
-        document.getElementById("for_innerhtml").innerHTML += `
+        new_data.street = document.getElementById("new1").value;
+        new_data.house = document.getElementById("new2").value;
+        new_data.postcode = document.getElementById("new3").value;
+        new_data.city = document.getElementById("new4").value;
+        new_data.mobile = document.getElementById("new5").value;
+
+        document.getElementById("new5_err").innerHTML = ``;
+        document.getElementById("new4_err").innerHTML = ``;
+        document.getElementById("new3_err").innerHTML = ``;
+        document.getElementById("new2_err").innerHTML = ``;
+        document.getElementById("new1_err").innerHTML = ``;
+
+        loading(true);
+        fetch("/Customer/settingtab2_new", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(new_data)
+        }).then(res => res.json()).then(datafromcontroller => {
+            loading(false);
+
+            document.getElementById("for_innerhtml").innerHTML += `
 
 <tr class="table_view_body" data-address_id="${datafromcontroller.id}">
                                     <td>
@@ -214,15 +257,34 @@ function add(event) {
                                         </div>
                                     </td>
                                 </tr>`
-        var modalhtml = document.getElementById("new_form");
-        var modal = bootstrap.Modal.getOrCreateInstance(modalhtml)
-        modal.hide();
+            var modalhtml = document.getElementById("new_form");
+            var modal = bootstrap.Modal.getOrCreateInstance(modalhtml)
+            modal.hide();
 
-    }).catch(err => console.log(err));
+
+        }).catch(err => console.log(err));
+    }
+    else {
+        if (!document.getElementById("new1").value) {
+            document.getElementById("new1_err").innerHTML = `Please Enter Street name`;
+        }
+        if (!document.getElementById("new2").value) {
+            document.getElementById("new2_err").innerHTML = `Please Enter House number`;
+        }
+        if (!document.getElementById("new3").value) {
+            document.getElementById("new3_err").innerHTML = `Please Enter Postal code`;
+        }
+        if (!document.getElementById("new4").value) {
+            document.getElementById("new4_err").innerHTML = `Please Enter City`;
+        }
+        if (!document.getElementById("new5").value) {
+            document.getElementById("new5_err").innerHTML = `Please Enter Phone number`;
+        }
+    }
 };
 document.getElementById("new_form").addEventListener("submit", (e) => {
     e.preventDefault();
-})
+});
 
 
 // tab3 
@@ -267,3 +329,44 @@ document.getElementById("psssubmit").addEventListener("click", (e) => {
 document.getElementById("passform").addEventListener("submit", (e) => {
     e.preventDefault();
 });
+
+
+function change_pin(id) {
+
+    var data = {}
+    data.postcode = document.getElementById("pin_" + id).value;
+    loading(true);
+    fetch("/Customer/change_pin", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(datafromcontroller => {
+        loading(false);
+        console.log(datafromcontroller.city);
+        document.getElementById("cty_" + id).value = datafromcontroller.city;
+
+    }).catch(err => console.log(err));
+
+}
+
+function change_pin_new() {
+
+    var data = {}
+    data.postcode = document.getElementById("new3").value;
+    loading(true);
+    fetch("/Customer/change_pin_new", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(datafromcontroller => {
+        loading(false);
+        console.log(datafromcontroller.city);
+        document.getElementById("new4").value = datafromcontroller.city;
+
+    }).catch(err => console.log(err));
+
+}

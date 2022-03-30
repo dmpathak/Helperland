@@ -205,7 +205,7 @@
                                         <form>
                                             <div class="mb-2">
                                                 <input asp-for="ServiceId" value="@user_data.myServiceId" class="d-none">
-                                                <input asp-for="date" id="reschedule_data1_@user_data.myServiceId" class="reschedule_data1" placeholder="DD/MM/YYYY">
+                                                <input asp-for="date" id="reschedule_data1_@user_data.myServiceId" class="reschedule_data1" onchange="datechange(@user_data.myServiceId)" placeholder="DD/MM/YYYY">
                                                 <select asp-for="start_time" id="reschedule_data2_@user_data.myServiceId" class="reschedule_data2">
                                                     <option value="">---</option>
                                                     <option value="8:00">8:00</option>
@@ -231,6 +231,9 @@
                                                     <option value="18:00">18:00</option>
                                                 </select>
                                             </div>
+                                            <span id="wrong_date_@user_data.myServiceId" class="text-danger"></span>
+                                            <span id="gone_date_@user_data.myServiceId" class="text-danger"></span>
+
 
                                             <div id="reschedule_error_@user_data.myServiceId" class="text-danger"></div>
                                             <div id="reschedule_success_@user_data.myServiceId" class="text-success"></div>

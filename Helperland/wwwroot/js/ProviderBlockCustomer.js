@@ -26,11 +26,9 @@
 // for left-right side manu 
 document.getElementById("expand_btn").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Open");
 })
 document.getElementById("expand_btn_res").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Return");
 })
 
 // for popover 

@@ -34,6 +34,7 @@
                 <div class="form-item col-12 col-sm-6">
                     <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
                     <span asp-validation-for="Email" class="text-danger"></span>
+                    <span class="text-danger">@ViewBag.Errormsg</span>
                 </div>
                 <div class="form-item col-12 col-sm-6">
                     <div class="input-group mx-0 row">

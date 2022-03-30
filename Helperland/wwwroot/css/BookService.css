@@ -453,11 +453,13 @@ a:hover {
 
 .fav_sp_container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .fav_sp {
     text-align: -webkit-center;
     margin-left: 15px;
+    margin-bottom: 15px;
 }
 
     .fav_sp img {

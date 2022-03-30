@@ -289,3 +289,21 @@ function refund(e, id) {
 };
 
 
+function change_pin(id) {
+
+    var data = {}
+    data.postal = document.getElementById("postal_" + id).value;
+    fetch("/Admin/change_postal", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(datafromcontroller => {
+
+        console.log(datafromcontroller.city);
+        document.getElementById("city_" + id).value = datafromcontroller.city;
+
+    }).catch(err => console.log(err));
+
+}

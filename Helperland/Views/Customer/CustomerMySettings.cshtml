@@ -287,22 +287,22 @@
                                                                 <div class="col mb-3">
                                                                     <label class="control-label"><b>Street Name</b></label>
                                                                     <input asp-for="setting2viewmodel.street" type="text" class="form-control" value="@item1.street" id="strt_@item1.address_id" placeholder="Street name">
-                                                                    <span asp-validation-for="setting2viewmodel.street" class="text-danger"></span>
+                                                                    <span asp-validation-for="setting2viewmodel.street" id="street_err_@item1.address_id" class="text-danger"></span>
                                                                 </div>
                                                                 <div class="col mb-3">
                                                                     <label class="control-label"><b>House number</b></label>
                                                                     <input asp-for="setting2viewmodel.house" type="text" class="form-control" value="@item1.house" id="house_@item1.address_id" placeholder="House number">
-                                                                    <span asp-validation-for="setting2viewmodel.house" class="text-danger"></span>
+                                                                    <span asp-validation-for="setting2viewmodel.house" id="house_err_@item1.address_id" class="text-danger"></span>
                                                                 </div>
                                                                 <div class="col mb-3">
                                                                     <label class="control-label"><b>Postal code</b></label>
-                                                                    <input asp-for="setting2viewmodel.postcode" type="text" class="form-control" value="@item1.pin" id="pin_@item1.address_id" placeholder="pin code">
-                                                                    <span asp-validation-for="setting2viewmodel.postcode" class="text-danger"></span>
+                                                                    <input asp-for="setting2viewmodel.postcode" type="text" class="form-control" value="@item1.pin" id="pin_@item1.address_id" onchange="change_pin(@item1.address_id)" placeholder="pin code">
+                                                                    <span asp-validation-for="setting2viewmodel.postcode" id="postal_err_@item1.address_id" class="text-danger"></span>
                                                                 </div>
                                                                 <div class="col mb-3">
                                                                     <label class="control-label"><b>City</b></label>
-                                                                    <input asp-for="setting2viewmodel.city" type="text" class="form-control" value="@item1.city" id="cty_@item1.address_id" placeholder="city">
-                                                                    <span asp-validation-for="setting2viewmodel.city" class="text-danger"></span>
+                                                                    <input asp-for="setting2viewmodel.city" type="text" class="form-control" value="@item1.city" id="cty_@item1.address_id" placeholder="city" readonly>
+                                                                    <span asp-validation-for="setting2viewmodel.city" id="city_err_@item1.address_id" class="text-danger"></span>
                                                                 </div>
 
                                                                 <div class="col mb-3">
@@ -311,7 +311,7 @@
                                                                         <span class="input-group-text" id="addon-wrapping">+91</span>
                                                                         <input asp-for="setting2viewmodel.mobile" type="text" class="form-control" id="phn_@item1.address_id" value="@item1.phone" aria-describedby="addon-wrapping">
                                                                     </div>
-                                                                    <span asp-validation-for="setting2viewmodel.mobile" class="text-danger"></span>
+                                                                    <span asp-validation-for="setting2viewmodel.mobile" id="number_err_@item1.address_id" class="text-danger"></span>
                                                                 </div>
                                                             </div>
                                                             <button onclick="edit(event, @item1.address_id);" class="rate_submit w-100">Edit</button>
@@ -342,22 +342,22 @@
                                             <div class="col mb-3">
                                                 <label class="control-label"><b>Street Name</b></label>
                                                 <input asp-for="setting2viewmodel.street" type="text" class="form-control" id="new1" value="">
-                                                <span asp-validation-for="setting2viewmodel.street" class="text-danger"></span>
+                                                <span asp-validation-for="setting2viewmodel.street" id="new1_err" class="text-danger"></span>
                                             </div>
                                             <div class="col mb-3">
                                                 <label class="control-label"><b>House number</b></label>
                                                 <input asp-for="setting2viewmodel.house" type="text" class="form-control" id="new2" value="">
-                                                <span asp-validation-for="setting2viewmodel.house" class="text-danger"></span>
+                                                <span asp-validation-for="setting2viewmodel.house" id="new2_err" class="text-danger"></span>
                                             </div>
                                             <div class="col mb-3">
                                                 <label class="control-label"><b>Postal code</b></label>
-                                                <input asp-for="setting2viewmodel.postcode" type="text" class="form-control" id="new3" value="">
-                                                <span asp-validation-for="setting2viewmodel.postcode" class="text-danger"></span>
+                                                <input asp-for="setting2viewmodel.postcode" type="text" class="form-control" id="new3" onchange="change_pin_new();" value="">
+                                                <span asp-validation-for="setting2viewmodel.postcode" id="new3_err" class="text-danger"></span>
                                             </div>
                                             <div class="col mb-3">
                                                 <label class="control-label"><b>City</b></label>
-                                                <input asp-for="setting2viewmodel.city" type="text" class="form-control" id="new4" value="">
-                                                <span asp-validation-for="setting2viewmodel.city" class="text-danger"></span>
+                                                <input asp-for="setting2viewmodel.city" type="text" class="form-control" id="new4" value="" readonly>
+                                                <span asp-validation-for="setting2viewmodel.city" id="new4_err" class="text-danger"></span>
                                             </div>
 
                                             <div class="col mb-3">
@@ -366,10 +366,10 @@
                                                     <span class="input-group-text" id="addon-wrapping">+91</span>
                                                     <input asp-for="setting2viewmodel.mobile" type="text" class="form-control" id="new5" placeholder="phone" aria-describedby="addon-wrapping">
                                                 </div>
-                                                <span asp-validation-for="setting2viewmodel.mobile" class="text-danger"></span>
+                                                <span asp-validation-for="setting2viewmodel.mobile" id="new5_err" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        <button class="rate_submit w-100" onclick="add(event)" data-bs-dismiss="modal" id="submit_new_address" type="submit">Add</button>
+                                        <button class="rate_submit w-100" onclick="add(event)" id="submit_new_address" type="submit">Add</button>
                                     </form>
                                 </div>
                             </div>

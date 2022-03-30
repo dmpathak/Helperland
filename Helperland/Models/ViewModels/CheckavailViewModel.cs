@@ -41,6 +41,6 @@ namespace Helperland.Models.ViewModels
 
         public string? fav_provider { get; set; }
 
-
+        public int selected_service_pro_id { get; set; }
     }
 }

@@ -4,6 +4,10 @@ namespace Helperland.Models.ViewModels
 {
     public class CustomerDashboardViewModel
     {
+
+        //block - Favourite 
+        public int provider_id { get; set; }
+
         public string service_provide_name { get; set; }
 
 

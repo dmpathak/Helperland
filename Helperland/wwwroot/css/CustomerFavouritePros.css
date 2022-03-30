@@ -277,7 +277,7 @@ tr {
 }
 
 .sec_main_container {
-    width: 845px;
+    width: 936px;
 }
 
 .between_2nd_container {
@@ -330,15 +330,16 @@ table.dataTable thead .sorting_desc {
 }
 
 .cap_img {
-    border: 1px solid #aaaaaa;
-    padding: 12px 7px 12px 7px;
-    border-radius: 27px;
-    margin-right: 12px;
+    border: 2px solid #aaaaaa;
+    padding: 17px 13px;
+    border-radius: 30px;
+}
+.avtar_img {
+    border-radius: 30px;
+    width: 60px;
+    border: 2px solid #aaaaaa;
 }
 
-table.dataTable tbody td {
-    padding: 16px 10px !important;
-}
 
 .star_imgs {
     margin-right: 1px;
@@ -713,15 +714,14 @@ table.dataTable.no-footer {
 
 /* for table responsive  */
 @media screen and (max-width: 767px) {
-    table.dataTable tbody tr {
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        margin: 35px 0px;
-        padding: 15px;
-        box-shadow: 0 0 6px rgb(0 0 0 / 25%);
+    table.dataTable tbody{
+        justify-content: center !important;
     }
 
+    table.dataTable tbody tr {
+        width: 250px !important;
+        justify-content: center;
+    }
     thead {
         display: none;
     }
@@ -860,3 +860,73 @@ body.loading .loaderContainer .loader {
     height: 100vh;
     background: rgba(0,0,0,0.7);
 }
+
+
+
+
+table.dataTable tbody th, table.dataTable tbody td{
+    padding: 0px !important;
+}
+table.dataTable tbody td {
+    padding: 6px 10px !important;
+}
+table.dataTable tbody tr {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 6px rgb(0 0 0 / 25%);
+}
+table.dataTable.no-footer {
+     border-bottom: none !important; 
+}
+.action_button_block {
+    width: 80px;
+    height: 34px;
+    background-color: #ff263bcf;
+    font-size: 16px;
+    color: #FFFFFF;
+    border-radius: 17px;
+    border: none;
+    padding: 7px 15px 8px 16px;
+    cursor: pointer;
+}
+
+    .action_button_block:hover {
+        background-color: #ff263bf7 !important;
+        transition: all 0.5s;
+    }
+
+.action_button_unblock {
+    width: 80px;
+    height: 34px;
+    background-color: #67b644;
+    font-size: 16px;
+    color: #FFFFFF;
+    border-radius: 17px;
+    border: none;
+    padding: 5px 7px;
+    cursor: pointer;
+}
+
+    .action_button_unblock:hover {
+        background-color: #4ba225 !important;
+        transition: all 0.5s;
+    }
+
+.action_button_Add {
+    width: 80px;
+    height: 34px;
+    background-color: #1D7A8C;
+    font-size: 16px;
+    color: #FFFFFF;
+    border-radius: 17px;
+    border: none;
+    padding: 5px 7px;
+    cursor: pointer;
+}
+
+    .action_button_Add:hover {
+        background-color: #0f6879 !important;
+        transition: all 0.5s;
+    }
+

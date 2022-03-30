@@ -35,11 +35,9 @@
 // for left-right side manu 
 document.getElementById("expand_btn").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Open");
 })
 document.getElementById("expand_btn_res").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Return");
 })
 
 // for popover 
@@ -56,7 +54,6 @@ function accept_req(id) {
     var acpt = {}
 
     acpt.ServiceId = document.getElementById("service_"+id).value;
-    console.log(acpt);
 
     fetch("/Provider/Accept", {
         method: "POST",
@@ -70,8 +67,8 @@ function accept_req(id) {
 
             alert("You are provider of this service...!");
             window.location.reload();
-            var show_btn = document.getElementById("show_button");
-            show_btn.classList.remove("d-none");
+            //var show_btn = document.getElementById("show_button");
+            //show_btn.classList.remove("d-none");
         }
         if (datafromcontroller.error == "conflict") {
             alert("Another service request has already been assigned which has time overlap with this service request. You can’t pick this one!");

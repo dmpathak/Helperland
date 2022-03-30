@@ -263,25 +263,35 @@ namespace Helperland.Controllers
         {
             var passwordHash = BCrypto.HashPassword(createAccount.Password);
             var user = new User();
+
+            var email = context.Users.Where(x => x.Email == createAccount.Email).ToList();
+
             if (ModelState.IsValid)
             {
-                user.FirstName = createAccount.FirstName;
-                user.LastName = createAccount.LastName;
-                user.Email = createAccount.Email;
-                user.Mobile = createAccount.Mobile;
-                user.Password = passwordHash;
-                user.UserTypeId = 1;
-                user.IsRegisteredUser = false;
-                user.WorksWithPets = false;
-                user.CreatedDate = DateTime.Now;
-                user.ModifiedDate = DateTime.Now;
-                user.ModifiedBy = 0;
-                user.IsApproved = false;
-                user.IsActive = true;
-                user.IsDeleted = false;
+                if (email.Count() == 0)
+                {
+                    user.FirstName = createAccount.FirstName;
+                    user.LastName = createAccount.LastName;
+                    user.Email = createAccount.Email;
+                    user.Mobile = createAccount.Mobile;
+                    user.Password = passwordHash;
+                    user.UserTypeId = 1;
+                    user.IsRegisteredUser = false;
+                    user.WorksWithPets = false;
+                    user.CreatedDate = DateTime.Now;
+                    user.ModifiedDate = DateTime.Now;
+                    user.ModifiedBy = 0;
+                    user.IsApproved = false;
+                    user.IsActive = true;
+                    user.IsDeleted = false;
 
-                context.Users.Add(user);
-                context.SaveChanges();
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.Errormsg = "This E Mail Address is already Exists";
+                }
             }
 
             return View();
@@ -295,29 +305,36 @@ namespace Helperland.Controllers
         {
             var passwordHash = BCrypto.HashPassword(beacomeaproViewModel.Password);
             var user = new User();
+
+            var email = context.Users.Where(x => x.Email == beacomeaproViewModel.Email).ToList();
+
             if (ModelState.IsValid)
             {
+                if (email.Count() == 0)
+                {
+                    user.FirstName = beacomeaproViewModel.FirstName;
+                    user.LastName = beacomeaproViewModel.LastName;
+                    user.Email = beacomeaproViewModel.Email;
+                    user.Password = passwordHash;
+                    user.Mobile = beacomeaproViewModel.Mobile;
+                    user.UserTypeId = 2;
+                    user.IsRegisteredUser = false;
+                    user.WorksWithPets = false;
+                    user.CreatedDate = DateTime.Now;
+                    user.ModifiedDate = DateTime.Now;
+                    user.ModifiedBy = 0;
+                    user.IsApproved = false;
+                    user.IsActive = false;
+                    user.IsDeleted = false;
 
-                user.FirstName = beacomeaproViewModel.FirstName;
-                user.LastName = beacomeaproViewModel.LastName;
-                user.Email = beacomeaproViewModel.Email;
-                user.Password = passwordHash;
-                user.Mobile = beacomeaproViewModel.Mobile;
-                user.UserTypeId = 2;
-                user.IsRegisteredUser = false;
-                user.WorksWithPets = false;
-                user.CreatedDate = DateTime.Now;
-                user.ModifiedDate = DateTime.Now;
-                user.ModifiedBy = 0;
-                user.IsApproved = false;
-                user.IsActive = false;
-                user.IsDeleted = false;
-
-                context.Users.Add(user);
-                context.SaveChanges();
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.Errormsg = "This E Mail Address is already Exists";
+                }
             }
-
-
             return View();
         }
 

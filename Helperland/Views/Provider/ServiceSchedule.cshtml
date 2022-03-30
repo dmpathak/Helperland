@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_ProviderLayout.cshtml";
 }
 @section CustomCss{
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
 <link rel="stylesheet" href="~/css/ProviderServiceSchedule.css" />
 }
 
@@ -39,8 +40,7 @@
         <hr style="opacity: 0.2;">
     </div>
     <div class="sec_main_container">
-        <div class="between_2nd_container_upper_header">
-            <p>Service Schedule</p>
+        <div id="Calender">
         </div>
     </div>
 </div>
@@ -49,7 +49,10 @@
 
 @section Scripts{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"
+        integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
 <script src="~/js/ProviderServiceSchedule.js"></script>
 }

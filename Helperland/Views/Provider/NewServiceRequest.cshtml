@@ -88,131 +88,135 @@
 
                 </thead>
                 <tbody>
-                    @foreach (var new_req in ViewBag.current_new_req)
+                    @if (ViewBag.current_new_req != null)
                     {
 
-                        <tr>
-                            <td class="between_table_data"><span id="ServiceId" class="hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">@new_req.myServiceId</span></td>
-                            <td class="between_table_data">
-                                <div class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">
-                                    <img src="~/img/calendar2.png" alt="">
-                                    <div><b id="date">@new_req.myservice_start_date</b> </div>
-                                </div>
-                                <div class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">
-                                    <img src="~/img/layer-14.png" alt="">
-                                    <div><span id="start_time">@new_req.myservice_start_time</span> - <span id="end_time">@new_req.myservice_end_time</span></div>
-                                </div>
-                            </td>
-                            <td class="between_table_data">
-                                <div class="d-flex align-items-center">
-                                    <div><img class="me-1" src="~/img/layer-15.png" alt=""></div>
-                                    <div style="text-align: justify;">
-                                        <p>@new_req.my_customer_name.FirstName @new_req.my_customer_name.LastName</p>
-                                        <p>@new_req.my_customer_address.AddressLine1 @new_req.my_customer_address.AddressLine2 </p>
-                                        <p>@new_req.my_customer_address.PostalCode @new_req.my_customer_address.City</p>
+
+                        @foreach (var new_req in ViewBag.current_new_req)
+                        {
+
+                            <tr>
+                                <td class="between_table_data"><span id="ServiceId" class="hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">@new_req.myServiceId</span></td>
+                                <td class="between_table_data">
+                                    <div class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">
+                                        <img src="~/img/calendar2.png" alt="">
+                                        <div><b id="date">@new_req.myservice_start_date</b> </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="between_table_data">
-                                <p class="between_2nd_container_data_service"> <span>@new_req.mypayment</span> €</p>
-                            </td>
-                            <td class="between_table_data">
-                                <p class="completed_btn d-none" id="show_button_@new_req.myServiceId">
-                                    <input type="button" value="Show" data-bs-toggle="modal" data-bs-target="#conflict_@new_req.myServiceId">
-                                </p>
-                            </td>
-                            <td class="between_table_data">
-                                <div class="d-flex">
-                                    <div class="completed_btn">
-                                        <input type="button" value="Accept" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">
+                                    <div class="data_adjust hover_for_modalopen" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">
+                                        <img src="~/img/layer-14.png" alt="">
+                                        <div><span id="start_time">@new_req.myservice_start_time</span> - <span id="end_time">@new_req.myservice_end_time</span></div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                        <div class="modal fade" id="servicedetail_@new_req.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <p class="modal-title" id="exampleModalLabel">Service Details</p>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </td>
+                                <td class="between_table_data">
+                                    <div class="d-flex align-items-center">
+                                        <div><img class="me-1" src="~/img/layer-15.png" alt=""></div>
+                                        <div style="text-align: justify;">
+                                            <p>@new_req.my_customer_name.FirstName @new_req.my_customer_name.LastName</p>
+                                            <p>@new_req.my_customer_address.AddressLine1 @new_req.my_customer_address.AddressLine2 </p>
+                                            <p>@new_req.my_customer_address.PostalCode @new_req.my_customer_address.City</p>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="first_part_modal col-12 col-lg-6">
-                                                <b> <h6><span id="date_modal">@new_req.myservice_start_date</span> <span id="starttime_modal">@new_req.myservice_start_time</span> - <span id="endtime_modal">@new_req.myservice_end_time</span></h6>  </b>
-                                                <p> <b>Duration:</b> <span id="duration_modal">@new_req.service_duration</span> Hrs </p>
+                                </td>
+                                <td class="between_table_data">
+                                    <p class="between_2nd_container_data_service"> <span>@new_req.mypayment</span> €</p>
+                                </td>
+                                <td class="between_table_data">
+                                    <p class="completed_btn d-none" id="show_button_@new_req.myServiceId">
+                                        <input type="button" value="Show" data-bs-toggle="modal" data-bs-target="#conflict_@new_req.myServiceId">
+                                    </p>
+                                </td>
+                                <td class="between_table_data">
+                                    <div class="d-flex">
+                                        <div class="completed_btn">
+                                            <input type="button" value="Accept" data-bs-toggle="modal" data-bs-target="#servicedetail_@new_req.myServiceId" onclick="for_map_show(@new_req.myServiceId);">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
 
-                                                <hr class="mb-2 mt-2" />
 
-                                                <p> <b>Service Id:</b> <span id="serviceid_modal">@new_req.myServiceId</span></p>
-                                                <p> <b>Extras:</b> <span id="extras_modal">@new_req.extras</span> </p>
-                                                <p> <b>Net Amount:</b> <span class="service_detail_modal_amount"> <span id="amount_modal">@new_req.mypayment</span> $ </span>  </p>
-                                                <hr class="mb-2 mt-2" />
+                            <div class="modal fade" id="servicedetail_@new_req.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title" id="exampleModalLabel">Service Details</p>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="first_part_modal col-12 col-lg-6">
+                                                    <b> <h6><span id="date_modal">@new_req.myservice_start_date</span> <span id="starttime_modal">@new_req.myservice_start_time</span> - <span id="endtime_modal">@new_req.myservice_end_time</span></h6>  </b>
+                                                    <p> <b>Duration:</b> <span id="duration_modal">@new_req.service_duration</span> Hrs </p>
 
-                                                <p> <b>Customer Name:</b> <span id="address_modal">@new_req.my_customer_name.FirstName @new_req.my_customer_name.LastName</span></p>
-                                                <p> <b>Service Address:</b> <span id="address_modal">@new_req.my_customer_address.AddressLine1 @new_req.my_customer_address.AddressLine2 @new_req.my_customer_address.PostalCode @new_req.my_customer_address.City</span></p>
-                                                <hr class="mb-2 mt-2" />
+                                                    <hr class="mb-2 mt-2" />
 
-                                                <p> <b>Comments</b> </p>
-                                                @if (@new_req.pet)
-                                                {
-                                                    <p> <img id="for_pet_img" src="~/img/success_tick.png" alt="" style="width: 25px"><span id="pet"> I Have pets at home</span> </p>
+                                                    <p> <b>Service Id:</b> <span id="serviceid_modal">@new_req.myServiceId</span></p>
+                                                    <p> <b>Extras:</b> <span id="extras_modal">@new_req.extras</span> </p>
+                                                    <p> <b>Net Amount:</b> <span class="service_detail_modal_amount"> <span id="amount_modal">@new_req.mypayment</span> $ </span>  </p>
+                                                    <hr class="mb-2 mt-2" />
 
-                                                }
-                                                else
-                                                {
-                                                    <p> <img id="for_pet_img" src="~/img/not-included.png" alt="" style="width: 25px"><span id="pet"> I don't Have pets at home</span> </p>
-                                                }
-                                                <hr class="mb-2 mt-2" />
+                                                    <p> <b>Customer Name:</b> <span id="address_modal">@new_req.my_customer_name.FirstName @new_req.my_customer_name.LastName</span></p>
+                                                    <p> <b>Service Address:</b> <span id="address_modal">@new_req.my_customer_address.AddressLine1 @new_req.my_customer_address.AddressLine2 @new_req.my_customer_address.PostalCode @new_req.my_customer_address.City</span></p>
+                                                    <hr class="mb-2 mt-2" />
 
-                                                <div class="d-flex">
-                                                    <button class="detail_modal_reschedule" onclick="accept_req(@new_req.myServiceId);">
-                                                        <img src="~/img/ic-check.png" alt="">
-                                                        <a class="mx-1" data-bs-dismiss="modal" value="Accept">Accept</a>
-                                                        <form>
-                                                            <input class="d-none" asp-for="ServiceId" value="@new_req.myServiceId" id="service_@new_req.myServiceId">
-                                                        </form>
-                                                    </button>
+                                                    <p> <b>Comments</b> </p>
+                                                    @if (@new_req.pet)
+                                                    {
+                                                        <p> <img id="for_pet_img" src="~/img/success_tick.png" alt="" style="width: 25px"><span id="pet"> I Have pets at home</span> </p>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <p> <img id="for_pet_img" src="~/img/not-included.png" alt="" style="width: 25px"><span id="pet"> I don't Have pets at home</span> </p>
+                                                    }
+                                                    <hr class="mb-2 mt-2" />
+
+                                                    <div class="d-flex">
+                                                        <button class="detail_modal_reschedule" onclick="accept_req(@new_req.myServiceId);">
+                                                            <img src="~/img/ic-check.png" alt="">
+                                                            <a class="mx-1" data-bs-dismiss="modal" value="Accept">Accept</a>
+                                                            <form>
+                                                                <input class="d-none" asp-for="ServiceId" value="@new_req.myServiceId" id="service_@new_req.myServiceId">
+                                                            </form>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <input class="d-none" type="text" value="@new_req.my_customer_address.PostalCode" id="mappostal_@new_req.myServiceId" />
+                                                <div class="second_part_modal col-12 col-lg-6" id="second_part_modal_@new_req.myServiceId">
+                                                    put open street map here
                                                 </div>
                                             </div>
-                                            <input class="d-none" type="text" value="@new_req.my_customer_address.PostalCode" id="mappostal_@new_req.myServiceId" />
-                                            <div class="second_part_modal col-12 col-lg-6"  id="second_part_modal_@new_req.myServiceId">
-                                                put open street map here 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*show modal *@
+                            <div class="modal fade" id="conflict_@new_req.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title" id="exampleModalLabel">Conflicted Service Details</p>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p> <b>Service Id: </b> <span id="conflict_serviceid_@new_req.myServiceId"></span></p>
+
+                                            <b> <h6> <b>Service Date: </b><span id="conflict_date_@new_req.myServiceId"></span> </h6>  </b>
+                                            <p> <b>Service Time: </b> <span id="conflict_starttime_@new_req.myServiceId"></span> - <span id="conflict_endtime_@new_req.myServiceId"></span> </p>
+                                            <p> <b>Duration: </b> <span id="conflict_duration_@new_req.myServiceId"></span> Hrs </p>
+
+                                            <hr class="mb-2 mt-2" />
+
+                                            <div class="completed_btn">
+                                                <input type="button" value="Ok" data-bs-dismiss="modal">
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        @*show modal *@
-                        <div class="modal fade" id="conflict_@new_req.myServiceId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <p class="modal-title" id="exampleModalLabel">Conflicted Service Details</p>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p> <b>Service Id: </b> <span id="conflict_serviceid_@new_req.myServiceId"></span></p>
-
-                                        <b> <h6> <b>Service Date: </b><span id="conflict_date_@new_req.myServiceId"></span> </h6>  </b>
-                                        <p> <b>Service Time: </b> <span id="conflict_starttime_@new_req.myServiceId"></span> - <span id="conflict_endtime_@new_req.myServiceId"></span> </p>
-                                        <p> <b>Duration: </b> <span id="conflict_duration_@new_req.myServiceId"></span> Hrs </p>
-
-                                        <hr class="mb-2 mt-2" />
-
-                                        <div class="completed_btn">
-                                            <input type="button" value="Ok" data-bs-dismiss="modal">
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        }
                     }
 
                 </tbody>

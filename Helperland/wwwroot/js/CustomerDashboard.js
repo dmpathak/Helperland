@@ -89,7 +89,6 @@ function first_modal(id) {
 
     var myservice_id = {}
     myservice_id.ServiceId = id;
-    /*console.log(id);*/
 
     loading(true);
     fetch("/Customer/CustomerDashboard1", {
@@ -126,6 +125,33 @@ function first_modal(id) {
 };
 
 
+// 1st part (datechange on 2nd tab with validation)
+function datechange(id) {
+    var date_id = document.getElementById("reschedule_data1_"+id);
+    var regex = /^([0-9]){2}\/([0-9]){2}\/([0-9]){4}$/;
+    if (date_id.value.match(regex)) {
+
+        document.getElementById("wrong_date_" + id).innerHTML = "";
+        //document.getElementById("date_empty_error").innerHTML = ``;
+        document.getElementById("gone_date_" + id).innerHTML = "";
+    }
+    else {
+        document.getElementById("wrong_date_"+id).innerHTML = "Please ! Enter Valid Date Format";
+    }
+
+    var today = new Date();
+    let entered_date = new Date(Number(date_id.value.split("/")[2]), Number(date_id.value.split("/")[1]) - 1, Number(date_id.value.split("/")[0]), today.getHours(), today.getMinutes(), today.getSeconds())
+    if (entered_date.getTime() + 50000 > (new Date()).getTime()) {
+        document.getElementById("gone_date_" + id).innerHTML = "";
+    }
+    else {
+        document.getElementById("gone_date_" + id).innerHTML = "You Can't Peak date before Today";
+    }
+}
+
+
+
+
 //  ..... 2nd modal data change.......
 
 function reschedule(e, id) {
@@ -154,7 +180,7 @@ function reschedule(e, id) {
             },2500)
         }
         else {
-            document.getElementById("reschedule_error_" + id).innerHTML = `service not rescheduled..!!`;
+            document.getElementById("reschedule_error_" + id).innerHTML = `Another service request has been assigned to the service provider!!...Either choose another date or pick up a different time slot`;
         }
 
     }).catch(err => console.log(err));

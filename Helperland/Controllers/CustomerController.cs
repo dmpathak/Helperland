@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Globalization;
 using BCrypto = BCrypt.Net.BCrypt;
 using Microsoft.AspNetCore.Authorization;
+using Helperland.ForSendemail;
 
 namespace Helperland.Controllers
 {
@@ -15,12 +16,14 @@ namespace Helperland.Controllers
         private readonly ILogger<CustomerController> _logger;
         private readonly HelperlandContext context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly Sendemail sendemail = new Sendemail();
 
         public CustomerController(ILogger<CustomerController> logger, HelperlandContext context, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             this.context = context;
             this.webHostEnvironment = webHostEnvironment;
+
         }
 
         public IActionResult CustomerDashboard()
@@ -32,7 +35,7 @@ namespace Helperland.Controllers
             var refunded = 5;
             var current_user_Id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var current_user_data = new List<object>();
-            var my_adata = context.ServiceRequests.Where(x => x.UserId == current_user_Id && x.Status == 1);
+            var my_adata = context.ServiceRequests.Where(x => x.UserId == current_user_Id && (x.Status == 1 || x.Status == 4));
 
 
             foreach (var eachdata in my_adata)
@@ -51,8 +54,12 @@ namespace Helperland.Controllers
 
                 if (eachdata.ServiceProviderId != null)
                 {
-                    var ratings = context.Ratings.Where(x => x.RatingTo == eachdata.ServiceProviderId).Average(x => x.Ratings);
-
+                    double avgRating = 0;
+                    var rating = context.Ratings.Where(x => x.RatingTo == eachdata.ServiceProviderId).ToList();
+                    if (rating.Count() > 0)
+                    {
+                        avgRating = (double)rating.Average(x => x.Ratings);
+                    }
                     current_user_data.Add(new
                     {
 
@@ -66,13 +73,7 @@ namespace Helperland.Controllers
 
                         myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
 
-                        //my_provider_rating = (
-                        //                from r in context.ServiceRequests
-                        //                join e in context.Ratings
-                        //                on r.ServiceProviderId equals e.RatingTo
-                        //                where r.ServiceId == eachdata.ServiceId
-                        //                select e.Ratings).FirstOrDefault(),
-                        my_provider_rating = ratings,
+                        my_provider_rating = avgRating,
 
 
                         serviceprovider_id = eachdata.ServiceProviderId,
@@ -213,18 +214,26 @@ namespace Helperland.Controllers
                     if ((DateTime.Compare(request_start, datefinal) <= 0 && DateTime.Compare(request_end, datefinal) > 0) || (DateTime.Compare(request_start, datefinal_end) < 0 && DateTime.Compare(request_end, datefinal_end) >= 0) || (DateTime.Compare(request_end, datefinal_end) > 0 && DateTime.Compare(request_start, datefinal) < 0))
                     {
                         return Json(false);
-                        //return RedirectToAction("CustomerDashboard", "Customer");
                     }
                 }
+
+                //send mail for reschedule service 
+                var provider_data = context.Users.Where(x => x.UserId == request.ServiceProviderId).FirstOrDefault();
+
+                var reschedule_email = new EmailModel()
+                {
+                    To = provider_data.Email,
+                    Subject = "service Reshedule mail",
+                    Body = "Service Request" + dashboard.ServiceId + "has been rescheduled by customer. New date and time are" + dashboard.date + " , " + dashboard.start_time,
+                };
+                sendemail.emailSend(reschedule_email);
+
             }
 
             request.ServiceStartDate = datefinal;
             context.SaveChanges();
-            //return RedirectToAction("CustomerDashboard", "Customer");
+
             return Json(true);
-
-
-
         }
 
         [HttpPost]
@@ -238,9 +247,25 @@ namespace Helperland.Controllers
 
             context.SaveChanges();
 
+            //sendemail mail for cancel
+            var provider_data = context.Users.Where(x => x.UserId == cancel.ServiceProviderId).FirstOrDefault();
+
+            if (provider_data != null)
+            {
+
+                var cancel_email = new EmailModel()
+                {
+                    To = provider_data.Email,
+                    Subject = "service acceptence mail",
+                    Body = "Service Request" + dashboard.ServiceId + "has been cancelled by customer",
+
+                };
+                sendemail.emailSend(cancel_email);
+            }
+
+
             return RedirectToAction("CustomerDashboard", "Customer");
         }
-
 
 
         public IActionResult CustomerServiceHistory()
@@ -267,9 +292,12 @@ namespace Helperland.Controllers
 
                 if (eachdata.ServiceProviderId != null)
                 {
-
-                    var rating = context.Ratings.Where(x => x.RatingTo == eachdata.ServiceProviderId).Average(x => x.Ratings);
-
+                    double avgRating = 0;
+                    var rating = context.Ratings.Where(x => x.RatingTo == eachdata.ServiceProviderId).ToList();
+                    if(rating.Count() > 0)
+                    {
+                        avgRating = (double)rating.Average(x => x.Ratings);
+                    }
                     current_user_history.Add(new
                     {
 
@@ -283,7 +311,7 @@ namespace Helperland.Controllers
                         myservice_end_time = eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Hours + ":" + eachdata.ServiceStartDate.AddHours(Convert.ToDouble(eachdata.ServiceHours + eachdata.ExtraHours)).TimeOfDay.Minutes,
 
                         // rating should particular service provider
-                        my_provider_rating = rating,
+                        my_provider_rating = avgRating,
 
                         serviceprovider_id = eachdata.ServiceProviderId,
 
@@ -368,10 +396,139 @@ namespace Helperland.Controllers
             return RedirectToAction("CustomerServiceHistory", "Customer");
         }
 
+        [HttpGet]
         public IActionResult CustomerFavouritePros()
         {
+            var current_user_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var data = context.ServiceRequests.Where(x => x.UserId == current_user_id && (x.Status == 2 || x.Status == 3)).Select(x => x.ServiceProviderId).Distinct().ToList();
+
+            var provider = new List<object>();
+
+            if (data != null)
+            {
+
+                foreach (var item in data)
+                {
+                    if (item != null)
+                    {
+
+
+                        var services = context.ServiceRequests.Where(x => x.ServiceProviderId == item && (x.Status == 2 || x.Status == 3)).Count();
+
+                        var provider_user = context.Users.Where(x => x.UserId == item).FirstOrDefault();
+                        decimal provider_ratings = 0;
+                        var ratings_data = context.Ratings.Where(x => x.RatingTo == item);
+                        if (ratings_data.Count() != 0)
+                        {
+                            var ratings = ratings_data.Average(x => x.Ratings);
+                            provider_ratings = ratings;
+                        }
+
+                        var fav_block = context.FavoriteAndBlockeds.Where(x => x.UserId == current_user_id && x.TargetUserId == item).FirstOrDefault();
+
+                        if (fav_block != null)
+                        {
+                            provider.Add(new
+                            {
+                                provider_id = item,
+                                avtar = provider_user.UserProfilePicture,
+                                name = provider_user.FirstName + " " + provider_user.LastName,
+                                ratings = provider_ratings,
+                                cleanings = services,
+                                is_block = fav_block.IsBlocked,
+                                is_fav = fav_block.IsFavorite,
+                            });
+                        }
+                        else
+                        {
+                            provider.Add(new
+                            {
+                                provider_id = item,
+                                avtar = provider_user.UserProfilePicture,
+                                name = provider_user.FirstName + " " + provider_user.LastName,
+                                ratings = provider_ratings,
+                                cleanings = services,
+                                is_block = false,
+                                is_fav = false,
+                            });
+                        }
+                    }
+                }
+                ViewBag.Provider = provider;
+            }
             return View();
         }
+
+        [HttpPost]
+        public IActionResult block([FromBody] CustomerDashboardViewModel action)
+        {
+            var current_customer_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var rate_data = context.FavoriteAndBlockeds.Where(x => x.UserId == current_customer_id && x.TargetUserId == action.provider_id).FirstOrDefault();
+
+            if (rate_data == null)
+            {
+                var rate = new FavoriteAndBlocked();
+
+                rate.UserId = current_customer_id;
+                rate.TargetUserId = action.provider_id;
+                rate.IsBlocked = true;
+
+                context.Add(rate);
+            }
+            else
+            {
+                rate_data.IsBlocked = true;
+            }
+            context.SaveChanges();
+            return Json(true);
+        }
+
+        [HttpPost]
+        public IActionResult Unblock([FromBody] CustomerDashboardViewModel action)
+        {
+            var current_customer_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var block_data = context.FavoriteAndBlockeds.Where(x => x.UserId == current_customer_id && x.TargetUserId == action.provider_id).FirstOrDefault();
+
+            block_data.IsBlocked = false;
+            context.SaveChanges();
+            return Json(true);
+        }
+
+        [HttpPost]
+        public IActionResult Add_fav([FromBody] CustomerDashboardViewModel action)
+        {
+            var current_customer_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var rate_data = context.FavoriteAndBlockeds.Where(x => x.UserId == current_customer_id && x.TargetUserId == action.provider_id).FirstOrDefault();
+
+            if (rate_data == null)
+            {
+                var rate = new FavoriteAndBlocked();
+
+                rate.UserId = current_customer_id;
+                rate.TargetUserId = action.provider_id;
+                rate.IsFavorite = true;
+
+                context.Add(rate);
+            }
+            else
+            {
+                rate_data.IsFavorite = true;
+            }
+            context.SaveChanges();
+            return Json(true);
+        }
+
+        [HttpPost]
+        public IActionResult Remove_fav([FromBody] CustomerDashboardViewModel action)
+        {
+            var current_customer_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var remove_fav_data = context.FavoriteAndBlockeds.Where(x => x.UserId == current_customer_id && x.TargetUserId == action.provider_id).FirstOrDefault();
+
+            remove_fav_data.IsFavorite = false;
+            context.SaveChanges();
+            return Json(true);
+        }
+
 
         public IActionResult CustomerMySettings()
         {
@@ -416,6 +573,7 @@ namespace Helperland.Controllers
             {
                 data_send.Add(new
                 {
+
                     f_name = current_cust_data.FirstName,
                     l_name = current_cust_data.LastName,
                     mail = current_cust_data.Email,
@@ -466,12 +624,16 @@ namespace Helperland.Controllers
 
             var current_cust_address_data = context.UserAddresses.Where(x => x.AddressId == setting.id).FirstOrDefault();
 
-            current_cust_address_data.AddressLine1 = setting.street;
-            current_cust_address_data.City = setting.city;
-            current_cust_address_data.AddressLine2 = setting.house;
-            current_cust_address_data.PostalCode = setting.postcode;
-            current_cust_address_data.Mobile = setting.mobile;
+            if (current_cust_address_data != null)
+            {
 
+                current_cust_address_data.AddressLine1 = setting.street;
+                current_cust_address_data.City = setting.city;
+                current_cust_address_data.AddressLine2 = setting.house;
+                current_cust_address_data.PostalCode = setting.postcode;
+                current_cust_address_data.Mobile = setting.mobile;
+
+            }
 
             context.SaveChanges();
             return Json(new { id = setting.id, address = "" + current_cust_address_data.AddressLine1 + " " + current_cust_address_data.AddressLine2 + ", " + current_cust_address_data.PostalCode + " " + current_cust_address_data.City, phone = current_cust_address_data.Mobile });
@@ -491,7 +653,7 @@ namespace Helperland.Controllers
 
             context.UserAddresses.Add(address);
             context.SaveChanges();
-            return Json(new { id = address.UserId, address = "" + address.AddressLine1 + " " + address.AddressLine2 + ", " + address.PostalCode + " " + address.City, phone = address.Mobile });
+            return Json(new { id = address.AddressId, address = "" + address.AddressLine1 + " " + address.AddressLine2 + ", " + address.PostalCode + " " + address.City, phone = address.Mobile });
         }
 
         [HttpPost]
@@ -511,6 +673,45 @@ namespace Helperland.Controllers
             else
             {
                 return Json("false");
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult change_pin([FromBody] settingtab2ViewModel setting)
+        {
+            var postal = setting.postcode;
+
+
+            var zipcode = context.Zipcodes.Where(x => x.ZipcodeValue == setting.postcode).FirstOrDefault();
+
+            if (zipcode != null)
+            {
+                var mycity = context.Cities.Where(x => x.Id == zipcode.CityId).FirstOrDefault();
+                return Json(new { city = mycity.CityName });
+            }
+            else
+            {
+                return Json(new { city = "" });
+            }
+        }
+        [HttpPost]
+
+        public IActionResult change_pin_new([FromBody] settingtab2ViewModel setting)
+        {
+            var postal = setting.postcode;
+
+
+            var zipcode = context.Zipcodes.Where(x => x.ZipcodeValue == setting.postcode).FirstOrDefault();
+
+            if (zipcode != null)
+            {
+                var mycity = context.Cities.Where(x => x.Id == zipcode.CityId).FirstOrDefault();
+                return Json(new { city = mycity.CityName });
+            }
+            else
+            {
+                return Json(new { city = "" });
             }
         }
     }

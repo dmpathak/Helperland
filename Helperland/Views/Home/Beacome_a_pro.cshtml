@@ -20,7 +20,19 @@
         </div>
         <div class="nav">
             <ul class="nav_ul">
-                <li class="navitem "><a class="nav_link navitem_round" href="#">Book a cleaner</a></li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (ViewBag.usertypeid == 1)
+                    {
+                        <li class="navitem "><a asp-controller="Book" asp-action="BookService" class="nav_link navitem_round">Book a cleaner</a></li>
+                    }
+
+                }
+                else
+                {
+                    <li class="navitem "><a asp-controller="Home" asp-action="index" asp-route-login="true" class="nav_link navitem_round">Book a cleaner</a></li>
+                }
                 <li class="navitem"><a class="nav_link" asp-controller="Home" asp-action="Prices">Prices</a></li>
                 <li class="navitem"><a class="nav_link" href="#">Our Guarantee</a></li>
                 <li class="navitem"><a class="nav_link" href="#">Blog</a></li>
@@ -56,6 +68,7 @@
                     <div class="form-item col-12">
                         <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
                         <span asp-validation-for="Email" class="text-danger"></span>
+                        <span class="text-danger">@ViewBag.Errormsg</span>
                     </div>
                     <div class="form-item col-12">
                         <div class="input-group mx-0 row">

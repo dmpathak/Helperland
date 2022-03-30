@@ -28,7 +28,7 @@
         <p class="nav-heading" style="cursor: pointer;"><a asp-action="Service_requests" asp-controller="Admin">helperland</a></p>
         <div class="second_nav">
             <img src="~/img/admin-user.png" alt="">
-            <p>James Smith</p>
+            <p>@User.Identity.Name<</p>
             <a asp-action="Logout" asp-controller="Home"><img src="~/img/logout.png" alt=""></a>
         </div>
     </div>

@@ -113,7 +113,7 @@
                             </label><br>
                             <div class="second_tab_data_select">
                                 <form id="clening_date_time">
-                                    <input asp-for="date" onchange="datechange();" id="date" placeholder="01/01/2018">
+                                    <input asp-for="date" onchange="datechange();" id="date" placeholder="DD/MM/YYYY">
 
                                     <select asp-for="time" onchange="timechange();" id="time" class="form-select-sm">
                                         <option value="">---</option>
@@ -318,7 +318,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><b>Postal code</b></label>
-                                    <input asp-for="pincode" id="form_postal" class="form-control" placeholder="" readonly>
+                                    <input asp-for="pincode" id="form_postal" class="form-control" value="" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><b>City</b></label>
@@ -360,11 +360,29 @@
                 <hr class="mb-1 mt-0">
                 <div class="mb-2">You can choose your favourite service provider from the below list</div>
                 <div class="fav_sp_container">
-                    <div class="fav_sp">
-                        <img class="rounded-pill" src="~/img/cap.png" alt="photo">
-                        <p class="mb-2 second_tab_headings"><b>Sandip Patel</b></p>
-                        <button>Select</button>
-                    </div>
+                    @if (ViewBag.my_fav_pro != null)
+                    {
+                        
+                    
+                    @foreach (var data in ViewBag.my_fav_pro)
+                    {
+                        <div class="fav_sp">
+                            @if (@data.avtar != null)
+                            {
+                                <img class="rounded-pill" style="padding: 0px;" src=@data.avtar alt="photo">
+                            }
+                            else
+                            {
+                                <img class="rounded-pill" src="~/img/cap.png" alt="photo">
+                            }
+                            <p class="mb-2 second_tab_headings"><b>@data.name</b></p>
+                            <input class="d-none" type="radio" name="fav_provider" id="fav_radio_@data.provider_id">
+                            <button id="fav_button_@data.provider_id" onclick="selected_fav_pro(@data.provider_id)">Select</button>
+
+                        </div>
+
+                    }
+                    }
                 </div>
                 <hr>
                 <!-- TAB-3 DATA continue button -->
@@ -440,8 +458,12 @@
 
                                 <img src="~/img/success_tick.png" alt="success" class="modal_success_img">
 
-                                <div>Booking has been successfully submitted</div>
-                                <p>Service Request Id: <span id="service_id"></span></p>
+                                <div id="booking_success">
+                                    Booking has been successfully submitted
+                                    <p>Service Request Id: <span id="service_id"></span></p>
+                                </div>
+                                <div class="text-danger d-none" id="show_error"></div>
+
                                 <button type="button" class="rounded-pill continue_btn"
                                         data-bs-dismiss="modal">
                                     Ok

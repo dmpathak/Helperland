@@ -1,7 +1,6 @@
 ﻿// for navbar 
 document.getElementById("expand_btn").onclick = () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log(document.getElementById("expand_btn_container"));
 }
 
 
@@ -68,9 +67,6 @@ $(document).ready(function () {
 
 tab_ids = ["", "paymentBtn", "detailsBtn", "schedulePlanBtn", "setupServiceBtn"]
 function progress_validator(tab_id) {
-    console.log(tab_id);
-    // document.getElementById("setupServiceBtn").click == true;
-    // tab_id = document.getElementById("setupServiceBtn");
     let i = 1;
     tab_ids.slice(1, 5).forEach(tabidind => {
         document.getElementById(tabidind).disabled = false;
@@ -139,7 +135,7 @@ function schedule_plan_continue() {
             document.getElementById("schedulePlanBtn").classList.add("filled");
         }
 
-        
+
     }
     else {
 
@@ -165,7 +161,7 @@ function schedule_plan_continue() {
         }
     }
 
-   
+
 }
 
 
@@ -195,26 +191,23 @@ function datechange() {
 
         document.getElementById("date_text").innerHTML = date_id.value;
         document.getElementById("date_text_responsive").innerHTML = date_id.value;
-        console.log(date_id.value);
         document.getElementById("wrong_date").innerHTML = "";
         document.getElementById("date_empty_error").innerHTML = ``;
         document.getElementById("gone_date").innerHTML = "";
     }
     else {
         document.getElementById("wrong_date").innerHTML = "Please ! Enter Valid Date Format";
+
     }
 
     var today = new Date();
     let entered_date = new Date(Number(date_id.value.split("/")[2]), Number(date_id.value.split("/")[1]) - 1, Number(date_id.value.split("/")[0]), today.getHours(), today.getMinutes(), today.getSeconds())
-    //console.log(entered_date);
-    //console.log(entered_date.getTime());
-    //console.log((new Date()).getTime());
     if (entered_date.getTime() + 50000 > (new Date()).getTime()) {
         document.getElementById("gone_date").innerHTML = "";
     }
     else {
         document.getElementById("gone_date").innerHTML = "You Can't Peak date before Today";
-    } 
+    }
 }
 
 // (timechange on 2nd tab )
@@ -241,7 +234,6 @@ function basicchange() {
         if (document.querySelector(`.click_checkbox${each_id}`).checked) {
             time += 0.5
         }
-        console.log(time)
     })
     document.getElementById("total_time").innerHTML =
         time;
@@ -280,7 +272,6 @@ $(document).ready(function () {
             document.getElementById("total_paym").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
             document.getElementById("total_paym_responsive").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
         }
-        console.log("a")
     });
 
     // SERVICE 2
@@ -300,7 +291,6 @@ $(document).ready(function () {
             document.getElementById("total_paym").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
             document.getElementById("total_paym_responsive").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
         }
-        console.log("b")
     });
 
     // SERVICE 3
@@ -320,7 +310,6 @@ $(document).ready(function () {
             document.getElementById("total_paym").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
             document.getElementById("total_paym_responsive").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
         }
-        console.log("c")
     });
 
     // SERVICE 4
@@ -340,7 +329,6 @@ $(document).ready(function () {
             document.getElementById("total_paym").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
             document.getElementById("total_paym_responsive").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
         }
-        console.log("d")
     });
 
     // SERVICE 5
@@ -360,13 +348,12 @@ $(document).ready(function () {
             document.getElementById("total_paym").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
             document.getElementById("total_paym_responsive").innerHTML = (parseFloat(document.getElementById("total_time").innerText)) * 18;
         }
-        console.log("e")
     });
 });
 
 
 
-//Java script of Fatch API for Check Availability (aa j fetch api sathe 3rd tab nu get address pan kari lidhelu 6e database mathi etle alag fetch api pa6i addres get karva banavani jarur no pade)
+//Java script of Fatch API for Check Availability
 var postalcode_form = document.querySelector("form#postalcode_form");
 var avail_btn = document.querySelector(".avail_btn");
 
@@ -377,7 +364,6 @@ avail_btn.addEventListener("click", (e) => {
     const data = {};
     data.MyCheckavail = formData.get("MyCheckavail");
     data.user_id = 2
-    //console.log(data)
     fetch("/Book/CheckAvailability", {
         method: "POST",
         headers: {
@@ -386,13 +372,11 @@ avail_btn.addEventListener("click", (e) => {
         body: JSON.stringify(data)
     })
         .then(res => res.json()).then(datareturnedfromcontroller => {
-            console.log(datareturnedfromcontroller);
             document.getElementById("address_show_radio").innerHTML = "";
             document.getElementById("setupServiceBtn").classList.add("filled")
 
 
             if (datareturnedfromcontroller.is_available == true) {
-                console.log(datareturnedfromcontroller.is_available);
                 Array.from(datareturnedfromcontroller.addresses).forEach(eachadd => {
                     document.getElementById("address_show_radio").innerHTML += `
 
@@ -417,11 +401,11 @@ avail_btn.addEventListener("click", (e) => {
                 document.getElementById("schedulePlanBtn").click();
                 document.getElementById("pin_not_found").innerHTML = ""
                 document.getElementById("form_postal").value = data.MyCheckavail
-                document.getElementById("form_city").value = "Ahmedabad"
+                document.getElementById("form_city").value = datareturnedfromcontroller.city
+
 
             }
             else {
-                //console.log("Data Not Found");
                 document.getElementById("pin_not_found").innerHTML = "There is no any service provider for this Postal Code !!"
                 document.getElementById("setupServiceBtn").classList.remove("filled")
             }
@@ -451,7 +435,6 @@ form_save.addEventListener("click", (event) => {
     mydata.pincode = document.getElementById("MyCheckavail").value;
     mydata.city = formData1.get("city");
     mydata.phone_number = formData1.get("phone_number");
-    console.log(mydata)
     fetch("/Book/save_new_address", {
         method: "POST",
         headers: {
@@ -462,10 +445,6 @@ form_save.addEventListener("click", (event) => {
         .then(res => res.json()).then(datareturnedfromcontroller => {
 
             document.getElementById("add_address_error").innerHTML = ``;
-            //console.log("Data aavi gyo 6e")
-            //console.log(datareturnedfromcontroller)
-            //console.log(mydata.house_number)
-            //console.log(mydata.pincode)
             document.getElementById("address_show_radio").innerHTML += `
                     <div class="form-check mb-3 existing_address">
                         <input class="form-check-input cust_add" type="radio" name="flexRadioDefault"
@@ -484,9 +463,10 @@ form_save.addEventListener("click", (event) => {
 // fetch api for final data submission
 var final = document.getElementById("complete_booking");
 final.addEventListener("click", (event) => {
-    //event.preventDefault();
-    console.log("booking_details");
-    console.log(booking_details);
+    if (document.querySelector('input[name="fav_provider"]:checked') != null) {
+        var fav_ids = document.querySelector('input[name="fav_provider"]:checked').id.split("_");
+        booking_details.selected_service_pro_id = fav_ids[2];
+    }
     fetch("/Book/FinaldataSubmit", {
         method: "POST",
         headers: {
@@ -494,9 +474,38 @@ final.addEventListener("click", (event) => {
         },
         body: JSON.stringify(booking_details)
     }).then(res => res.json()).then(datafromcontroller => {
+        if (Object.values(datafromcontroller)[0]) {
+            document.getElementById("show_error").classList.add("d-none");
+            document.getElementById("booking_success").classList.remove("d-none");
+            document.getElementById("service_id").innerHTML = Object.values(datafromcontroller)[1];
+        }
+        else {
+            document.getElementById("show_error").classList.remove("d-none");
+            document.getElementById("booking_success").classList.add("d-none");
+            document.getElementById("show_error").innerHTML = Object.values(datafromcontroller)[1];
 
-        document.getElementById("service_id").innerHTML = Object.values(datafromcontroller)[0];
-        //console.log(Object.values(datafromcontroller)[0])
-        //console.log("ready to final submit")
+        }
     }).catch(err => console.log(err));
 })
+
+
+function selected_fav_pro(id) {
+    if (document.querySelector('input[name="fav_provider"]:checked') != null) {
+        if (document.querySelector('input[name="fav_provider"]:checked') == document.getElementById(`fav_radio_${id}`)) {
+
+
+            document.getElementById("fav_radio_" + id).checked = false;
+            document.getElementById(`fav_button_${id}`).innerText = "select";
+        }
+        else {
+            var ids = document.querySelector('input[name="fav_provider"]:checked').id.split("_")
+            document.getElementById(`fav_button_${ids[2]}`).innerText = "select";
+            document.getElementById("fav_radio_" + id).checked = true;
+            document.getElementById(`fav_button_${id}`).innerText = "selected";
+        }
+    } else {
+        document.getElementById("fav_radio_" + id).checked = true;
+        document.getElementById(`fav_button_${id}`).innerText = "selected";
+    }
+
+}

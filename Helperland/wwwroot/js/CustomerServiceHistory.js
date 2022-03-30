@@ -45,11 +45,9 @@ $(document).ready(function () {
 // for left-right side manu 
 document.getElementById("expand_btn").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Open");
 })
 document.getElementById("expand_btn_res").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Return");
 })
 
 // for popover 
@@ -67,7 +65,6 @@ function first_modal(id) {
 
     var myservice_id = {}
     myservice_id.ServiceId = id;
-    console.log(id);
 
     loading(true);
     fetch("/Customer/CustomerDashboard1", {
@@ -103,42 +100,6 @@ function first_modal(id) {
 };
 
 
-//  ..... 2nd modal data change.......
-
-//function reschedule(id) {
-//    var reschedule_data = {}
-
-//    reschedule_data.ServiceId = id;
-//    reschedule_data.date = document.getElementById("reschedule_data1").value;
-//    reschedule_data.start_time = document.getElementById("reschedule_data2").value;
-
-//    loading(true);
-//    fetch("/Customer/CustomerServiceHistory", {
-//        method: "POST",
-//        headers: {
-//            "Content-Type": "application/json"
-//        },
-//        body: JSON.stringify(reschedule_data)
-//    }).then(res => res.json()).then(datafromcontroller => {
-
-//        if (datafromcontroller == true) {
-//            document, getElementById("reschedule_error").innerHTML +=
-//                `Another service request has been assigned to the service provider on ${Date} from ${Start_time} to ${End_time}`;
-
-//        }
-//        else {
-//            alert("Service Rescheduled Successfully..!")
-//        }
-
-//    }).catch(err => console.log(err));
-
-
-//};
-
-
-
-
-
 // stars Js 
 var rating_send = {}
 
@@ -150,7 +111,6 @@ svgs.forEach((s, i) => {
         var sid = s.getAttribute("data-serviceid");
         document.getElementById("htmlrate1_" + sid).value = (i % 5) + 1;
         $($cover).children("div.cover")[0].style.width = 100 - ((i % 5) + 1) * 20 + "%";
-        console.log(i, s);
     });
 });
 
@@ -162,7 +122,6 @@ svgs1.forEach((s, i) => {
         var sid = s.getAttribute("data-serviceid");
         document.getElementById("htmlrate2_" + sid).value = (i % 5) + 1;
         $($cover).children("div.cover1")[0].style.width = 100 - ((i % 5) + 1) * 20 + "%";
-        console.log(i, s);
     });
 });
 
@@ -174,9 +133,6 @@ svgs2.forEach((s, i) => {
         var sid = s.getAttribute("data-serviceid");
         document.getElementById("htmlrate3_" + sid).value = (i % 5) + 1;
         $($cover).children("div.cover2")[0].style.width = 100 - ((i % 5) + 1) * 20 + "%";
-        console.log(i, s);
     });
 });
 
-
-console.log(rating_send);

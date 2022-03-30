@@ -1,11 +1,9 @@
 ﻿// for left-right side manu 
 document.getElementById("expand_btn").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Open");
 })
 document.getElementById("expand_btn_res").addEventListener('click', () => {
     document.getElementById("expand_btn_container").classList.toggle("expand-btn-container-open")
-    console.log("Return");
 })
 
 // for popover 
@@ -23,7 +21,6 @@ $("#tab_1_year").val($("#tab_1_year").attr("value"))
 
 //setting tab 1
 function mygender(g_id) {
-    console.log(g_id);
     document.getElementById("gender_value").value = document.getElementById(g_id).value;
 }
 
@@ -43,7 +40,7 @@ function check(myid) {
     document.getElementById("heading_avtar_img").src = document.getElementById(myid).nextElementSibling.lastChild.src;
 
     document.getElementById("heading_avtar_img_value").value = document.getElementById(myid).nextElementSibling.lastChild.src;
-    console.log(checked)
+    
 
 }
 
@@ -89,3 +86,23 @@ function passsave(e) {
 document.getElementById("passform").addEventListener("submit", (e) => {
     e.preventDefault();
 });
+
+
+function change_pin_new() {
+
+    var data = {}
+    data.postcode = document.getElementById("postcode").value;
+    
+    fetch("/Provider/change_pin_new", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(datafromcontroller => {
+        console.log(datafromcontroller.city);
+        document.getElementById("city").value = datafromcontroller.city;
+
+    }).catch(err => console.log(err));
+
+}

@@ -37,7 +37,6 @@
             const srdate = new Date(parseInt(dateSplited[2]), parseInt(dateSplited[1]) - 1, parseInt(dateSplited[0]));
             const isDateGreater = from_dt.value ? srdate >= new Date(from_dt.value) : true;
             const isDateSmaller = to_dt.value ? srdate <= new Date(to_dt.value) : true;
-            console.log(isUserName, isUserType, isPhoneNumber, isDateGreater, isDateSmaller);
             return isUserName && isUserType && isPhoneNumber && isDateGreater && isDateSmaller;
         });
         dt.draw();
@@ -122,11 +121,8 @@ $(document).on('click', ".Deactivate", function (e) {
         body: JSON.stringify(send)
     }).then(res => res.json()).then(datafromcontroller => {
 
-        //alert(datafromcontroller);
         window.location.reload();
 
     }).catch(err => console.log(err));
-
-
 
 });

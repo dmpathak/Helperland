@@ -391,12 +391,12 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="control-label">Postal code</label>
-                                <input asp-for="postcode" type="text" class="form-control" id="postcode" value="@data[0].postal">
+                                <input asp-for="postcode" type="text" class="form-control" id="postcode" onchange="change_pin_new();" value="@data[0].postal">
                                 <span asp-validation-for="postcode" class="text-danger"></span>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="control-label">City</label>
-                                <input asp-for="city" type="text" class="form-control" id="city" value="@data[0].city">
+                                <input asp-for="city" type="text" class="form-control" id="city" value="@data[0].city" readonly>
                                 <span asp-validation-for="city" class="text-danger"></span>
                             </div>
 

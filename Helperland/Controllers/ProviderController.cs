@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Globalization;
 using BCrypto = BCrypt.Net.BCrypt;
 using Microsoft.AspNetCore.Authorization;
+using Helperland.ForSendemail;
 
 namespace Helperland.Controllers
 {
@@ -15,6 +16,7 @@ namespace Helperland.Controllers
         private readonly ILogger<ProviderController> _logger;
         private readonly HelperlandContext context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly Sendemail sendemail = new Sendemail();
 
         public ProviderController(ILogger<ProviderController> logger, HelperlandContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -27,48 +29,51 @@ namespace Helperland.Controllers
         public IActionResult NewServiceRequest()
         {
             var current_provider_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var requests = context.ServiceRequests.Where(x => x.Status == 1);
+            var current_provider_data = context.Users.Where(x => x.UserId == current_provider_id).FirstOrDefault();
+            var requests = context.ServiceRequests.Where(x => x.Status == 1 && x.ZipCode == current_provider_data.ZipCode).ToList();
             var new_requests = new List<object>();
-
-            foreach (var item in requests)
+            if (requests.Count() != 0)
             {
-                //for getting extra service 
-                var extra_got = (
-             from r in context.ServiceRequests
-             join e in context.ServiceRequestExtras
-             on r.ServiceRequestId equals e.ServiceRequestId
-             where r.ServiceId == item.ServiceId
-             select e.ServiceExtraId);
-
-                var x = "";
-                foreach (var service in extra_got)
+                foreach (var item in requests)
                 {
-                    if (service == 1)
-                    {
-                        x = x + "Inside cabinets, ";
-                    }
-                    if (service == 2)
-                    {
-                        x = x + "Inside fridge, ";
-                    }
-                    if (service == 3)
-                    {
-                        x = x + "Inside oven, ";
-                    }
-                    if (service == 4)
-                    {
-                        x = x + "Laundry wash & dry, ";
-                    }
-                    if (service == 5)
-                    {
-                        x = x + "Interior windows, ";
-                    }
-                }
+                    //for getting extra service 
+                    var extra_got = (
+                 from r in context.ServiceRequests
+                 join e in context.ServiceRequestExtras
+                 on r.ServiceRequestId equals e.ServiceRequestId
+                 where r.ServiceId == item.ServiceId
+                 select e.ServiceExtraId);
 
-                var isblock = context.FavoriteAndBlockeds.Where(x => x.UserId == current_provider_id && x.TargetUserId == item.UserId).FirstOrDefault();
+                    var x = "";
+                    foreach (var service in extra_got)
+                    {
+                        if (service == 1)
+                        {
+                            x = x + "Inside cabinets, ";
+                        }
+                        if (service == 2)
+                        {
+                            x = x + "Inside fridge, ";
+                        }
+                        if (service == 3)
+                        {
+                            x = x + "Inside oven, ";
+                        }
+                        if (service == 4)
+                        {
+                            x = x + "Laundry wash & dry, ";
+                        }
+                        if (service == 5)
+                        {
+                            x = x + "Interior windows, ";
+                        }
+                    }
 
-                if (isblock == null || (isblock != null && isblock.IsBlocked == false))
-                {
+                    var isblock = context.FavoriteAndBlockeds.Where(x => x.UserId == current_provider_id && x.TargetUserId == item.UserId).FirstOrDefault();
+                    var check_blocked_by_cust = context.FavoriteAndBlockeds.Where(x => x.UserId == item.UserId && x.TargetUserId == current_provider_id).FirstOrDefault();
+
+                    if ((isblock == null || (isblock != null && isblock.IsBlocked == false)) && (check_blocked_by_cust == null || (check_blocked_by_cust != null && check_blocked_by_cust.IsBlocked == false)))
+                    {
 
                         new_requests.Add(new
                         {
@@ -99,9 +104,10 @@ namespace Helperland.Controllers
 
                             pet = item.HasPets
                         });
+                    }
                 }
+                ViewBag.current_new_req = new_requests;
             }
-            ViewBag.current_new_req = new_requests;
             return View();
         }
 
@@ -133,6 +139,37 @@ namespace Helperland.Controllers
                     service_data.ServiceProviderId = current_user_Id;
                     service_data.Status = 4;
                     context.SaveChanges();
+
+                    //for send mail of accepted 
+                    var provider_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+                    var provider_at_pincode = context.Users.Where(x => x.ZipCode == provider_data.ZipCode && x.UserTypeId == 2).ToList();
+
+                    foreach (var provider in provider_at_pincode)
+                    {
+                        if (provider.UserId == current_user_Id)
+                        {
+                            var acceptence_email = new EmailModel()
+                            {
+                                To = provider.Email,
+                                Subject = "service acceptence mail",
+                                Body = "new service has been assigned to you with Service Id " + Service_id,
+
+                            };
+                            sendemail.emailSend(acceptence_email);
+                        }
+                        else
+                        {
+                            var forbidden_email = new EmailModel()
+                            {
+                                To = provider.Email,
+                                Subject = "service forbidden mail",
+                                Body = "service with service id " + Service_id + "is accepted by another service provider",
+
+                            };
+                            sendemail.emailSend(forbidden_email);
+                        }
+                    }
+
                     return Json(new { error = "success" });
                 }
                 else
@@ -162,6 +199,37 @@ namespace Helperland.Controllers
                     service_data.ServiceProviderId = current_user_Id;
                     service_data.Status = 4;
                     context.SaveChanges();
+
+                    //for send mail of accepted 
+                    var provider_data = context.Users.Where(x => x.UserId == current_user_Id).FirstOrDefault();
+                    var provider_at_pincode = context.Users.Where(x => x.ZipCode == provider_data.ZipCode && x.UserTypeId == 2).ToList();
+
+                    foreach (var provider in provider_at_pincode)
+                    {
+                        if (provider.UserId == current_user_Id)
+                        {
+                            var acceptence_email = new EmailModel()
+                            {
+                                To = provider.Email,
+                                Subject = "service acceptence mail",
+                                Body = "new service has been assigned to you with Service Id " + Service_id,
+
+                            };
+                            sendemail.emailSend(acceptence_email);
+                        }
+                        else
+                        {
+                            var forbidden_email = new EmailModel()
+                            {
+                                To = provider.Email,
+                                Subject = "service forbidden mail",
+                                Body = "service with service id " + Service_id + "is accepted by another service provider",
+
+                            };
+                            sendemail.emailSend(forbidden_email);
+                        }
+                    }
+
                     return Json(new { error = "success" });
                 }
             }
@@ -287,11 +355,10 @@ namespace Helperland.Controllers
 
 
 
-
-
         [HttpGet]
         public IActionResult ServiceSchedule()
         {
+
             return View();
         }
 
@@ -578,12 +645,14 @@ namespace Helperland.Controllers
             }
 
             var provider_add = context.UserAddresses.Where(x => x.UserId == current_provider_id).FirstOrDefault();
+            var provider_add_usertable = context.Users.Where(x => x.UserId == current_provider_id).FirstOrDefault();
 
             if (provider_add != null)
             {
                 provider_add.AddressLine1 = provider.street;
                 provider_add.AddressLine2 = provider.house;
                 provider_add.PostalCode = provider.postcode;
+                provider_add_usertable.ZipCode = provider.postcode;
                 provider_add.City = provider.city;
                 provider_add.Mobile = provider.mobile;
             }
@@ -591,9 +660,11 @@ namespace Helperland.Controllers
             {
                 var provider_new_add = new UserAddress();
 
+                provider_new_add.UserId = current_provider_id;
                 provider_new_add.AddressLine1 = provider.street;
                 provider_new_add.AddressLine2 = provider.house;
                 provider_new_add.PostalCode = provider.postcode;
+                provider_add_usertable.ZipCode = provider.postcode;
                 provider_new_add.City = provider.city;
                 provider_new_add.Mobile = provider.mobile;
 
@@ -626,5 +697,56 @@ namespace Helperland.Controllers
             }
             return Json("datanone");
         }
+
+        [HttpPost]
+
+        public IActionResult change_pin_new([FromBody] ProviderDashboardViewModel setting)
+        {
+
+            var zipcode = context.Zipcodes.Where(x => x.ZipcodeValue == setting.postcode).FirstOrDefault();
+
+            if (zipcode != null)
+            {
+                var mycity = context.Cities.Where(x => x.Id == zipcode.CityId).FirstOrDefault();
+                return Json(new { city = mycity.CityName });
+            }
+            else
+            {
+                return Json(new { city = "" });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetEvents()
+        {
+            var current_user_id = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var data = new List<object>();
+
+            var services = context.ServiceRequests.Where(x => x.ServiceProviderId == current_user_id && (x.Status == 2 || x.Status == 4)).ToList();
+            foreach (var service in services)
+            {
+                data.Add(new
+                {
+                    id = service.ServiceId,
+                    title = service.ServiceStartDate.ToString("HH:mm") + " - " + service.ServiceStartDate.AddHours(service.ServiceHours).ToString("HH:mm"),
+                    start = service.ServiceStartDate.ToString("yyyy-MM-ddTHH:mm"),
+                    color = service.Status == 2 ? "#86858b" : "#1d7a8c",
+                    postalcode = service.ZipCode,
+
+                });
+            }
+            return Json(data);
+        }
+
+        public class EventViewModel
+        {
+#nullable disable
+            public int id { get; set; }
+            public string start { get; set; }
+            public string title { get; set; }
+            public string backgroundColor { get; set; }
+            public bool allDay { get; set; }
+        }
+
     }
 }

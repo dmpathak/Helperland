@@ -4,6 +4,7 @@ using Helperland.Models.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Helperland.ForSendemail;
 
 namespace Helperland.Controllers
 {
@@ -13,6 +14,7 @@ namespace Helperland.Controllers
         private readonly ILogger<AdminController> _logger;
         private readonly HelperlandContext context;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly Sendemail sendemail = new Sendemail();
 
         public AdminController(ILogger<AdminController> logger, HelperlandContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -218,6 +220,18 @@ namespace Helperland.Controllers
                         return Json(false);
                     }
                 }
+
+                //sendemail mail to provider 
+                var pro_data = context.Users.Where(x => x.UserId == request.ServiceProviderId).FirstOrDefault();
+                var admin_reschedule_pro_email = new EmailModel()
+                {
+                    To = pro_data.Email,
+                    Subject = "service acceptence mail",
+                    Body = "Service Request" + admin.id_for_service + "has been rescheduled by Admin. New date and time are" + admin.date + " , " + admin.time,
+
+                };
+                sendemail.emailSend(admin_reschedule_pro_email);
+
             }
 
             request.ServiceStartDate = datefinal;
@@ -230,6 +244,20 @@ namespace Helperland.Controllers
             request_address.PostalCode = admin.postal;
             request_address.City = admin.city;
             context.SaveChanges();
+
+            //sendemail mail to customer
+            var cust_data = context.Users.Where(x => x.UserId == request.UserId).FirstOrDefault();
+            var admin_reschedule_cust_email = new EmailModel()
+            {
+                To = cust_data.Email,
+                Subject = "service acceptence mail",
+                Body = "Service Request" + admin.id_for_service + "has been rescheduled by Admin. New date and time are" + admin.date + " , " + admin.time,
+
+            };
+            sendemail.emailSend(admin_reschedule_cust_email);       
+            
+
+
             return Json(true);
 
         }
@@ -294,5 +322,25 @@ namespace Helperland.Controllers
             context.SaveChanges();
             return Json(true);
         }
+
+
+        [HttpPost]
+        public IActionResult change_postal([FromBody] AdminViewModel setting)
+        {
+
+            var zipcode = context.Zipcodes.Where(x => x.ZipcodeValue == setting.postal).FirstOrDefault();
+
+            if (zipcode != null)
+            {
+                var mycity = context.Cities.Where(x => x.Id == zipcode.CityId).FirstOrDefault();
+                return Json(new { city = mycity.CityName });
+            }
+            else
+            {
+                return Json(new { city = "" });
+            }
+        }
+
+
     }
 }
